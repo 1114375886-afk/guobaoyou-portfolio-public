@@ -243,7 +243,7 @@ a { text-decoration: none; }
   --light-x: 50%;
   --light-y: 50%;
   --light-radius: clamp(230px, 28vw, 480px);
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
   opacity: 0;
   mix-blend-mode: multiply;
@@ -267,28 +267,35 @@ a { text-decoration: none; }
   transition: opacity .32s ease;
 }
 .coverTitleProjection.is-active {
-  opacity: .86;
+  opacity: .96;
+}
+.coverTitleProjection p,
+.coverTitleProjection h1,
+.coverTitleProjection > span {
+  transform: translate3d(var(--shadow-x, 8px), var(--shadow-y, 8px), 0);
+  filter: blur(.7px);
+  will-change: transform, filter;
 }
 .coverTitleProjection p {
-  color: transparent;
-  -webkit-text-stroke: 0 transparent;
+  color: rgba(35,94,68,.17);
+  -webkit-text-stroke: .022em rgba(35,94,68,.38);
   text-shadow:
-    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(35,94,68,.42),
-    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 16px rgba(73,224,146,.22);
+    var(--shadow-x, 9px) var(--shadow-y, 9px) var(--shadow-blur, 5px) rgba(35,94,68,.54),
+    var(--shadow-far-x, 18px) var(--shadow-far-y, 18px) 14px rgba(73,224,146,.3);
 }
 .coverTitleProjection h1 {
   color: transparent;
-  -webkit-text-stroke: 0 transparent;
+  -webkit-text-stroke: clamp(2px, .23vw, 5px) rgba(42,47,72,.52);
   text-shadow:
-    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(42,47,72,.4),
-    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 18px rgba(89,124,255,.21);
+    var(--shadow-x, 9px) var(--shadow-y, 9px) var(--shadow-blur, 5px) rgba(42,47,72,.58),
+    var(--shadow-far-x, 18px) var(--shadow-far-y, 18px) 15px rgba(89,124,255,.29);
 }
 .coverTitleProjection > span {
-  color: transparent;
-  -webkit-text-stroke: 0 transparent;
+  color: rgba(136,79,18,.16);
+  -webkit-text-stroke: .018em rgba(136,79,18,.42);
   text-shadow:
-    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(136,79,18,.39),
-    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 16px rgba(255,170,67,.21);
+    var(--shadow-x, 9px) var(--shadow-y, 9px) var(--shadow-blur, 5px) rgba(136,79,18,.52),
+    var(--shadow-far-x, 18px) var(--shadow-far-y, 18px) 14px rgba(255,170,67,.3);
 }
 
 .coverFooter {
