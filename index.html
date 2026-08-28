@@ -19,17 +19,19 @@
     <title>Bai YuPeng — AI Animation Portfolio</title>
   </head>
   <body>
-    <main>
-      <section class="cover" id="top" aria-labelledby="cover-title">
-        <!-- 四个光晕背景元素：外观、位置和动画都在 styles.css 的“光晕效果”区域控制。 -->
-        <div class="glow glowMint" aria-hidden="true"></div>
-        <div class="glow glowRose" aria-hidden="true"></div>
-        <div class="glow glowBlue" aria-hidden="true"></div>
-        <div class="glow glowYellow" aria-hidden="true"></div>
+    <main class="portfolioShell">
+      <!-- 单一背景：四个光晕始终留在同一个画面内。 -->
+      <div class="ambientGlows" aria-hidden="true">
+        <div class="glow glowMint"></div>
+        <div class="glow glowRose"></div>
+        <div class="glow glowBlue"></div>
+        <div class="glow glowYellow"></div>
+      </div>
 
+      <section class="cover" id="cover" aria-labelledby="cover-title">
         <header class="coverHeader coverReveal">
           <span class="coverKicker">AI <i>×</i> DESIGN</span>
-          <a class="namePlate" href="#about" aria-label="前往关于 Bai YuPeng">Bai YuPeng</a>
+          <span class="namePlate">Bai YuPeng</span>
         </header>
 
         <div class="coverTitle coverReveal">
@@ -39,44 +41,92 @@
         </div>
 
         <div class="coverFooter coverReveal">
-          <a class="contactButton entryButton" href="#work">
+          <button class="contactButton entryButton" id="portfolio-entry" type="button" aria-controls="portfolio-stage" aria-expanded="false">
             <span class="contactText">进入作品集</span>
             <span class="waveFrame" aria-hidden="true">
-              <i class="waveBar" style="height: 10px"></i><i class="waveBar" style="height: 18px"></i><i class="waveBar" style="height: 8px"></i><i class="waveBar" style="height: 22px"></i><i class="waveBar" style="height: 13px"></i><i class="waveBar" style="height: 25px"></i><i class="waveBar" style="height: 9px"></i><i class="waveBar" style="height: 19px"></i><i class="waveBar" style="height: 12px"></i><i class="waveBar" style="height: 23px"></i><i class="waveBar" style="height: 8px"></i><i class="waveBar" style="height: 17px"></i><i class="waveBar" style="height: 11px"></i><i class="waveBar" style="height: 21px"></i><i class="waveBar" style="height: 9px"></i><i class="waveBar" style="height: 16px"></i>
+              <i class="waveBar" style="height: 10px"></i><i class="waveBar" style="height: 18px"></i><i class="waveBar" style="height: 8px"></i><i class="waveBar" style="height: 22px"></i><i class="waveBar" style="height: 13px"></i><i class="waveBar" style="height: 25px"></i><i class="waveBar" style="height: 9px"></i><i class="waveBar" style="height: 19px"></i><i class="waveBar" style="height: 12px"></i><i class="waveBar" style="height: 23px"></i><i class="waveBar" style="height: 8px"></i><i class="waveBar" style="height: 17px"></i>
             </span>
             <span class="contactArrow" aria-hidden="true">↘</span>
-          </a>
+          </button>
         </div>
       </section>
 
-      <section class="workPreview" id="work" aria-labelledby="work-title">
-        <header><span>01 / 精选项目</span><p>品牌重塑 · 2026</p></header>
-        <div class="projectCanvas"><span>MIST</span><b>雾</b><small>东方茶饮的当代表达</small></div>
-        <div class="projectInfo"><h2 id="work-title">雾岛茶集</h2><p>从品牌策略到数字体验，构建一种安静、克制又可被记住的东方感知。</p></div>
-      </section>
+      <section class="portfolioStage" id="portfolio-stage" aria-label="作品集内容" aria-hidden="true">
+        <header class="stageHeader">
+          <span>BAI YUPENG / SELECTED WORK</span>
+          <button class="homeButton" id="portfolio-home" type="button">返回封面</button>
+        </header>
 
-      <section class="projectList" aria-label="更多项目">
-        <article class="projectRow"><span>02</span><h3>栖间酒店</h3><p>品牌系统 · 空间导视</p><b>2025</b></article>
-        <article class="projectRow"><span>03</span><h3>无界展览</h3><p>视觉识别 · 动态设计</p><b>2025</b></article>
-        <article class="projectRow"><span>04</span><h3>Monday Notes</h3><p>数字产品 · 编辑设计</p><b>2024</b></article>
-      </section>
+        <div class="slideDeck">
+          <article class="portfolioSlide is-active" data-slide="0" data-tone="mint">
+            <div class="slideNumber">01</div>
+            <div class="slideCopy">
+              <p class="slideKicker">品牌重塑 · 2026</p>
+              <h2>雾岛茶集</h2>
+              <p>从品牌策略到数字体验，构建一种安静、克制又可被记住的东方感知。</p>
+              <ul><li>品牌策略</li><li>视觉系统</li><li>动态体验</li></ul>
+            </div>
+            <div class="slideWord" aria-hidden="true">MIST</div>
+          </article>
 
-      <section class="about" id="about" aria-labelledby="about-title">
-        <div class="aboutLabel"><span>02 / 关于我</span><p>策略与美感之间，寻找准确的表达。</p></div>
-        <div class="aboutBody">
-          <h2 id="about-title">我相信，真正高级的设计不需要大声说话。</h2>
-          <div class="aboutDetails">
-            <p>我是林然，一名独立创意设计师。过去 7 年，我与文化、生活方式和科技领域的团队合作，将模糊的想法转化为清晰、有温度的品牌体验。</p>
-            <ul><li>品牌策略与视觉系统</li><li>网站与数字产品体验</li><li>艺术指导与动态设计</li></ul>
+          <article class="portfolioSlide" data-slide="1" data-tone="rose">
+            <div class="slideNumber">02</div>
+            <div class="slideCopy">
+              <p class="slideKicker">品牌系统 · 空间导视</p>
+              <h2>栖间酒店</h2>
+              <p>以留白、光影和缓慢节奏，塑造介于城市与自然之间的居住体验。</p>
+              <ul><li>视觉识别</li><li>空间语言</li><li>品牌叙事</li></ul>
+            </div>
+            <div class="slideWord" aria-hidden="true">REST</div>
+          </article>
+
+          <article class="portfolioSlide" data-slide="2" data-tone="blue">
+            <div class="slideNumber">03</div>
+            <div class="slideCopy">
+              <p class="slideKicker">视觉识别 · 动态设计</p>
+              <h2>无界展览</h2>
+              <p>让字体、声音与图像在同一节奏中变化，形成可以被感知的动态展览身份。</p>
+              <ul><li>艺术指导</li><li>动态图形</li><li>展览视觉</li></ul>
+            </div>
+            <div class="slideWord" aria-hidden="true">FLOW</div>
+          </article>
+
+          <article class="portfolioSlide" data-slide="3" data-tone="yellow">
+            <div class="slideNumber">04</div>
+            <div class="slideCopy">
+              <p class="slideKicker">数字产品 · 编辑设计</p>
+              <h2>Monday Notes</h2>
+              <p>将每周灵感整理成轻量、清晰的数字阅读体验，让内容本身成为界面。</p>
+              <ul><li>产品体验</li><li>编辑系统</li><li>交互设计</li></ul>
+            </div>
+            <div class="slideWord" aria-hidden="true">NOTE</div>
+          </article>
+
+          <article class="portfolioSlide aboutSlide" data-slide="4" data-tone="ink">
+            <div class="slideNumber">05</div>
+            <div class="slideCopy">
+              <p class="slideKicker">ABOUT / CONTACT</p>
+              <h2>Bai YuPeng</h2>
+              <p>关注 AI 动画、视觉设计与动态叙事，在技术与美感之间寻找准确、鲜明的表达。</p>
+              <a class="contactLink" href="mailto:hello@example.com">联系我 <span>↗</span></a>
+            </div>
+            <div class="slideWord" aria-hidden="true">HELLO</div>
+          </article>
+        </div>
+
+        <footer class="stageControls">
+          <button class="roundControl" id="slide-prev" type="button" aria-label="上一个内容">←</button>
+          <div class="slideDots" role="tablist" aria-label="选择内容">
+            <button class="slideDot is-active" type="button" data-target="0" aria-label="查看第 1 项" aria-selected="true"></button>
+            <button class="slideDot" type="button" data-target="1" aria-label="查看第 2 项" aria-selected="false"></button>
+            <button class="slideDot" type="button" data-target="2" aria-label="查看第 3 项" aria-selected="false"></button>
+            <button class="slideDot" type="button" data-target="3" aria-label="查看第 4 项" aria-selected="false"></button>
+            <button class="slideDot" type="button" data-target="4" aria-label="查看关于与联系" aria-selected="false"></button>
           </div>
-        </div>
+          <span class="slideCounter"><b id="slide-current">01</b> / 05</span>
+          <button class="roundControl" id="slide-next" type="button" aria-label="下一个内容">→</button>
+        </footer>
       </section>
-
-      <footer class="footer">
-        <p>有一个想法？</p>
-        <a href="mailto:hello@example.com">让我们聊聊<span>↗</span></a>
-        <div><span>© 2026 RAN STUDIO</span><span>SHANGHAI · CHINA</span><a href="#top">回到顶部 ↑</a></div>
-      </footer>
     </main>
   </body>
 </html>
