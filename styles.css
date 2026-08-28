@@ -54,10 +54,10 @@ a { text-decoration: none; }
 }
 
 /* JS 会持续改变尺寸与位置；以下数值也是关闭动态效果时的静态后备布局。 */
-.glowMint { width: clamp(320px, 38vw, 620px); left: -5vw; top: 5vh; background: #95ffaf; }
-.glowRose { width: clamp(260px, 32vw, 480px); right: -5vw; top: 8vh; background: #ffc9d2; }
-.glowBlue { width: clamp(290px, 35vw, 560px); right: 0; bottom: -2vh; background: #b9ddff; }
-.glowYellow { width: clamp(240px, 29vw, 440px); left: 5vw; bottom: 2vh; background: #ffe7a3; }
+.glowMint { width: clamp(360px, 42vw, 680px); left: -5vw; top: 5vh; background: #95ffaf; }
+.glowRose { width: clamp(245px, 28vw, 460px); right: -5vw; top: 8vh; background: #ffc9d2; }
+.glowBlue { width: clamp(300px, 35vw, 580px); right: 0; bottom: -2vh; background: #b9ddff; }
+.glowYellow { width: clamp(200px, 22vw, 390px); left: 5vw; bottom: 2vh; background: #ffe7a3; }
 /* ==================== 光晕效果：基础样式结束 ==================== */
 
 .cover,
