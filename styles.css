@@ -91,17 +91,47 @@ a { text-decoration: none; }
 .coverKicker i { margin: 0 .15em; font-style: normal; }
 
 .namePlate {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: 64px;
-  padding: 0 24px 5px;
-  border-radius: 13px;
+  min-height: 52px;
+  padding: 0 18px 4px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 10px;
   background: #050505;
   color: #fff;
   font-family: "Arial Black", Arial, sans-serif;
-  font-size: clamp(1.1rem, 2.35vw, 2.35rem);
+  font-size: clamp(.92rem, 1.75vw, 1.7rem);
   font-weight: 900;
   letter-spacing: -.07em;
+  cursor: default;
+  transform-origin: center;
+  transition: transform .45s var(--ease), border-radius .45s var(--ease), box-shadow .45s ease;
+}
+
+.namePlate::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -40%;
+  bottom: -40%;
+  left: -65%;
+  width: 38%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.72), transparent);
+  pointer-events: none;
+  transform: skewX(-18deg);
+  transition: left .65s var(--ease);
+}
+
+@media (hover: hover) {
+  .namePlate:hover {
+    border-radius: 24px 8px 24px 8px;
+    box-shadow: 0 12px 28px rgba(0,0,0,.18);
+    transform: rotate(-2deg) scale(1.06);
+  }
+
+  .namePlate:hover::after { left: 125%; }
 }
 
 .coverTitle {
@@ -398,7 +428,7 @@ a { text-decoration: none; }
   .cover, .portfolioStage { padding: 24px 20px 22px; }
   .coverHeader { align-items: center; }
   .coverKicker { max-width: 100px; padding: 0; font-size: .72rem; line-height: 1.25; }
-  .namePlate { min-height: 46px; padding: 0 14px 3px; border-radius: 9px; font-size: 1.15rem; }
+  .namePlate { min-height: 40px; padding: 0 11px 3px; border-radius: 8px; font-size: .98rem; }
   .coverTitle { top: 45%; width: 92vw; transform: translate(-50%, -50%); }
   .coverTitle p { padding-left: 7%; font-size: clamp(2.05rem, 11vw, 3.25rem); white-space: normal; }
   .coverTitle h1 { margin-top: .08em; font-size: clamp(3.25rem, 17.7vw, 5.2rem); letter-spacing: -.02em; }
