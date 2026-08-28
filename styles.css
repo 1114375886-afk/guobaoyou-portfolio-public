@@ -124,10 +124,11 @@ a { color: inherit; text-decoration: none; }
   backface-visibility: hidden;
 }
 
-/* 三个光晕：尺寸故意不一致，并分布在左侧、右上和右下三个区域。 */
+/* 四个光晕：尺寸故意不一致，并分布在彼此错开的区域。 */
 .glowMint { width: clamp(250px, 30vw, 470px); left: -9vw; top: 22vh; background: #95ffaf; animation: glowMint 16s linear -3s infinite; }
 .glowRose { width: clamp(160px, 18vw, 290px); right: 8vw; top: -7vh; background: #ffc9d2; animation: glowRose 19s linear -11s infinite; }
 .glowBlue { width: clamp(210px, 24vw, 380px); right: -3vw; bottom: -8vh; background: #b9ddff; animation: glowBlue 17s linear -7s infinite; }
+.glowYellow { width: clamp(140px, 15vw, 240px); left: 38vw; bottom: -6vh; background: #ffe7a3; animation: glowYellow 20s linear -6s infinite; }
 /* ==================== 光晕效果：基础样式结束 ==================== */
 
 .coverHeader {
@@ -276,6 +277,13 @@ a { color: inherit; text-decoration: none; }
   48% { opacity: .54; filter: blur(32px); transform: translate3d(-16vw, -13vh, 0) scale(1.13); }
   53% { opacity: .4; filter: blur(42px); transform: translate3d(-12vw, -10vh, 0) scale(.93); }
   77% { opacity: .46; filter: blur(36px); transform: translate3d(1vw, -17vh, 0) scale(1.05); }
+}
+@keyframes glowYellow {
+  0%, 100% { opacity: .18; filter: blur(50px); transform: translate3d(-4vw, 5vh, 0) scale(.88); }
+  30% { opacity: .44; filter: blur(32px); transform: translate3d(4vw, -3vh, 0) scale(1.06); }
+  48% { opacity: .5; filter: blur(30px); transform: translate3d(9vw, -8vh, 0) scale(1.11); }
+  53% { opacity: .36; filter: blur(38px); transform: translate3d(6vw, -5vh, 0) scale(.92); }
+  78% { opacity: .42; filter: blur(34px); transform: translate3d(-2vw, -11vh, 0) scale(1.04); }
 }
 /* ==================== 光晕效果：动画关键帧结束 ==================== */
 
