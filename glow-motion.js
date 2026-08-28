@@ -22,10 +22,10 @@
       [.68, -.74],
     ];
     const sizeRules = [
-      [.56, 320, 620],
-      [.47, 260, 480],
-      [.51, 290, 560],
-      [.43, 240, 440],
+      [.62, 360, 680],
+      [.42, 245, 460],
+      [.52, 300, 580],
+      [.32, 200, 390],
     ];
     const speedFactors = [1, .88, .94, .82];
 
@@ -66,8 +66,8 @@
           state.vx = directions[index][0] * speed * speedFactors[index];
           state.vy = directions[index][1] * speed * speedFactors[index];
         } else {
-          state.x = clamp(state.x * width / oldWidth, -state.baseSize * .12, width + state.baseSize * .12);
-          state.y = clamp(state.y * height / oldHeight, -state.baseSize * .12, height + state.baseSize * .12);
+          state.x = clamp(state.x * width / oldWidth, 0, width);
+          state.y = clamp(state.y * height / oldHeight, 0, height);
         }
 
         state.element.style.left = "0";
@@ -80,17 +80,16 @@
 
     const updateBreathing = (time) => {
       states.forEach((state) => {
-        const pulse = 1 + Math.sin(time * .00034 + state.phase) * .105;
+        const pulse = 1 + Math.sin(time * .00034 + state.phase) * .07;
         state.size = state.baseSize * pulse;
       });
     };
 
     const keepInside = (state) => {
-      const allowance = state.size * .14;
-      const minimumX = -allowance;
-      const maximumX = width + allowance;
-      const minimumY = -allowance;
-      const maximumY = height + allowance;
+      const minimumX = 0;
+      const maximumX = width;
+      const minimumY = 0;
+      const maximumY = height;
 
       if (state.x < minimumX) {
         state.x = minimumX;
@@ -191,6 +190,7 @@
           keepInside(state);
         });
         resolveCollisions();
+        states.forEach(keepInside);
         states.forEach((state) => updateElasticity(state, deltaTime));
         render(time);
       }
