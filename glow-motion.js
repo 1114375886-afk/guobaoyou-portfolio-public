@@ -119,7 +119,7 @@
           const distance = Math.max(1, Math.hypot(deltaX, deltaY));
           const normalX = deltaX / distance;
           const normalY = deltaY / distance;
-          const safeDistance = (first.size + second.size) * .42 + 14;
+          const safeDistance = (first.size + second.size) * .48 + 14;
           const approachDistance = 46;
 
           if (distance >= safeDistance + approachDistance) continue;
