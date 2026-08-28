@@ -227,5 +227,86 @@
     };
   }
 
+  function createTitleEffects(title) {
+    if (!title || !title.parentNode) return function noop() {};
+
+    const lines = Array.from(title.children);
+    lines.forEach((line) => line.setAttribute("data-text", line.textContent.trim()));
+
+    const projection = title.cloneNode(true);
+    projection.className = "coverTitle coverTitleProjection";
+    projection.setAttribute("aria-hidden", "true");
+    projection.querySelectorAll("[id]").forEach((element) => element.removeAttribute("id"));
+    title.parentNode.insertBefore(projection, title);
+
+    const reducedMotion = global.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let targetX = title.clientWidth / 2;
+    let targetY = title.clientHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+    let animationFrame = 0;
+    let active = false;
+
+    const writePosition = () => {
+      projection.style.setProperty("--projection-x", `${currentX.toFixed(2)}px`);
+      projection.style.setProperty("--projection-y", `${currentY.toFixed(2)}px`);
+    };
+
+    const followPointer = () => {
+      currentX += (targetX - currentX) * .14;
+      currentY += (targetY - currentY) * .14;
+      writePosition();
+
+      if (active || Math.abs(targetX - currentX) > .12 || Math.abs(targetY - currentY) > .12) {
+        animationFrame = global.requestAnimationFrame(followPointer);
+      } else {
+        animationFrame = 0;
+      }
+    };
+
+    const updateTarget = (event) => {
+      const rect = title.getBoundingClientRect();
+      targetX = clamp(event.clientX - rect.left, 0, rect.width);
+      targetY = clamp(event.clientY - rect.top, 0, rect.height);
+
+      if (reducedMotion) {
+        currentX = targetX;
+        currentY = targetY;
+        writePosition();
+      } else if (!animationFrame) {
+        animationFrame = global.requestAnimationFrame(followPointer);
+      }
+    };
+
+    const onPointerEnter = (event) => {
+      updateTarget(event);
+      currentX = targetX;
+      currentY = targetY;
+      writePosition();
+      active = true;
+      projection.classList.add("is-active");
+    };
+
+    const onPointerLeave = () => {
+      active = false;
+      projection.classList.remove("is-active");
+    };
+
+    title.addEventListener("pointerenter", onPointerEnter);
+    title.addEventListener("pointermove", updateTarget);
+    title.addEventListener("pointerleave", onPointerLeave);
+    writePosition();
+
+    return function stopTitleEffects() {
+      global.cancelAnimationFrame(animationFrame);
+      title.removeEventListener("pointerenter", onPointerEnter);
+      title.removeEventListener("pointermove", updateTarget);
+      title.removeEventListener("pointerleave", onPointerLeave);
+      projection.remove();
+      lines.forEach((line) => line.removeAttribute("data-text"));
+    };
+  }
+
   global.createGlowMotion = createGlowMotion;
+  global.createTitleEffects = createTitleEffects;
 })(window);
