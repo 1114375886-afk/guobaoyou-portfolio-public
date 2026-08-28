@@ -40,6 +40,7 @@
       y: 0,
       vx: 0,
       vy: 0,
+      speed: 0,
       baseSize: 0,
       size: 0,
       phase: index * 1.73,
@@ -59,12 +60,14 @@
       states.forEach((state, index) => {
         const [ratio, minimum, maximum] = sizeRules[index % sizeRules.length];
         state.baseSize = clamp(shortSide * ratio, minimum, maximum);
+        state.speed = speed * speedFactors[index];
 
         if (initial) {
+          const directionLength = Math.hypot(directions[index][0], directions[index][1]);
           state.x = width * startingPoints[index][0];
           state.y = height * startingPoints[index][1];
-          state.vx = directions[index][0] * speed * speedFactors[index];
-          state.vy = directions[index][1] * speed * speedFactors[index];
+          state.vx = directions[index][0] / directionLength * state.speed;
+          state.vy = directions[index][1] / directionLength * state.speed;
         } else {
           state.x = clamp(state.x * width / oldWidth, 0, width);
           state.y = clamp(state.y * height / oldHeight, 0, height);
@@ -109,6 +112,14 @@
     };
 
     const resolveCollisions = () => {
+      const restoreSpeed = (state) => {
+        const currentSpeed = Math.hypot(state.vx, state.vy);
+        if (currentSpeed < .001) return;
+        const correction = state.speed / currentSpeed;
+        state.vx *= correction;
+        state.vy *= correction;
+      };
+
       for (let firstIndex = 0; firstIndex < states.length; firstIndex += 1) {
         for (let secondIndex = firstIndex + 1; secondIndex < states.length; secondIndex += 1) {
           const first = states[firstIndex];
@@ -145,6 +156,8 @@
             first.vy -= impulse * normalY;
             second.vx += impulse * normalX;
             second.vy += impulse * normalY;
+            restoreSpeed(first);
+            restoreSpeed(second);
           }
 
           first.squish = Math.max(first.squish, .16);
