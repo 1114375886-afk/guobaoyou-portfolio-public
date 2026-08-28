@@ -239,23 +239,49 @@
     projection.querySelectorAll("[id]").forEach((element) => element.removeAttribute("id"));
     title.parentNode.insertBefore(projection, title);
 
+    const lightSurface = title.closest(".cover") || title;
+    const projectedLines = Array.from(projection.children);
     const reducedMotion = global.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let targetX = title.clientWidth / 2;
-    let targetY = title.clientHeight / 2;
+    const initialRect = title.getBoundingClientRect();
+    let targetX = initialRect.left + initialRect.width / 2;
+    let targetY = initialRect.top + initialRect.height / 2;
     let currentX = targetX;
     let currentY = targetY;
     let animationFrame = 0;
     let active = false;
 
-    const writePosition = () => {
-      projection.style.setProperty("--projection-x", `${currentX.toFixed(2)}px`);
-      projection.style.setProperty("--projection-y", `${currentY.toFixed(2)}px`);
+    const writeShadows = () => {
+      lines.forEach((line, index) => {
+        const lineRect = line.getBoundingClientRect();
+        const centerX = lineRect.left + lineRect.width / 2;
+        const centerY = lineRect.top + lineRect.height / 2;
+        let deltaX = centerX - currentX;
+        let deltaY = centerY - currentY;
+        let distance = Math.hypot(deltaX, deltaY);
+
+        if (distance < 1) {
+          deltaX = 0;
+          deltaY = 1;
+          distance = 1;
+        }
+
+        const directionX = deltaX / distance;
+        const directionY = deltaY / distance;
+        const shadowLength = clamp(23 - distance * .015, 10, 22);
+        const projectedLine = projectedLines[index];
+
+        projectedLine.style.setProperty("--shadow-x", `${(directionX * shadowLength * .58).toFixed(2)}px`);
+        projectedLine.style.setProperty("--shadow-y", `${(directionY * shadowLength * .58).toFixed(2)}px`);
+        projectedLine.style.setProperty("--shadow-far-x", `${(directionX * shadowLength).toFixed(2)}px`);
+        projectedLine.style.setProperty("--shadow-far-y", `${(directionY * shadowLength).toFixed(2)}px`);
+        projectedLine.style.setProperty("--shadow-blur", `${(3.5 + shadowLength * .16).toFixed(2)}px`);
+      });
     };
 
     const followPointer = () => {
-      currentX += (targetX - currentX) * .14;
-      currentY += (targetY - currentY) * .14;
-      writePosition();
+      currentX += (targetX - currentX) * .16;
+      currentY += (targetY - currentY) * .16;
+      writeShadows();
 
       if (active || Math.abs(targetX - currentX) > .12 || Math.abs(targetY - currentY) > .12) {
         animationFrame = global.requestAnimationFrame(followPointer);
@@ -265,14 +291,13 @@
     };
 
     const updateTarget = (event) => {
-      const rect = title.getBoundingClientRect();
-      targetX = clamp(event.clientX - rect.left, 0, rect.width);
-      targetY = clamp(event.clientY - rect.top, 0, rect.height);
+      targetX = event.clientX;
+      targetY = event.clientY;
 
       if (reducedMotion) {
         currentX = targetX;
         currentY = targetY;
-        writePosition();
+        writeShadows();
       } else if (!animationFrame) {
         animationFrame = global.requestAnimationFrame(followPointer);
       }
@@ -282,7 +307,7 @@
       updateTarget(event);
       currentX = targetX;
       currentY = targetY;
-      writePosition();
+      writeShadows();
       active = true;
       projection.classList.add("is-active");
     };
@@ -292,16 +317,16 @@
       projection.classList.remove("is-active");
     };
 
-    title.addEventListener("pointerenter", onPointerEnter);
-    title.addEventListener("pointermove", updateTarget);
-    title.addEventListener("pointerleave", onPointerLeave);
-    writePosition();
+    lightSurface.addEventListener("pointerenter", onPointerEnter);
+    lightSurface.addEventListener("pointermove", updateTarget);
+    lightSurface.addEventListener("pointerleave", onPointerLeave);
+    writeShadows();
 
     return function stopTitleEffects() {
       global.cancelAnimationFrame(animationFrame);
-      title.removeEventListener("pointerenter", onPointerEnter);
-      title.removeEventListener("pointermove", updateTarget);
-      title.removeEventListener("pointerleave", onPointerLeave);
+      lightSurface.removeEventListener("pointerenter", onPointerEnter);
+      lightSurface.removeEventListener("pointermove", updateTarget);
+      lightSurface.removeEventListener("pointerleave", onPointerLeave);
       projection.remove();
       lines.forEach((line) => line.removeAttribute("data-text"));
     };
