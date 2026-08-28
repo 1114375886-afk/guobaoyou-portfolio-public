@@ -45,18 +45,19 @@ a { text-decoration: none; }
   position: absolute;
   aspect-ratio: 1;
   border-radius: 50%;
-  opacity: .34;
-  filter: blur(54px);
+  opacity: .35;
+  filter: blur(44px);
   transform: translate3d(0,0,0);
-  will-change: transform, opacity, filter;
+  transform-origin: center;
+  will-change: width, transform, opacity;
   backface-visibility: hidden;
 }
 
-/* 四个光晕尺寸不同，运动轨迹错开并覆盖整个屏幕。 */
-.glowMint { width: clamp(290px, 34vw, 540px); left: -12vw; top: 18vh; background: #95ffaf; animation: glowMint 13s linear -3s infinite; }
-.glowRose { width: clamp(190px, 22vw, 340px); right: 0; top: -10vh; background: #ffc9d2; animation: glowRose 15.5s linear -11s infinite; }
-.glowBlue { width: clamp(245px, 28vw, 440px); right: -6vw; bottom: -12vh; background: #b9ddff; animation: glowBlue 14s linear -7s infinite; }
-.glowYellow { width: clamp(170px, 19vw, 290px); left: 35vw; bottom: -8vh; background: #ffe7a3; animation: glowYellow 16s linear -6s infinite; }
+/* JS 会持续改变尺寸与位置；以下数值也是关闭动态效果时的静态后备布局。 */
+.glowMint { width: clamp(320px, 38vw, 620px); left: -5vw; top: 5vh; background: #95ffaf; }
+.glowRose { width: clamp(260px, 32vw, 480px); right: -5vw; top: 8vh; background: #ffc9d2; }
+.glowBlue { width: clamp(290px, 35vw, 560px); right: 0; bottom: -2vh; background: #b9ddff; }
+.glowYellow { width: clamp(240px, 29vw, 440px); left: 5vw; bottom: 2vh; background: #ffe7a3; }
 /* ==================== 光晕效果：基础样式结束 ==================== */
 
 .cover,
@@ -430,33 +431,6 @@ a { text-decoration: none; }
 @keyframes coverIn { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes coverTitleIn { from { opacity: 0; transform: translate(-42%, -34%); } to { opacity: 1; transform: translate(-42%, -44%); } }
 @keyframes contentIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-
-/* ==================== 光晕效果：动画关键帧 ==================== */
-@keyframes glowMint {
-  0%, 100% { opacity: .22; filter: blur(58px); transform: translate3d(-10vw, 5vh, 0) scale(.88); }
-  22% { opacity: .5; filter: blur(40px); transform: translate3d(28vw, -15vh, 0) scale(1.08); }
-  48% { opacity: .56; filter: blur(34px); transform: translate3d(82vw, 18vh, 0) scale(1.16); }
-  72% { opacity: .42; filter: blur(42px); transform: translate3d(50vw, 60vh, 0) scale(.94); }
-}
-@keyframes glowRose {
-  0%, 100% { opacity: .2; filter: blur(54px); transform: translate3d(12vw, -5vh, 0) scale(.9); }
-  25% { opacity: .46; filter: blur(36px); transform: translate3d(-28vw, 20vh, 0) scale(1.08); }
-  52% { opacity: .52; filter: blur(32px); transform: translate3d(-80vw, 62vh, 0) scale(1.15); }
-  76% { opacity: .38; filter: blur(40px); transform: translate3d(-42vw, 85vh, 0) scale(.92); }
-}
-@keyframes glowBlue {
-  0%, 100% { opacity: .18; filter: blur(58px); transform: translate3d(8vw, 10vh, 0) scale(.86); }
-  28% { opacity: .48; filter: blur(38px); transform: translate3d(-35vw, -20vh, 0) scale(1.08); }
-  55% { opacity: .54; filter: blur(32px); transform: translate3d(-84vw, -72vh, 0) scale(1.16); }
-  78% { opacity: .4; filter: blur(42px); transform: translate3d(-38vw, -88vh, 0) scale(.93); }
-}
-@keyframes glowYellow {
-  0%, 100% { opacity: .18; filter: blur(50px); transform: translate3d(-45vw, 10vh, 0) scale(.88); }
-  24% { opacity: .44; filter: blur(34px); transform: translate3d(40vw, -18vh, 0) scale(1.07); }
-  52% { opacity: .5; filter: blur(30px); transform: translate3d(32vw, -80vh, 0) scale(1.14); }
-  76% { opacity: .36; filter: blur(38px); transform: translate3d(-45vw, -56vh, 0) scale(.92); }
-}
-/* ==================== 光晕效果：动画关键帧结束 ==================== */
 
 @media (max-width: 760px) {
   .cover, .portfolioStage { padding: 24px 20px 22px; }
