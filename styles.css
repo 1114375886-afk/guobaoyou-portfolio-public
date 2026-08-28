@@ -206,6 +206,71 @@ a { text-decoration: none; }
   text-shadow: 1px 1px 0 rgba(255,255,255,.9), 3px 3px 0 rgba(184,107,0,.13);
 }
 
+/* 标题常驻微弱流光：三行使用不同周期，避免同步扫过。 */
+.coverTitle:not(.coverTitleProjection) > p,
+.coverTitle:not(.coverTitleProjection) > h1,
+.coverTitle:not(.coverTitleProjection) > span { position: relative; }
+.coverTitle:not(.coverTitleProjection) > p::after,
+.coverTitle:not(.coverTitleProjection) > h1::after,
+.coverTitle:not(.coverTitleProjection) > span::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: transparent;
+  background: linear-gradient(108deg, transparent 34%, rgba(190,255,222,.9) 48%, rgba(255,220,175,.72) 52%, transparent 66%);
+  background-size: 260% 100%;
+  background-position: 145% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0 transparent;
+  font: inherit;
+  font-style: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  white-space: inherit;
+  pointer-events: none;
+  opacity: .2;
+  animation: titleSheen 11s linear infinite;
+}
+.coverTitle:not(.coverTitleProjection) > h1::after { opacity: .14; animation-duration: 13s; animation-delay: -4s; }
+.coverTitle:not(.coverTitleProjection) > span::after { opacity: .18; animation-duration: 12s; animation-delay: -8s; }
+
+/* 鼠标附近的小范围投影层；位置由脚本进行带延迟的插值跟随。 */
+.coverTitleProjection {
+  --projection-x: 50%;
+  --projection-y: 50%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  clip-path: circle(0 at var(--projection-x) var(--projection-y));
+  filter: blur(.35px);
+  mix-blend-mode: multiply;
+  will-change: clip-path, opacity;
+  transition: opacity .28s ease, clip-path .42s var(--ease);
+}
+.coverTitleProjection.is-active {
+  opacity: .78;
+  clip-path: circle(82px at var(--projection-x) var(--projection-y));
+}
+.coverTitleProjection p {
+  color: transparent;
+  -webkit-text-stroke: .022em rgba(54,167,119,.28);
+  text-shadow: 8px 9px 0 rgba(73,224,146,.28);
+}
+.coverTitleProjection h1 {
+  color: transparent;
+  -webkit-text-stroke: clamp(2px, .23vw, 5px) rgba(76,104,232,.38);
+  text-shadow: 8px 9px 0 rgba(89,124,255,.22);
+}
+.coverTitleProjection > span {
+  color: rgba(224,126,20,.32);
+  -webkit-text-stroke: .018em rgba(224,126,20,.2);
+  text-shadow: 8px 9px 0 rgba(255,170,67,.2);
+}
+
 .coverFooter {
   position: relative;
   z-index: 2;
@@ -410,12 +475,14 @@ a { text-decoration: none; }
 
 .js .coverReveal { opacity: 0; }
 .js.ready .coverHeader { animation: coverIn .9s .08s var(--ease) forwards; }
-.js.ready .coverTitle { animation: coverTitleIn 1.05s .16s var(--ease) forwards; }
+.js.ready .coverTitle:not(.coverTitleProjection) { animation: coverTitleIn 1.05s .16s var(--ease) forwards; }
+.js.ready .coverTitleProjection { animation: none; }
 .js.ready .coverFooter { animation: coverIn .95s .34s var(--ease) forwards; }
 
 @keyframes coverIn { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes coverTitleIn { from { opacity: 0; transform: translate(-42%, -34%); } to { opacity: 1; transform: translate(-42%, -44%); } }
 @keyframes contentIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes titleSheen { from { background-position: 145% 0; } to { background-position: -145% 0; } }
 
 @media (max-width: 760px) {
   .cover, .portfolioStage { padding: 24px 20px 22px; }
@@ -426,6 +493,7 @@ a { text-decoration: none; }
   .coverTitle p { padding-left: 0; font-size: clamp(2.05rem, 11vw, 3.25rem); white-space: normal; }
   .coverTitle h1 { margin-top: .08em; font-size: clamp(3.25rem, 17.7vw, 5.2rem); letter-spacing: -.02em; }
   .coverTitle > span { margin-top: .14em; margin-right: 0; font-size: 3.1rem; }
+  .coverTitleProjection.is-active { clip-path: circle(62px at var(--projection-x) var(--projection-y)); }
   .entryButton { width: auto; height: 50px; padding-inline: 18px; border-radius: 12px; box-shadow: 5px 5px 0 rgba(0,0,0,.06); }
   .stageHeader { padding-bottom: 12px; font-size: .58rem; }
   .homeButton { padding: 9px 10px; }
