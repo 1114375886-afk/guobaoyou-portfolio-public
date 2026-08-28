@@ -1,5 +1,8 @@
 requestAnimationFrame(() => document.documentElement.classList.add("ready"));
 
+const stopGlowMotion = window.createGlowMotion?.(document.querySelector(".ambientGlows"));
+window.addEventListener("pagehide", () => stopGlowMotion?.(), { once: true });
+
 const shell = document.querySelector(".portfolioShell");
 const cover = document.querySelector(".cover");
 const stage = document.querySelector(".portfolioStage");
