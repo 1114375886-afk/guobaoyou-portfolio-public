@@ -52,11 +52,11 @@ a { text-decoration: none; }
   backface-visibility: hidden;
 }
 
-/* 四个光晕尺寸不同，并分布在彼此错开的区域。 */
-.glowMint { width: clamp(250px, 30vw, 470px); left: -9vw; top: 22vh; background: #95ffaf; animation: glowMint 16s linear -3s infinite; }
-.glowRose { width: clamp(160px, 18vw, 290px); right: 8vw; top: -7vh; background: #ffc9d2; animation: glowRose 19s linear -11s infinite; }
-.glowBlue { width: clamp(210px, 24vw, 380px); right: -3vw; bottom: -8vh; background: #b9ddff; animation: glowBlue 17s linear -7s infinite; }
-.glowYellow { width: clamp(140px, 15vw, 240px); left: 38vw; bottom: -6vh; background: #ffe7a3; animation: glowYellow 20s linear -6s infinite; }
+/* 四个光晕尺寸不同，运动轨迹错开并覆盖整个屏幕。 */
+.glowMint { width: clamp(290px, 34vw, 540px); left: -12vw; top: 18vh; background: #95ffaf; animation: glowMint 13s linear -3s infinite; }
+.glowRose { width: clamp(190px, 22vw, 340px); right: 0; top: -10vh; background: #ffc9d2; animation: glowRose 15.5s linear -11s infinite; }
+.glowBlue { width: clamp(245px, 28vw, 440px); right: -6vw; bottom: -12vh; background: #b9ddff; animation: glowBlue 14s linear -7s infinite; }
+.glowYellow { width: clamp(170px, 19vw, 290px); left: 35vw; bottom: -8vh; background: #ffe7a3; animation: glowYellow 16s linear -6s infinite; }
 /* ==================== 光晕效果：基础样式结束 ==================== */
 
 .cover,
@@ -433,32 +433,28 @@ a { text-decoration: none; }
 
 /* ==================== 光晕效果：动画关键帧 ==================== */
 @keyframes glowMint {
-  0%, 100% { opacity: .22; filter: blur(58px); transform: translate3d(-3vw, 7vh, 0) scale(.88); }
-  30% { opacity: .52; filter: blur(38px); transform: translate3d(10vw, -4vh, 0) scale(1.08); }
-  48% { opacity: .56; filter: blur(34px); transform: translate3d(18vw, 4vh, 0) scale(1.12); }
-  53% { opacity: .42; filter: blur(42px); transform: translate3d(14vw, 2vh, 0) scale(.94); }
-  76% { opacity: .48; filter: blur(38px); transform: translate3d(5vw, 13vh, 0) scale(1.05); }
+  0%, 100% { opacity: .22; filter: blur(58px); transform: translate3d(-10vw, 5vh, 0) scale(.88); }
+  22% { opacity: .5; filter: blur(40px); transform: translate3d(28vw, -15vh, 0) scale(1.08); }
+  48% { opacity: .56; filter: blur(34px); transform: translate3d(82vw, 18vh, 0) scale(1.16); }
+  72% { opacity: .42; filter: blur(42px); transform: translate3d(50vw, 60vh, 0) scale(.94); }
 }
 @keyframes glowRose {
-  0%, 100% { opacity: .2; filter: blur(54px); transform: translate3d(4vw, -3vh, 0) scale(.9); }
-  28% { opacity: .46; filter: blur(34px); transform: translate3d(-5vw, 5vh, 0) scale(1.08); }
-  47% { opacity: .52; filter: blur(32px); transform: translate3d(-10vw, 11vh, 0) scale(1.12); }
-  52% { opacity: .38; filter: blur(40px); transform: translate3d(-7vw, 8vh, 0) scale(.92); }
-  78% { opacity: .44; filter: blur(36px); transform: translate3d(3vw, 3vh, 0) scale(1.04); }
+  0%, 100% { opacity: .2; filter: blur(54px); transform: translate3d(12vw, -5vh, 0) scale(.9); }
+  25% { opacity: .46; filter: blur(36px); transform: translate3d(-28vw, 20vh, 0) scale(1.08); }
+  52% { opacity: .52; filter: blur(32px); transform: translate3d(-80vw, 62vh, 0) scale(1.15); }
+  76% { opacity: .38; filter: blur(40px); transform: translate3d(-42vw, 85vh, 0) scale(.92); }
 }
 @keyframes glowBlue {
-  0%, 100% { opacity: .18; filter: blur(58px); transform: translate3d(4vw, 5vh, 0) scale(.86); }
-  30% { opacity: .48; filter: blur(36px); transform: translate3d(-9vw, -5vh, 0) scale(1.08); }
-  48% { opacity: .54; filter: blur(32px); transform: translate3d(-16vw, -13vh, 0) scale(1.13); }
-  53% { opacity: .4; filter: blur(42px); transform: translate3d(-12vw, -10vh, 0) scale(.93); }
-  77% { opacity: .46; filter: blur(36px); transform: translate3d(1vw, -17vh, 0) scale(1.05); }
+  0%, 100% { opacity: .18; filter: blur(58px); transform: translate3d(8vw, 10vh, 0) scale(.86); }
+  28% { opacity: .48; filter: blur(38px); transform: translate3d(-35vw, -20vh, 0) scale(1.08); }
+  55% { opacity: .54; filter: blur(32px); transform: translate3d(-84vw, -72vh, 0) scale(1.16); }
+  78% { opacity: .4; filter: blur(42px); transform: translate3d(-38vw, -88vh, 0) scale(.93); }
 }
 @keyframes glowYellow {
-  0%, 100% { opacity: .18; filter: blur(50px); transform: translate3d(-4vw, 5vh, 0) scale(.88); }
-  30% { opacity: .44; filter: blur(32px); transform: translate3d(4vw, -3vh, 0) scale(1.06); }
-  48% { opacity: .5; filter: blur(30px); transform: translate3d(9vw, -8vh, 0) scale(1.11); }
-  53% { opacity: .36; filter: blur(38px); transform: translate3d(6vw, -5vh, 0) scale(.92); }
-  78% { opacity: .42; filter: blur(34px); transform: translate3d(-2vw, -11vh, 0) scale(1.04); }
+  0%, 100% { opacity: .18; filter: blur(50px); transform: translate3d(-45vw, 10vh, 0) scale(.88); }
+  24% { opacity: .44; filter: blur(34px); transform: translate3d(40vw, -18vh, 0) scale(1.07); }
+  52% { opacity: .5; filter: blur(30px); transform: translate3d(32vw, -80vh, 0) scale(1.14); }
+  76% { opacity: .36; filter: blur(38px); transform: translate3d(-45vw, -56vh, 0) scale(.92); }
 }
 /* ==================== 光晕效果：动画关键帧结束 ==================== */
 
