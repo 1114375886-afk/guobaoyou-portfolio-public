@@ -271,7 +271,7 @@
 
         const directionX = deltaX / distance;
         const directionY = deltaY / distance;
-        const shadowLength = clamp(23 - distance * .015, 10, 22);
+        const shadowLength = clamp(42 - distance * .02, 18, 38);
         const projectedLine = projectedLines[index];
 
         projectedLine.style.setProperty("--shadow-x", `${(directionX * shadowLength * .58).toFixed(2)}px`);
