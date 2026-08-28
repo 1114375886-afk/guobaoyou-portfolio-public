@@ -239,7 +239,8 @@
     projection.querySelectorAll("[id]").forEach((element) => element.removeAttribute("id"));
     title.parentNode.insertBefore(projection, title);
 
-    const lightSurface = title.closest(".cover") || title;
+    const lightSurface = global;
+    const leaveSurface = document.documentElement;
     const projectedLines = Array.from(projection.children);
     const reducedMotion = global.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const initialRect = title.getBoundingClientRect();
@@ -312,30 +313,19 @@
       }
     };
 
-    const onPointerEnter = (event) => {
-      updateTarget(event);
-      currentX = targetX;
-      currentY = targetY;
-      writeShadows();
-      active = true;
-      projection.classList.add("is-active");
-    };
-
     const onPointerLeave = () => {
       active = false;
       projection.classList.remove("is-active");
     };
 
-    lightSurface.addEventListener("pointerenter", onPointerEnter);
-    lightSurface.addEventListener("pointermove", updateTarget);
-    lightSurface.addEventListener("pointerleave", onPointerLeave);
+    lightSurface.addEventListener("pointermove", updateTarget, { passive: true });
+    leaveSurface.addEventListener("pointerleave", onPointerLeave);
     writeShadows();
 
     return function stopTitleEffects() {
       global.cancelAnimationFrame(animationFrame);
-      lightSurface.removeEventListener("pointerenter", onPointerEnter);
       lightSurface.removeEventListener("pointermove", updateTarget);
-      lightSurface.removeEventListener("pointerleave", onPointerLeave);
+      leaveSurface.removeEventListener("pointerleave", onPointerLeave);
       projection.remove();
       lines.forEach((line) => line.removeAttribute("data-text"));
     };
