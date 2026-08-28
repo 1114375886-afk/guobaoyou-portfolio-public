@@ -238,37 +238,38 @@ a { text-decoration: none; }
 .coverTitle:not(.coverTitleProjection) > h1::after { opacity: .14; animation-duration: 13s; animation-delay: -4s; }
 .coverTitle:not(.coverTitleProjection) > span::after { opacity: .18; animation-duration: 12s; animation-delay: -8s; }
 
-/* 鼠标附近的小范围投影层；位置由脚本进行带延迟的插值跟随。 */
+/* 鼠标作为光源：三行投影始终沿远离鼠标的方向延伸。 */
 .coverTitleProjection {
-  --projection-x: 50%;
-  --projection-y: 50%;
   z-index: 0;
   pointer-events: none;
   opacity: 0;
-  clip-path: circle(0 at var(--projection-x) var(--projection-y));
-  filter: blur(.35px);
   mix-blend-mode: multiply;
-  will-change: clip-path, opacity;
-  transition: opacity .28s ease, clip-path .42s var(--ease);
+  will-change: opacity;
+  transition: opacity .32s ease;
 }
 .coverTitleProjection.is-active {
-  opacity: .78;
-  clip-path: circle(82px at var(--projection-x) var(--projection-y));
+  opacity: .72;
 }
 .coverTitleProjection p {
   color: transparent;
-  -webkit-text-stroke: .022em rgba(54,167,119,.28);
-  text-shadow: 8px 9px 0 rgba(73,224,146,.28);
+  -webkit-text-stroke: 0 transparent;
+  text-shadow:
+    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(35,94,68,.34),
+    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 16px rgba(73,224,146,.18);
 }
 .coverTitleProjection h1 {
   color: transparent;
-  -webkit-text-stroke: clamp(2px, .23vw, 5px) rgba(76,104,232,.38);
-  text-shadow: 8px 9px 0 rgba(89,124,255,.22);
+  -webkit-text-stroke: 0 transparent;
+  text-shadow:
+    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(42,47,72,.32),
+    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 18px rgba(89,124,255,.16);
 }
 .coverTitleProjection > span {
-  color: rgba(224,126,20,.32);
-  -webkit-text-stroke: .018em rgba(224,126,20,.2);
-  text-shadow: 8px 9px 0 rgba(255,170,67,.2);
+  color: transparent;
+  -webkit-text-stroke: 0 transparent;
+  text-shadow:
+    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(136,79,18,.31),
+    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 16px rgba(255,170,67,.16);
 }
 
 .coverFooter {
@@ -493,7 +494,6 @@ a { text-decoration: none; }
   .coverTitle p { padding-left: 0; font-size: clamp(2.05rem, 11vw, 3.25rem); white-space: normal; }
   .coverTitle h1 { margin-top: .08em; font-size: clamp(3.25rem, 17.7vw, 5.2rem); letter-spacing: -.02em; }
   .coverTitle > span { margin-top: .14em; margin-right: 0; font-size: 3.1rem; }
-  .coverTitleProjection.is-active { clip-path: circle(62px at var(--projection-x) var(--projection-y)); }
   .entryButton { width: auto; height: 50px; padding-inline: 18px; border-radius: 12px; box-shadow: 5px 5px 0 rgba(0,0,0,.06); }
   .stageHeader { padding-bottom: 12px; font-size: .58rem; }
   .homeButton { padding: 9px 10px; }
