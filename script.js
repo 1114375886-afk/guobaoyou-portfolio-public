@@ -1,7 +1,11 @@
 requestAnimationFrame(() => document.documentElement.classList.add("ready"));
 
 const stopGlowMotion = window.createGlowMotion?.(document.querySelector(".ambientGlows"));
-window.addEventListener("pagehide", () => stopGlowMotion?.(), { once: true });
+const stopTitleEffects = window.createTitleEffects?.(document.querySelector(".coverTitle"));
+window.addEventListener("pagehide", () => {
+  stopGlowMotion?.();
+  stopTitleEffects?.();
+}, { once: true });
 
 const shell = document.querySelector(".portfolioShell");
 const cover = document.querySelector(".cover");
