@@ -225,13 +225,13 @@ a { text-decoration: none; }
   will-change: transform;
 }
 .entryButton {
-  width: min(310px, 28vw);
-  height: 92px;
-  padding: 0 28px;
-  border: 3px solid #050505;
-  border-radius: 18px;
+  width: auto;
+  height: 58px;
+  padding: 0 22px;
+  border: 2px solid #050505;
+  border-radius: 14px;
   background: rgba(255,255,255,.64);
-  box-shadow: 10px 10px 0 rgba(0,0,0,.06);
+  box-shadow: 6px 6px 0 rgba(0,0,0,.06);
 }
 .entryButton::before {
   content: "";
@@ -247,9 +247,7 @@ a { text-decoration: none; }
 .entryButton:focus-visible::before { transform: scaleX(1); transform-origin: left; }
 .entryButton:hover,
 .entryButton:focus-visible { color: #fff; }
-.contactText,
-.contactArrow,
-.waveFrame { position: relative; z-index: 1; }
+.contactText { position: relative; z-index: 1; }
 .contactText {
   font-size: 1rem;
   font-weight: 800;
@@ -259,20 +257,6 @@ a { text-decoration: none; }
   paint-order: stroke fill;
   text-shadow: 1px 1px 0 rgba(255,255,255,.6), 2px 2px 0 rgba(5,5,5,.07);
 }
-.contactArrow { margin-left: auto; font-size: 1.7rem; transition: transform .35s ease; }
-.entryButton:hover .contactArrow { transform: rotate(45deg); }
-.waveFrame {
-  height: 34px;
-  flex: 1;
-  margin: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-}
-.waveBar { width: 1px; display: block; background: currentColor; transform: scaleY(.35); transform-origin: center; }
-.entryButton:hover .waveBar,
-.entryButton:focus-visible .waveBar { animation: wave .75s ease-in-out infinite alternate; animation-delay: calc(var(--wave-index, 0) * 34ms); }
 .entryButton:focus-visible { outline: 2px solid #050505; outline-offset: 5px; }
 
 .portfolioStage {
@@ -429,7 +413,6 @@ a { text-decoration: none; }
 .js.ready .coverTitle { animation: coverTitleIn 1.05s .16s var(--ease) forwards; }
 .js.ready .coverFooter { animation: coverIn .95s .34s var(--ease) forwards; }
 
-@keyframes wave { from { transform: scaleY(.35); } to { transform: scaleY(1.35); } }
 @keyframes coverIn { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes coverTitleIn { from { opacity: 0; transform: translate(-42%, -34%); } to { opacity: 1; transform: translate(-42%, -44%); } }
 @keyframes contentIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
@@ -443,7 +426,7 @@ a { text-decoration: none; }
   .coverTitle p { padding-left: 0; font-size: clamp(2.05rem, 11vw, 3.25rem); white-space: normal; }
   .coverTitle h1 { margin-top: .08em; font-size: clamp(3.25rem, 17.7vw, 5.2rem); letter-spacing: -.02em; }
   .coverTitle > span { margin-top: .14em; margin-right: 0; font-size: 3.1rem; }
-  .entryButton { width: 100%; height: 72px; padding-inline: 22px; border-radius: 15px; box-shadow: 7px 7px 0 rgba(0,0,0,.06); }
+  .entryButton { width: auto; height: 50px; padding-inline: 18px; border-radius: 12px; box-shadow: 5px 5px 0 rgba(0,0,0,.06); }
   .stageHeader { padding-bottom: 12px; font-size: .58rem; }
   .homeButton { padding: 9px 10px; }
   .portfolioSlide {
