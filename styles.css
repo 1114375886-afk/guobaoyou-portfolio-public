@@ -87,6 +87,10 @@ a { text-decoration: none; }
   font-size: clamp(.8rem, 1.55vw, 1.55rem);
   font-weight: 900;
   letter-spacing: .13em;
+  -webkit-text-stroke: .018em currentColor;
+  paint-order: stroke fill;
+  text-shadow: 1px 1px 0 rgba(255,255,255,.75), 2px 2px 0 rgba(5,5,5,.08);
+  text-rendering: geometricPrecision;
 }
 .coverKicker i { margin: 0 .15em; font-style: normal; }
 
@@ -94,17 +98,23 @@ a { text-decoration: none; }
   position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: 52px;
-  padding: 0 18px 4px;
+  width: max-content;
+  min-height: 44px;
+  padding: 0 14px 3px;
   overflow: hidden;
   isolation: isolate;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #050505;
   color: #fff;
   font-family: "Arial Black", Arial, sans-serif;
-  font-size: clamp(.92rem, 1.75vw, 1.7rem);
+  font-size: clamp(.82rem, 1.4vw, 1.35rem);
   font-weight: 900;
   letter-spacing: -.07em;
+  line-height: 1;
+  -webkit-text-stroke: .018em currentColor;
+  paint-order: stroke fill;
+  text-shadow: 1px 1px 0 rgba(255,255,255,.22);
+  text-rendering: geometricPrecision;
   cursor: default;
   transform-origin: center;
   transition: transform .45s var(--ease), border-radius .45s var(--ease), box-shadow .45s ease;
@@ -140,19 +150,33 @@ a { text-decoration: none; }
   left: 50%;
   top: 50%;
   width: min(76vw, 1420px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
   transform: translate(-42%, -44%);
 }
 .coverTitle p,
 .coverTitle h1,
-.coverTitle > span { margin: 0; line-height: .82; }
+.coverTitle > span {
+  width: 100%;
+  margin: 0;
+  font-style: italic;
+  line-height: .82;
+  text-align: right;
+  paint-order: stroke fill;
+  text-rendering: geometricPrecision;
+}
 .coverTitle p {
-  padding-left: 25%;
+  padding-left: 0;
   font-family: "Arial Black", Arial, sans-serif;
   font-size: clamp(2.4rem, 6.4vw, 7.4rem);
   font-weight: 900;
   font-style: italic;
   letter-spacing: .02em;
   white-space: nowrap;
+  -webkit-text-stroke: .022em currentColor;
+  text-shadow: 1px 1px 0 rgba(255,255,255,.8), 3px 3px 0 rgba(5,5,5,.08);
 }
 .coverTitle h1 {
   font-family: "Arial Black", Impact, Arial, sans-serif;
@@ -163,16 +187,19 @@ a { text-decoration: none; }
   color: transparent;
   -webkit-text-stroke: clamp(2px, .23vw, 5px) #050505;
   paint-order: stroke fill;
+  text-shadow: 1px 1px 0 rgba(255,255,255,.9), 3px 3px 0 rgba(5,5,5,.09);
   white-space: nowrap;
 }
 .coverTitle > span {
   display: block;
-  width: max-content;
-  margin: .05em 2.5% 0 auto;
+  margin-top: .05em;
   color: #ffb84c;
   font-size: clamp(2.8rem, 6vw, 6.8rem);
   font-weight: 300;
+  font-style: italic;
   letter-spacing: -.06em;
+  -webkit-text-stroke: .018em currentColor;
+  text-shadow: 1px 1px 0 rgba(255,255,255,.9), 3px 3px 0 rgba(184,107,0,.13);
 }
 
 .coverFooter {
@@ -217,7 +244,15 @@ a { text-decoration: none; }
 .contactText,
 .contactArrow,
 .waveFrame { position: relative; z-index: 1; }
-.contactText { font-size: 1rem; font-weight: 800; letter-spacing: .04em; white-space: nowrap; }
+.contactText {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  -webkit-text-stroke: .014em currentColor;
+  paint-order: stroke fill;
+  text-shadow: 1px 1px 0 rgba(255,255,255,.6), 2px 2px 0 rgba(5,5,5,.07);
+}
 .contactArrow { margin-left: auto; font-size: 1.7rem; transition: transform .35s ease; }
 .entryButton:hover .contactArrow { transform: rotate(45deg); }
 .waveFrame {
@@ -428,11 +463,11 @@ a { text-decoration: none; }
   .cover, .portfolioStage { padding: 24px 20px 22px; }
   .coverHeader { align-items: center; }
   .coverKicker { max-width: 100px; padding: 0; font-size: .72rem; line-height: 1.25; }
-  .namePlate { min-height: 40px; padding: 0 11px 3px; border-radius: 8px; font-size: .98rem; }
+  .namePlate { min-height: 34px; padding: 0 9px 2px; border-radius: 7px; font-size: .82rem; }
   .coverTitle { top: 45%; width: 92vw; transform: translate(-50%, -50%); }
-  .coverTitle p { padding-left: 7%; font-size: clamp(2.05rem, 11vw, 3.25rem); white-space: normal; }
+  .coverTitle p { padding-left: 0; font-size: clamp(2.05rem, 11vw, 3.25rem); white-space: normal; }
   .coverTitle h1 { margin-top: .08em; font-size: clamp(3.25rem, 17.7vw, 5.2rem); letter-spacing: -.02em; }
-  .coverTitle > span { margin-top: .14em; margin-right: 4%; font-size: 3.1rem; }
+  .coverTitle > span { margin-top: .14em; margin-right: 0; font-size: 3.1rem; }
   .entryButton { width: 100%; height: 72px; padding-inline: 22px; box-shadow: 7px 7px 0 rgba(0,0,0,.06); }
   .stageHeader { padding-bottom: 12px; font-size: .58rem; }
   .homeButton { padding: 9px 10px; }
