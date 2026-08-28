@@ -238,38 +238,57 @@ a { text-decoration: none; }
 .coverTitle:not(.coverTitleProjection) > h1::after { opacity: .14; animation-duration: 13s; animation-delay: -4s; }
 .coverTitle:not(.coverTitleProjection) > span::after { opacity: .18; animation-duration: 12s; animation-delay: -8s; }
 
-/* 鼠标作为光源：三行投影始终沿远离鼠标的方向延伸。 */
+/* 鼠标作为光源：大范围圆形光区内，三行投影沿远离鼠标的方向延伸。 */
 .coverTitleProjection {
+  --light-x: 50%;
+  --light-y: 50%;
+  --light-radius: clamp(230px, 28vw, 480px);
   z-index: 0;
   pointer-events: none;
   opacity: 0;
   mix-blend-mode: multiply;
-  will-change: opacity;
+  -webkit-mask-image: radial-gradient(
+    circle var(--light-radius) at var(--light-x) var(--light-y),
+    #000 0%,
+    #000 58%,
+    rgba(0,0,0,.92) 70%,
+    rgba(0,0,0,.35) 88%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--light-radius) at var(--light-x) var(--light-y),
+    #000 0%,
+    #000 58%,
+    rgba(0,0,0,.92) 70%,
+    rgba(0,0,0,.35) 88%,
+    transparent 100%
+  );
+  will-change: opacity, mask-image, -webkit-mask-image;
   transition: opacity .32s ease;
 }
 .coverTitleProjection.is-active {
-  opacity: .72;
+  opacity: .86;
 }
 .coverTitleProjection p {
   color: transparent;
   -webkit-text-stroke: 0 transparent;
   text-shadow:
-    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(35,94,68,.34),
-    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 16px rgba(73,224,146,.18);
+    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(35,94,68,.42),
+    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 16px rgba(73,224,146,.22);
 }
 .coverTitleProjection h1 {
   color: transparent;
   -webkit-text-stroke: 0 transparent;
   text-shadow:
-    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(42,47,72,.32),
-    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 18px rgba(89,124,255,.16);
+    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(42,47,72,.4),
+    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 18px rgba(89,124,255,.21);
 }
 .coverTitleProjection > span {
   color: transparent;
   -webkit-text-stroke: 0 transparent;
   text-shadow:
-    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(136,79,18,.31),
-    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 16px rgba(255,170,67,.16);
+    var(--shadow-x, 7px) var(--shadow-y, 7px) var(--shadow-blur, 5px) rgba(136,79,18,.39),
+    var(--shadow-far-x, 13px) var(--shadow-far-y, 13px) 16px rgba(255,170,67,.21);
 }
 
 .coverFooter {
@@ -494,6 +513,7 @@ a { text-decoration: none; }
   .coverTitle p { padding-left: 0; font-size: clamp(2.05rem, 11vw, 3.25rem); white-space: normal; }
   .coverTitle h1 { margin-top: .08em; font-size: clamp(3.25rem, 17.7vw, 5.2rem); letter-spacing: -.02em; }
   .coverTitle > span { margin-top: .14em; margin-right: 0; font-size: 3.1rem; }
+  .coverTitleProjection { --light-radius: clamp(180px, 58vw, 300px); }
   .entryButton { width: auto; height: 50px; padding-inline: 18px; border-radius: 12px; box-shadow: 5px 5px 0 rgba(0,0,0,.06); }
   .stageHeader { padding-bottom: 12px; font-size: .58rem; }
   .homeButton { padding: 9px 10px; }
