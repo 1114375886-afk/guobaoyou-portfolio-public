@@ -251,6 +251,10 @@
     let active = false;
 
     const writeShadows = () => {
+      const projectionRect = projection.getBoundingClientRect();
+      projection.style.setProperty("--light-x", `${(currentX - projectionRect.left).toFixed(2)}px`);
+      projection.style.setProperty("--light-y", `${(currentY - projectionRect.top).toFixed(2)}px`);
+
       lines.forEach((line, index) => {
         const lineRect = line.getBoundingClientRect();
         const centerX = lineRect.left + lineRect.width / 2;
@@ -293,6 +297,11 @@
     const updateTarget = (event) => {
       targetX = event.clientX;
       targetY = event.clientY;
+
+      if (!active) {
+        active = true;
+        projection.classList.add("is-active");
+      }
 
       if (reducedMotion) {
         currentX = targetX;
