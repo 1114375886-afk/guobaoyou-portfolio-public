@@ -14,15 +14,10 @@ const currentLabel = document.querySelector("#slide-current");
 const slides = Array.from(document.querySelectorAll(".portfolioSlide"));
 const dots = Array.from(document.querySelectorAll(".slideDot"));
 const contactButtons = document.querySelectorAll(".contactButton");
-const bars = document.querySelectorAll(".waveBar");
 
 let activeIndex = 0;
 let exploring = false;
 let transitionTimer;
-
-bars.forEach((bar, index) => {
-  bar.style.setProperty("--wave-index", String(Math.abs(index - (bars.length - 1) / 2)));
-});
 
 const updateNavigation = () => {
   currentLabel.textContent = String(activeIndex + 1).padStart(2, "0");
