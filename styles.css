@@ -95,11 +95,12 @@ a { text-decoration: none; }
 .coverKicker i { margin: 0 .15em; font-style: normal; }
 
 .namePlate {
+  --cap-height: .72em;
   position: relative;
   display: inline-flex;
   align-items: center;
   width: max-content;
-  height: 1.5em;
+  height: calc(var(--cap-height) * 1.5);
   min-height: 0;
   padding: 0 .5em .04em;
   overflow: hidden;
@@ -464,7 +465,7 @@ a { text-decoration: none; }
   .cover, .portfolioStage { padding: 24px 20px 22px; }
   .coverHeader { align-items: center; }
   .coverKicker { max-width: 100px; padding: 0; font-size: .72rem; line-height: 1.25; }
-  .namePlate { height: 1.5em; min-height: 0; padding: 0 .5em .04em; border-radius: 6px; font-size: .72rem; }
+  .namePlate { height: calc(var(--cap-height) * 1.5); min-height: 0; padding: 0 .5em .04em; border-radius: 6px; font-size: .72rem; }
   .coverTitle { top: 45%; width: 92vw; transform: translate(-50%, -50%); }
   .coverTitle p { padding-left: 0; font-size: clamp(2.05rem, 11vw, 3.25rem); white-space: normal; }
   .coverTitle h1 { margin-top: .08em; font-size: clamp(3.25rem, 17.7vw, 5.2rem); letter-spacing: -.02em; }
