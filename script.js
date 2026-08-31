@@ -5,6 +5,7 @@ const stopGlowMotion = window.createGlowMotion?.(document.querySelector(".ambien
 const shell = document.querySelector(".portfolioShell");
 const cover = document.querySelector(".cover");
 const coverHeader = document.querySelector(".coverHeader");
+const coverFooter = document.querySelector(".coverFooter");
 const stage = document.querySelector(".portfolioStage");
 const stageContactSlot = document.querySelector("#stage-contact-slot");
 const entryButton = document.querySelector("#portfolio-entry");
@@ -86,14 +87,14 @@ const scheduleContactClose = () => {
   window.clearTimeout(contactHideTimer);
   contactHideTimer = window.setTimeout(() => {
     if (!contactHub?.matches(":hover") && !contactHub?.contains(document.activeElement)) setContactOpen(false);
-  }, 90);
+  }, 360);
 };
 
 const schedulePointerContactClose = () => {
   window.clearTimeout(contactHideTimer);
   contactHideTimer = window.setTimeout(() => {
     if (!contactHub?.matches(":hover")) setContactOpen(false);
-  }, 90);
+  }, 360);
 };
 
 const fallbackCopy = (value) => {
@@ -255,6 +256,7 @@ const activateSlide = (nextIndex) => {
 };
 
 const openPortfolio = () => {
+  if (exploring) return;
   exploring = true;
   stopTitleEffects();
   setContactOpen(false);
@@ -282,7 +284,15 @@ cover.addEventListener("copy", (event) => {
   if (!event.target.closest?.(".copyItem")) event.preventDefault();
 });
 
+entryButton.addEventListener("pointerdown", (event) => {
+  if (event.pointerType === "mouse" && event.button !== 0) return;
+  openPortfolio();
+}, { passive: true });
 entryButton.addEventListener("click", openPortfolio);
+coverFooter?.addEventListener("pointerdown", (event) => {
+  if (event.pointerType === "mouse" && event.button !== 0) return;
+  openPortfolio();
+}, { passive: true });
 homeButton.addEventListener("click", closePortfolio);
 previousButton.addEventListener("click", () => activateSlide(activeIndex - 1));
 nextButton.addEventListener("click", () => activateSlide(activeIndex + 1));
@@ -304,6 +314,7 @@ document.addEventListener("keydown", (event) => {
 
 contactHub?.addEventListener("pointerenter", () => setContactOpen(true));
 contactHub?.addEventListener("pointerleave", schedulePointerContactClose);
+contactCard?.addEventListener("pointerenter", () => setContactOpen(true));
 contactHub?.addEventListener("focusin", () => setContactOpen(true));
 contactHub?.addEventListener("focusout", scheduleContactClose);
 const toggleContactFromClick = () => {
@@ -312,6 +323,9 @@ const toggleContactFromClick = () => {
 };
 contactPrompt?.addEventListener("click", toggleContactFromClick);
 contactTrigger?.addEventListener("click", toggleContactFromClick);
+document.addEventListener("pointerdown", (event) => {
+  if (!contactHub?.contains(event.target)) setContactOpen(false);
+});
 copyItems.forEach((button) => button.addEventListener("click", () => copyContact(button)));
 resumeOpen?.addEventListener("click", (event) => {
   event.stopPropagation();
