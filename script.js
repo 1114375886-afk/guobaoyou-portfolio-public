@@ -32,6 +32,15 @@ const digitalResume = document.querySelector("#digital-resume");
 const resumeZoomOut = document.querySelector("#resume-zoom-out");
 const resumeZoomIn = document.querySelector("#resume-zoom-in");
 const resumeZoomLabel = document.querySelector("#resume-zoom-label");
+const projectOpen = document.querySelector("#project-open");
+const projectModal = document.querySelector("#project-modal");
+const projectClose = document.querySelector("#project-close");
+const projectTabs = Array.from(document.querySelectorAll(".projectTab"));
+const projectChapters = Array.from(document.querySelectorAll(".projectChapter"));
+const projectChapterCounter = document.querySelector("#project-chapter-counter");
+const projectPrevious = document.querySelector("#project-prev");
+const projectNext = document.querySelector("#project-next");
+const projectFilm = document.querySelector("#project-film");
 
 let activeIndex = 0;
 let exploring = false;
@@ -40,6 +49,8 @@ let contactHideTimer;
 let resumeZoom = 1;
 let resumeReturnFocus;
 let resumeDragState;
+let projectChapterIndex = 0;
+let projectReturnFocus;
 
 const setContactOpen = (isOpen) => {
   window.clearTimeout(contactHideTimer);
@@ -126,6 +137,43 @@ const closeResume = () => {
   resumeReturnFocus?.focus?.({ preventScroll: true });
 };
 
+const activateProjectChapter = (nextIndex) => {
+  if (!projectChapters.length) return;
+  const normalizedIndex = (nextIndex + projectChapters.length) % projectChapters.length;
+  projectChapterIndex = normalizedIndex;
+  projectChapters.forEach((chapter, index) => {
+    const selected = index === normalizedIndex;
+    chapter.classList.toggle("is-active", selected);
+    chapter.setAttribute("aria-hidden", String(!selected));
+  });
+  projectTabs.forEach((tab, index) => {
+    const selected = index === normalizedIndex;
+    tab.classList.toggle("is-active", selected);
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+  if (projectChapterCounter) projectChapterCounter.value = `${String(normalizedIndex + 1).padStart(2, "0")} / ${String(projectChapters.length).padStart(2, "0")}`;
+  if (normalizedIndex !== 0) projectFilm?.pause();
+};
+
+const openProject = () => {
+  projectReturnFocus = document.activeElement;
+  setContactOpen(false);
+  activateProjectChapter(0);
+  projectModal?.classList.add("is-open");
+  projectModal?.setAttribute("aria-hidden", "false");
+  projectOpen?.setAttribute("aria-expanded", "true");
+  window.setTimeout(() => projectClose?.focus({ preventScroll: true }), 320);
+};
+
+const closeProject = () => {
+  projectFilm?.pause();
+  projectModal?.classList.remove("is-open");
+  projectModal?.setAttribute("aria-hidden", "true");
+  projectOpen?.setAttribute("aria-expanded", "false");
+  projectReturnFocus?.focus?.({ preventScroll: true });
+};
+
 const updateNavigation = () => {
   currentLabel.textContent = String(activeIndex + 1).padStart(2, "0");
   dots.forEach((dot, index) => {
@@ -199,6 +247,12 @@ dots.forEach((dot) => dot.addEventListener("click", () => activateSlide(Number(d
 
 document.addEventListener("keydown", (event) => {
   if (resumeModal?.classList.contains("is-open")) return;
+  if (projectModal?.classList.contains("is-open")) {
+    if (event.key === "Escape") closeProject();
+    if (event.key === "ArrowRight") activateProjectChapter(projectChapterIndex + 1);
+    if (event.key === "ArrowLeft") activateProjectChapter(projectChapterIndex - 1);
+    return;
+  }
   if (!exploring) return;
   if (event.key === "ArrowRight") activateSlide(activeIndex + 1);
   if (event.key === "ArrowLeft") activateSlide(activeIndex - 1);
@@ -257,6 +311,14 @@ resumeViewport?.addEventListener("dragstart", (event) => event.preventDefault())
 resumeModal?.addEventListener("click", (event) => {
   if (event.target === resumeModal) closeResume();
 });
+projectOpen?.addEventListener("click", openProject);
+projectClose?.addEventListener("click", closeProject);
+projectPrevious?.addEventListener("click", () => activateProjectChapter(projectChapterIndex - 1));
+projectNext?.addEventListener("click", () => activateProjectChapter(projectChapterIndex + 1));
+projectTabs.forEach((tab) => tab.addEventListener("click", () => activateProjectChapter(Number(tab.dataset.projectTarget))));
+projectModal?.addEventListener("click", (event) => {
+  if (event.target === projectModal) closeProject();
+});
 window.addEventListener("resize", () => {
   if (resumeModal?.classList.contains("is-open")) updateResumeZoom();
 });
@@ -277,3 +339,4 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 }
 
 updateNavigation();
+activateProjectChapter(0);
