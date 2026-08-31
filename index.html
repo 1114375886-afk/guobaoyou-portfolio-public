@@ -13,10 +13,10 @@
     <meta name="twitter:description" content="AI × DESIGN · Portfolio 2026" />
     <meta name="twitter:image" content="https://1114375886-afk.github.io/guobaoyou-portfolio-public/og-2026.png" />
     <link rel="icon" href="./favicon.svg" />
-    <link rel="stylesheet" href="./styles.css?v=20260831-contact21" />
+    <link rel="stylesheet" href="./styles.css?v=20260831-swarm1" />
     <script>document.documentElement.classList.add("js");</script>
     <script src="./glow-motion.js?v=20260829-shadow7" defer></script>
-    <script src="./script.js?v=20260831-contact9" defer></script>
+    <script src="./script.js?v=20260831-swarm1" defer></script>
     <title>Bai YuPeng — AI Animation Portfolio</title>
   </head>
   <body>
@@ -85,15 +85,23 @@
         </header>
 
         <div class="slideDeck">
-          <article class="portfolioSlide is-active" data-slide="0" data-tone="mint">
-            <div class="slideNumber">01</div>
-            <div class="slideCopy">
-              <p class="slideKicker">品牌重塑 · 2026</p>
-              <h2>雾岛茶集</h2>
-              <p>从品牌策略到数字体验，构建一种安静、克制又可被记住的东方感知。</p>
-              <ul><li>品牌策略</li><li>视觉系统</li><li>动态体验</li></ul>
+          <article class="portfolioSlide featuredProjectSlide is-active" data-slide="0" data-tone="ink">
+            <img class="featuredProjectImage" src="./assets/projects/beneath-the-swarm/stills/poster.jpg" alt="《虫潮之下》主角与狗穿越废土的项目画面" />
+            <div class="featuredProjectShade" aria-hidden="true"></div>
+            <div class="featuredProjectIndex">01 / AIGC FILM</div>
+            <div class="featuredProjectCopy">
+              <p class="slideKicker">AIGC 动画短片 · 2026</p>
+              <h2>虫潮之下</h2>
+              <p>荒原里习以为常的一场虫潮，因为甲虫体内那枚不该存在的电子元件，露出另一重真相。</p>
+              <ul><li>剧本</li><li>角色设计</li><li>分镜与剪辑</li><li>AI 影像</li></ul>
+              <button class="projectOpenButton" id="project-open" type="button" aria-controls="project-modal" aria-expanded="false">
+                <span>查看完整项目</span><i aria-hidden="true">↗</i>
+              </button>
             </div>
-            <div class="slideWord" aria-hidden="true">MIST</div>
+            <div class="featuredProjectMeta" aria-hidden="true">
+              <span>POST-APOCALYPTIC</span>
+              <span>DESERT / SWARM / SECRET</span>
+            </div>
           </article>
 
           <article class="portfolioSlide" data-slide="1" data-tone="rose">
@@ -155,6 +163,111 @@
         </footer>
       </section>
     </main>
+
+    <div class="projectModal" id="project-modal" aria-hidden="true">
+      <section class="projectDossier" role="dialog" aria-modal="true" aria-labelledby="project-title">
+        <header class="projectHeader">
+          <button class="projectClose" id="project-close" type="button">← 返回作品集</button>
+          <p><span>BAI YUPENG / 2026</span><strong id="project-title">虫潮之下</strong></p>
+          <output class="projectChapterCounter" id="project-chapter-counter">01 / 04</output>
+        </header>
+
+        <nav class="projectNav" role="tablist" aria-label="项目章节">
+          <button class="projectTab is-active" type="button" role="tab" data-project-target="0" aria-selected="true"><span>01</span> 正片 / FILM</button>
+          <button class="projectTab" type="button" role="tab" data-project-target="1" aria-selected="false"><span>02</span> 角色 / CAST</button>
+          <button class="projectTab" type="button" role="tab" data-project-target="2" aria-selected="false"><span>03</span> 世界 / WORLD</button>
+          <button class="projectTab" type="button" role="tab" data-project-target="3" aria-selected="false"><span>04</span> 制作 / PROCESS</button>
+        </nav>
+
+        <div class="projectChapters">
+          <article class="projectChapter filmChapter is-active" data-project-chapter="0" role="tabpanel">
+            <div class="filmFrame">
+              <video id="project-film" controls playsinline preload="metadata" poster="./assets/projects/beneath-the-swarm/stills/poster.jpg">
+                <source src="./assets/projects/beneath-the-swarm/beneath-the-swarm.mp4" type="video/mp4" />
+                你的浏览器暂不支持视频播放。
+              </video>
+              <span class="filmFrameLabel">AIGC ANIMATION / ORIGINAL FILM</span>
+            </div>
+            <div class="filmSynopsis">
+              <p class="projectEyebrow">BENEATH THE SWARM</p>
+              <h2>废土日常，<br />被一枚芯片打断。</h2>
+              <p>末世后的沙漠里，城市只剩被风沙吞没的残骸。主角与他的狗守着一间荒无人烟的木屋，以应付丧尸虫潮为日常。直到一次战斗后，他们在甲虫体内发现高科技电子物品——这场虫灾，也许从来不是自然发生。</p>
+              <dl class="filmFacts">
+                <div><dt>类型</dt><dd>末世废土 / 黑色幽默</dd></div>
+                <div><dt>形式</dt><dd>AIGC 动画短片</dd></div>
+                <div><dt>职责</dt><dd>个人全流程制作</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projectChapter castChapter" data-project-chapter="1" role="tabpanel">
+            <header class="chapterIntro">
+              <p class="projectEyebrow">CHARACTER DOSSIER / 角色档案</p>
+              <h2>一老一狗，<br />荒原里的最佳拍档。</h2>
+              <p>角色轮廓一硬一软：主角稳重克制，狗则承担警觉与喜剧节奏。两者在同一画面里形成清晰的性格反差。</p>
+            </header>
+            <div class="castGrid">
+              <article class="castCard keeperCard">
+                <div class="castImage"><img src="./assets/projects/beneath-the-swarm/protagonist.png" alt="主角全身角色设定图" /></div>
+                <div class="castCopy">
+                  <span>01 / THE KEEPER</span>
+                  <h3>木屋守望者</h3>
+                  <p>机械义眼记录荒原里的每一次异动。寡言、老练，对虫潮的处理近乎机械化；当甲虫内部出现电子元件，他第一次意识到熟悉的生存规则正在失效。</p>
+                  <ul><li>沉着</li><li>经验丰富</li><li>机械义眼</li></ul>
+                </div>
+              </article>
+              <article class="castCard houndCard">
+                <div class="castImage"><img src="./assets/projects/beneath-the-swarm/dog-model-sheet.png" alt="狗的正面、侧面与背面角色设定图" /></div>
+                <div class="castCopy">
+                  <span>02 / THE HOUND</span>
+                  <h3>荒原伙伴</h3>
+                  <p>反应比主人更快，表情也更诚实。它既是最灵敏的预警器，也是紧张叙事中的轻松节拍；面对虫群时，夸张外表下藏着毫不迟疑的勇气。</p>
+                  <ul><li>警觉</li><li>敏捷</li><li>喜剧担当</li></ul>
+                </div>
+              </article>
+            </div>
+          </article>
+
+          <article class="projectChapter worldChapter" data-project-chapter="2" role="tabpanel">
+            <div class="worldStatement">
+              <p class="projectEyebrow">WORLD BUILDING / 世界观</p>
+              <h2>文明退场后，<br />风沙接管了城市。</h2>
+              <p>低饱和沙金色贯穿全片。汽车残骸、废弃旅馆与木屋构成生存空间；生物外壳与精密电子的并置，则把故事从“灾难”推向“阴谋”。</p>
+            </div>
+            <figure class="worldImage worldHero"><img src="./assets/projects/beneath-the-swarm/stills/world-ruins.jpg" alt="被风沙掩埋的城市与汽车残骸" /><figcaption>01 / 城市残骸</figcaption></figure>
+            <figure class="worldImage worldCabin"><img src="./assets/projects/beneath-the-swarm/stills/cabin-porch.jpg" alt="主角在荒原木屋门廊休息" /><figcaption>02 / 木屋日常</figcaption></figure>
+            <figure class="worldImage worldSwarm"><img src="./assets/projects/beneath-the-swarm/stills/swarm-arrives.jpg" alt="虫群越过沙漠袭来" /><figcaption>03 / 虫潮来临</figcaption></figure>
+            <figure class="worldImage worldClue"><img src="./assets/projects/beneath-the-swarm/stills/tech-beetle.jpg" alt="机械结构的甲虫靠近荒原遗骸" /><figcaption>04 / 异常线索</figcaption></figure>
+          </article>
+
+          <article class="projectChapter processChapter" data-project-chapter="3" role="tabpanel">
+            <div class="processCopy">
+              <p class="projectEyebrow">FROM SCRIPT TO SCREEN / 制作路径</p>
+              <h2>用统一的角色与色彩，<br />把 AI 镜头剪成一部片。</h2>
+              <ol class="processSteps">
+                <li><span>01</span><div><b>剧本与节奏</b><p>先建立“平静—虫潮—反击—线索”的四段式叙事。</p></div></li>
+                <li><span>02</span><div><b>角色与世界资产</b><p>固定人物、狗、虫体与废土环境的造型和色彩规则。</p></div></li>
+                <li><span>03</span><div><b>镜头生成与筛选</b><p>围绕景别、动作方向和光线连续性生成可衔接镜头。</p></div></li>
+                <li><span>04</span><div><b>声音与成片</b><p>通过剪辑、配乐与音效，补足冲击感和黑色幽默节奏。</p></div></li>
+              </ol>
+              <p class="processTools">IMAGE 2 · MIDJOURNEY NIJI 8 · NANO BANANA 2 · SEEDANCE 2.0 · SUNO 5</p>
+            </div>
+            <div class="processFrames" aria-label="关键画面">
+              <figure class="processFrame processFrameWide"><img src="./assets/projects/beneath-the-swarm/stills/duo-ready.jpg" alt="主角和狗背靠背准备战斗" /><figcaption>角色关系</figcaption></figure>
+              <figure class="processFrame"><img src="./assets/projects/beneath-the-swarm/stills/first-contact.jpg" alt="狗与甲虫对峙" /><figcaption>动作建立</figcaption></figure>
+              <figure class="processFrame"><img src="./assets/projects/beneath-the-swarm/stills/beetle-closeup.jpg" alt="甲虫怪物特写" /><figcaption>威胁升级</figcaption></figure>
+              <figure class="processFrame processFrameWide"><img src="./assets/projects/beneath-the-swarm/stills/duo-action.jpg" alt="狗跃起迎击飞行甲虫" /><figcaption>高潮镜头</figcaption></figure>
+            </div>
+          </article>
+        </div>
+
+        <footer class="projectFooter">
+          <button id="project-prev" type="button" aria-label="上一个项目章节">← 上一章</button>
+          <p>点击章节标题浏览项目，不会跳转到新页面</p>
+          <button id="project-next" type="button" aria-label="下一个项目章节">下一章 →</button>
+        </footer>
+      </section>
+    </div>
 
     <div class="resumeModal" id="resume-modal" aria-hidden="true">
       <p class="resumeBackdropHint" aria-hidden="true">点击空白处返回</p>
