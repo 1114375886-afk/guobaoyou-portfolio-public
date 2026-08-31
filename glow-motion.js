@@ -319,6 +319,11 @@
     };
 
     const updateTarget = (event) => {
+      if (event.target?.closest?.("button, a, .contactCard")) {
+        active = false;
+        projection.classList.remove("is-active");
+        return;
+      }
       targetX = event.clientX;
       targetY = event.clientY;
 
