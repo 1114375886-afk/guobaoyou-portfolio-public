@@ -297,6 +297,7 @@
 
     const writeShadows = () => {
       const projectionRect = projection.getBoundingClientRect();
+      const projectionRadius = clamp(Math.min(global.innerWidth, global.innerHeight) * .24, 140, 260);
       projection.style.setProperty("--light-x", `${(currentX - projectionRect.left).toFixed(2)}px`);
       projection.style.setProperty("--light-y", `${(currentY - projectionRect.top).toFixed(2)}px`);
 
@@ -322,10 +323,7 @@
         }
 
         const shadowLength = clamp(30 - distance * .018, 12, 28);
-        const fadeStart = Math.min(global.innerWidth, global.innerHeight) * .22;
-        const fadeEnd = Math.max(global.innerWidth, global.innerHeight) * .62;
-        const distanceFalloff = 1 - clamp((distance - fadeStart) / Math.max(fadeEnd - fadeStart, 1), 0, 1);
-        const lightStrength = .18 + distanceFalloff * .82;
+        const lightStrength = Math.pow(clamp(1 - distance / projectionRadius, 0, 1), .85);
         const directionalStrength = 1 - radialStrength * .82;
         const directionalOffsetScale = 1 - radialStrength * .94;
         const ringSpread = clamp(
