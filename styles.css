@@ -113,6 +113,7 @@ a { text-decoration: none; }
 
 .contactHub {
   position: relative;
+  z-index: 80;
   display: flex;
   align-items: center;
   gap: clamp(10px, 1.2vw, 20px);
@@ -188,8 +189,8 @@ a { text-decoration: none; }
 
 .contactCard {
   position: absolute;
-  z-index: 20;
-  top: calc(100% + 8px);
+  z-index: 100;
+  top: calc(100% - 2px);
   right: 0;
   width: min(420px, calc(100vw - 40px));
   padding: 18px;
@@ -441,6 +442,9 @@ a { text-decoration: none; }
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  min-height: 82px;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .contactButton {
@@ -505,7 +509,7 @@ a { text-decoration: none; }
 
 .stageHeader {
   position: relative;
-  z-index: 10;
+  z-index: 80;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -515,9 +519,11 @@ a { text-decoration: none; }
   font-weight: 700;
   letter-spacing: .12em;
 }
-.stageHeaderActions { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: clamp(12px, 1.4vw, 22px); }
+.stageHeaderActions { position: relative; z-index: 80; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: clamp(12px, 1.4vw, 22px); overflow: visible; }
 .stageContactSlot:empty { display: none; }
-.stageContactSlot .contactHub { letter-spacing: normal; }
+.stageContactSlot { position: relative; z-index: 90; overflow: visible; pointer-events: auto; }
+.stageContactSlot .contactHub { z-index: 90; letter-spacing: normal; pointer-events: auto; }
+.stageContactSlot .contactCard { z-index: 120; }
 .homeButton {
   padding: 13px 22px;
   border: 1px solid rgba(5,5,5,.28);
@@ -1094,7 +1100,7 @@ a { text-decoration: none; }
   .contactHub { gap: 7px; }
   .contactPrompt { gap: .42em; padding: .52em .68em; font-size: .72rem; }
   .namePlate { height: calc(var(--cap-height) * 2); min-height: 0; padding: 0 .5em; border-radius: 6px; font-size: .72rem; }
-  .contactCard { top: calc(100% + 5px); width: min(360px, calc(100vw - 40px)); padding: 14px; border-radius: 20px; }
+  .contactCard { top: calc(100% - 2px); width: min(360px, calc(100vw - 40px)); padding: 14px; border-radius: 20px; }
   .contactCardIntro { grid-template-columns: 70px 1fr; gap: 14px; }
   .contactPortrait { width: 70px; border-radius: 15px; }
   .contactItem { padding: 13px 12px; }
