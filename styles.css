@@ -38,7 +38,14 @@ a { text-decoration: none; }
   mix-blend-mode: multiply;
 }
 
-.ambientGlows { position: absolute; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+.ambientGlows {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout paint;
+}
 
 /* ==================== 光晕效果：基础样式 ==================== */
 .glow {
@@ -49,7 +56,7 @@ a { text-decoration: none; }
   filter: blur(44px);
   transform: translate3d(0,0,0);
   transform-origin: center;
-  will-change: width, transform, opacity;
+  will-change: transform, opacity;
   backface-visibility: hidden;
 }
 
@@ -380,6 +387,8 @@ a { text-decoration: none; }
   opacity: 0;
   mix-blend-mode: multiply;
   will-change: opacity;
+  -webkit-mask-image: radial-gradient(circle 280px at var(--light-x, 50%) var(--light-y, 50%), #000 0 58%, rgba(0,0,0,.72) 76%, transparent 100%);
+  mask-image: radial-gradient(circle 280px at var(--light-x, 50%) var(--light-y, 50%), #000 0 58%, rgba(0,0,0,.72) 76%, transparent 100%);
   transition: opacity .32s ease;
 }
 .coverTitleProjection.is-active {
@@ -390,7 +399,10 @@ a { text-decoration: none; }
 .coverTitleProjection > span {
   color: transparent;
   -webkit-text-stroke: 0 transparent;
-  text-shadow: none;
+  text-shadow:
+    var(--shadow-x, 7px) var(--shadow-y, 7px) 6px var(--near-shadow-color, transparent),
+    var(--shadow-far-x, 14px) var(--shadow-far-y, 14px) 18px var(--far-shadow-color, transparent);
+  will-change: text-shadow;
 }
 .coverTitleProjection .projectionChar {
   position: relative;
@@ -424,7 +436,7 @@ a { text-decoration: none; }
 
 .coverFooter {
   position: relative;
-  z-index: 2;
+  z-index: 20;
   grid-row: 3;
   display: flex;
   justify-content: flex-end;
@@ -438,16 +450,19 @@ a { text-decoration: none; }
   overflow: hidden;
   transform-origin: center;
   transition: transform .24s ease, color .45s ease;
-  will-change: transform;
 }
 .entryButton {
+  z-index: 2;
   width: auto;
-  height: 58px;
-  padding: 0 22px;
+  min-width: 148px;
+  height: 62px;
+  padding: 0 26px;
   border: 2px solid #050505;
   border-radius: 14px;
   background: rgba(255,255,255,.64);
   box-shadow: 6px 6px 0 rgba(0,0,0,.06);
+  pointer-events: auto;
+  touch-action: manipulation;
 }
 .entryButton::before {
   content: "";
@@ -1193,7 +1208,7 @@ a { text-decoration: none; }
   .coverTitle p { font-size: clamp(1.8rem, 9vh, 2.8rem); }
   .coverTitle h1 { font-size: clamp(3rem, 15vh, 4.6rem); }
   .coverTitle > span { font-size: clamp(2rem, 9vh, 3rem); }
-  .entryButton { height: 44px; }
+  .entryButton { min-width: 136px; height: 50px; padding-inline: 20px; }
 
   .stageHeader { padding-bottom: 8px; }
   .homeButton { padding: 8px 12px; }
