@@ -650,6 +650,39 @@ a { text-decoration: none; }
   50% { opacity: 1; transform: scale(1.055); }
 }
 
+/* 矮屏电脑适配：浏览器缩放较大或可用高度较小时，保持三个区域互不遮挡。 */
+@media (max-height: 640px) and (min-width: 761px) {
+  .cover,
+  .portfolioStage { padding: clamp(18px, 5vh, 32px) 5.3vw clamp(16px, 4vh, 26px); }
+
+  .coverTitle { row-gap: clamp(3px, 1vh, 8px); }
+  .coverTitle p { font-size: clamp(2.7rem, 6.7vw, 5.8rem); }
+  .coverTitle h1 { font-size: clamp(4.6rem, 10.8vw, 9rem); }
+  .coverTitle > span { margin-top: .04em; font-size: clamp(2.7rem, 5.2vw, 4.8rem); }
+  .entryButton { height: 50px; padding-inline: 18px; }
+
+  .stageHeader { padding-bottom: 10px; }
+  .homeButton { padding: 9px 16px; font-size: .82rem; }
+  .portfolioSlide {
+    inset: 1.4vh 0 1vh;
+    grid-template-columns: minmax(52px, .18fr) minmax(280px, 1fr) minmax(130px, .52fr);
+    gap: 2vw;
+    padding: clamp(18px, 4vh, 30px) clamp(24px, 3.5vw, 46px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .slideNumber { font-size: clamp(2rem, 4vw, 3.2rem); }
+  .slideKicker { margin-bottom: 12px; }
+  .slideCopy h2 { font-size: clamp(2.8rem, 6.3vw, 5.3rem); }
+  .slideCopy > p { margin-top: 17px; line-height: 1.55; }
+  .slideCopy ul { margin-top: 14px; }
+  .slideCopy li { padding: 6px 10px; }
+  .slideWord { font-size: clamp(4.6rem, 10vw, 7rem); }
+  .stageControls { gap: 12px; padding-top: 8px; }
+  .roundControl { width: 42px; height: 42px; }
+}
+
 /* ==================== 联系卡片 / 网页版简历 ==================== */
 .resumeModal {
   position: fixed;
@@ -880,6 +913,37 @@ a { text-decoration: none; }
   .resumeSection + .resumeSection { margin-top: 30px; }
   .resumeEntry > div { display: block; }
   .resumeEntry time { display: inline-block; margin-top: 8px; }
+}
+
+/* 横屏手机和特别矮的浏览器窗口：内容始终可达，避免被固定全屏裁切。 */
+@media (max-width: 760px) and (max-height: 640px) {
+  .cover,
+  .portfolioStage { padding: 14px 16px 12px; }
+  .coverTitle { top: 47%; row-gap: 3px; }
+  .coverTitle p { font-size: clamp(1.8rem, 9vh, 2.8rem); }
+  .coverTitle h1 { font-size: clamp(3rem, 15vh, 4.6rem); }
+  .coverTitle > span { font-size: clamp(2rem, 9vh, 3rem); }
+  .entryButton { height: 44px; }
+
+  .stageHeader { padding-bottom: 8px; }
+  .homeButton { padding: 8px 12px; }
+  .portfolioSlide {
+    inset: 8px 0 6px;
+    align-content: start;
+    padding: 18px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .slideNumber { display: none; }
+  .slideKicker { margin-bottom: 10px; }
+  .slideCopy h2 { font-size: clamp(2.35rem, 12vw, 4rem); }
+  .slideCopy > p { margin-top: 14px; line-height: 1.5; }
+  .slideCopy ul { margin-top: 12px; }
+  .slideCopy li { padding: 6px 9px; }
+  .slideWord { font-size: 4rem; opacity: .14; }
+  .stageControls { gap: 8px; padding-top: 6px; }
+  .roundControl { width: 38px; height: 38px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
