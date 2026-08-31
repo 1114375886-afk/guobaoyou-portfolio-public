@@ -13,10 +13,10 @@
     <meta name="twitter:description" content="AI × DESIGN · Portfolio 2026" />
     <meta name="twitter:image" content="https://1114375886-afk.github.io/guobaoyou-portfolio-public/og-2026.png" />
     <link rel="icon" href="./favicon.svg" />
-    <link rel="stylesheet" href="./styles.css?v=20260831-swarm1" />
+    <link rel="stylesheet" href="./styles.css?v=20260831-perf2" />
     <script>document.documentElement.classList.add("js");</script>
-    <script src="./glow-motion.js?v=20260829-shadow7" defer></script>
-    <script src="./script.js?v=20260831-swarm1" defer></script>
+    <script src="./glow-motion.js?v=20260831-perf2" defer></script>
+    <script src="./script.js?v=20260831-perf2" defer></script>
     <title>Bai YuPeng — AI Animation Portfolio</title>
   </head>
   <body>
@@ -182,8 +182,7 @@
         <div class="projectChapters">
           <article class="projectChapter filmChapter is-active" data-project-chapter="0" role="tabpanel">
             <div class="filmFrame">
-              <video id="project-film" controls playsinline preload="metadata" poster="./assets/projects/beneath-the-swarm/stills/poster.jpg">
-                <source src="./assets/projects/beneath-the-swarm/beneath-the-swarm.mp4" type="video/mp4" />
+              <video id="project-film" controls playsinline preload="none" poster="./assets/projects/beneath-the-swarm/stills/poster.jpg" data-project-src="./assets/projects/beneath-the-swarm/beneath-the-swarm.mp4">
                 你的浏览器暂不支持视频播放。
               </video>
               <span class="filmFrameLabel">AIGC ANIMATION / ORIGINAL FILM</span>
@@ -208,7 +207,7 @@
             </header>
             <div class="castGrid">
               <article class="castCard keeperCard">
-                <div class="castImage"><img src="./assets/projects/beneath-the-swarm/protagonist.png" alt="主角全身角色设定图" /></div>
+                <div class="castImage"><img data-project-src="./assets/projects/beneath-the-swarm/protagonist.png" loading="lazy" decoding="async" alt="主角全身角色设定图" /></div>
                 <div class="castCopy">
                   <span>01 / THE KEEPER</span>
                   <h3>木屋守望者</h3>
@@ -217,7 +216,7 @@
                 </div>
               </article>
               <article class="castCard houndCard">
-                <div class="castImage"><img src="./assets/projects/beneath-the-swarm/dog-model-sheet.png" alt="狗的正面、侧面与背面角色设定图" /></div>
+                <div class="castImage"><img data-project-src="./assets/projects/beneath-the-swarm/dog-model-sheet.png" loading="lazy" decoding="async" alt="狗的正面、侧面与背面角色设定图" /></div>
                 <div class="castCopy">
                   <span>02 / THE HOUND</span>
                   <h3>荒原伙伴</h3>
@@ -234,10 +233,10 @@
               <h2>文明退场后，<br />风沙接管了城市。</h2>
               <p>低饱和沙金色贯穿全片。汽车残骸、废弃旅馆与木屋构成生存空间；生物外壳与精密电子的并置，则把故事从“灾难”推向“阴谋”。</p>
             </div>
-            <figure class="worldImage worldHero"><img src="./assets/projects/beneath-the-swarm/stills/world-ruins.jpg" alt="被风沙掩埋的城市与汽车残骸" /><figcaption>01 / 城市残骸</figcaption></figure>
-            <figure class="worldImage worldCabin"><img src="./assets/projects/beneath-the-swarm/stills/cabin-porch.jpg" alt="主角在荒原木屋门廊休息" /><figcaption>02 / 木屋日常</figcaption></figure>
-            <figure class="worldImage worldSwarm"><img src="./assets/projects/beneath-the-swarm/stills/swarm-arrives.jpg" alt="虫群越过沙漠袭来" /><figcaption>03 / 虫潮来临</figcaption></figure>
-            <figure class="worldImage worldClue"><img src="./assets/projects/beneath-the-swarm/stills/tech-beetle.jpg" alt="机械结构的甲虫靠近荒原遗骸" /><figcaption>04 / 异常线索</figcaption></figure>
+            <figure class="worldImage worldHero"><img data-project-src="./assets/projects/beneath-the-swarm/stills/world-ruins.jpg" loading="lazy" decoding="async" alt="被风沙掩埋的城市与汽车残骸" /><figcaption>01 / 城市残骸</figcaption></figure>
+            <figure class="worldImage worldCabin"><img data-project-src="./assets/projects/beneath-the-swarm/stills/cabin-porch.jpg" loading="lazy" decoding="async" alt="主角在荒原木屋门廊休息" /><figcaption>02 / 木屋日常</figcaption></figure>
+            <figure class="worldImage worldSwarm"><img data-project-src="./assets/projects/beneath-the-swarm/stills/swarm-arrives.jpg" loading="lazy" decoding="async" alt="虫群越过沙漠袭来" /><figcaption>03 / 虫潮来临</figcaption></figure>
+            <figure class="worldImage worldClue"><img data-project-src="./assets/projects/beneath-the-swarm/stills/tech-beetle.jpg" loading="lazy" decoding="async" alt="机械结构的甲虫靠近荒原遗骸" /><figcaption>04 / 异常线索</figcaption></figure>
           </article>
 
           <article class="projectChapter processChapter" data-project-chapter="3" role="tabpanel">
@@ -253,10 +252,10 @@
               <p class="processTools">IMAGE 2 · MIDJOURNEY NIJI 8 · NANO BANANA 2 · SEEDANCE 2.0 · SUNO 5</p>
             </div>
             <div class="processFrames" aria-label="关键画面">
-              <figure class="processFrame processFrameWide"><img src="./assets/projects/beneath-the-swarm/stills/duo-ready.jpg" alt="主角和狗背靠背准备战斗" /><figcaption>角色关系</figcaption></figure>
-              <figure class="processFrame"><img src="./assets/projects/beneath-the-swarm/stills/first-contact.jpg" alt="狗与甲虫对峙" /><figcaption>动作建立</figcaption></figure>
-              <figure class="processFrame"><img src="./assets/projects/beneath-the-swarm/stills/beetle-closeup.jpg" alt="甲虫怪物特写" /><figcaption>威胁升级</figcaption></figure>
-              <figure class="processFrame processFrameWide"><img src="./assets/projects/beneath-the-swarm/stills/duo-action.jpg" alt="狗跃起迎击飞行甲虫" /><figcaption>高潮镜头</figcaption></figure>
+              <figure class="processFrame processFrameWide"><img data-project-src="./assets/projects/beneath-the-swarm/stills/duo-ready.jpg" loading="lazy" decoding="async" alt="主角和狗背靠背准备战斗" /><figcaption>角色关系</figcaption></figure>
+              <figure class="processFrame"><img data-project-src="./assets/projects/beneath-the-swarm/stills/first-contact.jpg" loading="lazy" decoding="async" alt="狗与甲虫对峙" /><figcaption>动作建立</figcaption></figure>
+              <figure class="processFrame"><img data-project-src="./assets/projects/beneath-the-swarm/stills/beetle-closeup.jpg" loading="lazy" decoding="async" alt="甲虫怪物特写" /><figcaption>威胁升级</figcaption></figure>
+              <figure class="processFrame processFrameWide"><img data-project-src="./assets/projects/beneath-the-swarm/stills/duo-action.jpg" loading="lazy" decoding="async" alt="狗跃起迎击飞行甲虫" /><figcaption>高潮镜头</figcaption></figure>
             </div>
           </article>
         </div>
