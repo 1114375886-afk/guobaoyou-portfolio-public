@@ -9,7 +9,9 @@ window.addEventListener("pagehide", () => {
 
 const shell = document.querySelector(".portfolioShell");
 const cover = document.querySelector(".cover");
+const coverHeader = document.querySelector(".coverHeader");
 const stage = document.querySelector(".portfolioStage");
+const stageContactSlot = document.querySelector("#stage-contact-slot");
 const entryButton = document.querySelector("#portfolio-entry");
 const homeButton = document.querySelector("#portfolio-home");
 const previousButton = document.querySelector("#slide-prev");
@@ -18,10 +20,111 @@ const currentLabel = document.querySelector("#slide-current");
 const slides = Array.from(document.querySelectorAll(".portfolioSlide"));
 const dots = Array.from(document.querySelectorAll(".slideDot"));
 const contactButtons = document.querySelectorAll(".contactButton");
+const contactHub = document.querySelector("#contact-hub");
+const contactPrompt = document.querySelector("#contact-prompt");
+const contactTrigger = document.querySelector("#contact-trigger");
+const contactCard = document.querySelector("#contact-card");
+const copyItems = Array.from(document.querySelectorAll(".copyItem"));
+const resumeOpen = document.querySelector("#resume-open");
+const resumeModal = document.querySelector("#resume-modal");
+const resumeViewport = document.querySelector("#resume-viewport");
+const digitalResume = document.querySelector("#digital-resume");
+const resumeZoomOut = document.querySelector("#resume-zoom-out");
+const resumeZoomIn = document.querySelector("#resume-zoom-in");
+const resumeZoomLabel = document.querySelector("#resume-zoom-label");
 
 let activeIndex = 0;
 let exploring = false;
 let transitionTimer;
+let contactHideTimer;
+let resumeZoom = 1;
+let resumeReturnFocus;
+let resumeDragState;
+
+const setContactOpen = (isOpen) => {
+  window.clearTimeout(contactHideTimer);
+  contactHub?.classList.toggle("is-open", isOpen);
+  contactCard?.setAttribute("aria-hidden", String(!isOpen));
+  contactPrompt?.setAttribute("aria-expanded", String(isOpen));
+  contactTrigger?.setAttribute("aria-expanded", String(isOpen));
+};
+
+const scheduleContactClose = () => {
+  window.clearTimeout(contactHideTimer);
+  contactHideTimer = window.setTimeout(() => {
+    if (!contactHub?.matches(":hover") && !contactHub?.contains(document.activeElement)) setContactOpen(false);
+  }, 90);
+};
+
+const schedulePointerContactClose = () => {
+  window.clearTimeout(contactHideTimer);
+  contactHideTimer = window.setTimeout(() => {
+    if (!contactHub?.matches(":hover")) setContactOpen(false);
+  }, 90);
+};
+
+const fallbackCopy = (value) => {
+  const field = document.createElement("textarea");
+  field.value = value;
+  field.setAttribute("readonly", "");
+  field.style.position = "fixed";
+  field.style.opacity = "0";
+  document.body.appendChild(field);
+  field.select();
+  document.execCommand("copy");
+  field.remove();
+};
+
+const copyContact = async (button) => {
+  const value = button.dataset.copy || "";
+  const feedback = button.querySelector("em");
+  window.clearTimeout(button.copyResetTimer);
+  button.classList.add("is-copied");
+  if (feedback) feedback.textContent = "已复制";
+
+  try {
+    if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(value);
+    else fallbackCopy(value);
+  } catch {
+    fallbackCopy(value);
+  }
+
+  button.copyResetTimer = window.setTimeout(() => {
+    button.classList.remove("is-copied");
+    if (feedback) feedback.textContent = "单击复制";
+  }, 1600);
+};
+
+const updateResumeZoom = (nextZoom = resumeZoom) => {
+  if (!resumeViewport || !digitalResume) return;
+  resumeZoom = Math.min(2, Math.max(.6, Math.round(nextZoom * 10) / 10));
+  const baseWidth = Math.min(980, Math.max(280, resumeViewport.clientWidth - (window.innerWidth <= 760 ? 24 : 64)));
+  digitalResume.style.width = `${Math.round(baseWidth)}px`;
+  digitalResume.style.zoom = String(resumeZoom);
+  resumeZoomLabel.value = `${Math.round(resumeZoom * 100)}%`;
+  resumeZoomLabel.textContent = `${Math.round(resumeZoom * 100)}%`;
+  resumeZoomOut.disabled = resumeZoom <= .6;
+  resumeZoomIn.disabled = resumeZoom >= 2;
+};
+
+const openResume = () => {
+  resumeReturnFocus = document.activeElement;
+  setContactOpen(false);
+  resumeModal.classList.add("is-open");
+  resumeModal.setAttribute("aria-hidden", "false");
+  resumeZoom = 1;
+  requestAnimationFrame(() => {
+    updateResumeZoom(1);
+    resumeViewport.scrollTo({ top: 0, left: 0 });
+    resumeZoomIn.focus({ preventScroll: true });
+  });
+};
+
+const closeResume = () => {
+  resumeModal.classList.remove("is-open");
+  resumeModal.setAttribute("aria-hidden", "true");
+  resumeReturnFocus?.focus?.({ preventScroll: true });
+};
 
 const updateNavigation = () => {
   currentLabel.textContent = String(activeIndex + 1).padStart(2, "0");
@@ -64,6 +167,8 @@ const activateSlide = (nextIndex) => {
 
 const openPortfolio = () => {
   exploring = true;
+  setContactOpen(false);
+  stageContactSlot.append(contactHub);
   shell.classList.add("is-exploring");
   cover.setAttribute("aria-hidden", "true");
   stage.setAttribute("aria-hidden", "false");
@@ -73,12 +178,18 @@ const openPortfolio = () => {
 
 const closePortfolio = () => {
   exploring = false;
+  setContactOpen(false);
+  coverHeader.append(contactHub);
   shell.classList.remove("is-exploring");
   cover.setAttribute("aria-hidden", "false");
   stage.setAttribute("aria-hidden", "true");
   entryButton.setAttribute("aria-expanded", "false");
   window.setTimeout(() => entryButton.focus({ preventScroll: true }), 500);
 };
+
+cover.addEventListener("copy", (event) => {
+  if (!event.target.closest?.(".copyItem")) event.preventDefault();
+});
 
 entryButton.addEventListener("click", openPortfolio);
 homeButton.addEventListener("click", closePortfolio);
@@ -87,10 +198,67 @@ nextButton.addEventListener("click", () => activateSlide(activeIndex + 1));
 dots.forEach((dot) => dot.addEventListener("click", () => activateSlide(Number(dot.dataset.target))));
 
 document.addEventListener("keydown", (event) => {
+  if (resumeModal?.classList.contains("is-open")) return;
   if (!exploring) return;
   if (event.key === "ArrowRight") activateSlide(activeIndex + 1);
   if (event.key === "ArrowLeft") activateSlide(activeIndex - 1);
   if (event.key === "Escape") closePortfolio();
+});
+
+contactHub?.addEventListener("pointerenter", () => setContactOpen(true));
+contactHub?.addEventListener("pointerleave", schedulePointerContactClose);
+contactHub?.addEventListener("focusin", () => setContactOpen(true));
+contactHub?.addEventListener("focusout", scheduleContactClose);
+const toggleContactFromClick = () => {
+  const hasHover = window.matchMedia("(hover: hover)").matches;
+  setContactOpen(hasHover || !contactHub.classList.contains("is-open"));
+};
+contactPrompt?.addEventListener("click", toggleContactFromClick);
+contactTrigger?.addEventListener("click", toggleContactFromClick);
+copyItems.forEach((button) => button.addEventListener("click", () => copyContact(button)));
+resumeOpen?.addEventListener("click", (event) => {
+  event.stopPropagation();
+  openResume();
+});
+resumeZoomOut?.addEventListener("click", () => updateResumeZoom(resumeZoom - .2));
+resumeZoomIn?.addEventListener("click", () => updateResumeZoom(resumeZoom + .2));
+resumeViewport?.addEventListener("wheel", (event) => {
+  if (!event.ctrlKey && !event.metaKey) return;
+  event.preventDefault();
+  updateResumeZoom(resumeZoom + (event.deltaY < 0 ? .2 : -.2));
+}, { passive: false });
+resumeViewport?.addEventListener("pointerdown", (event) => {
+  if (event.button !== 0 || event.pointerType !== "mouse") return;
+  resumeDragState = {
+    pointerId: event.pointerId,
+    x: event.clientX,
+    y: event.clientY,
+    left: resumeViewport.scrollLeft,
+    top: resumeViewport.scrollTop
+  };
+  resumeViewport.classList.add("is-dragging");
+  resumeViewport.setPointerCapture?.(event.pointerId);
+});
+resumeViewport?.addEventListener("pointermove", (event) => {
+  if (!resumeDragState || resumeDragState.pointerId !== event.pointerId) return;
+  resumeViewport.scrollLeft = resumeDragState.left - (event.clientX - resumeDragState.x);
+  resumeViewport.scrollTop = resumeDragState.top - (event.clientY - resumeDragState.y);
+  event.preventDefault();
+});
+const stopResumeDrag = (event) => {
+  if (!resumeDragState || resumeDragState.pointerId !== event.pointerId) return;
+  resumeViewport.releasePointerCapture?.(event.pointerId);
+  resumeViewport.classList.remove("is-dragging");
+  resumeDragState = undefined;
+};
+resumeViewport?.addEventListener("pointerup", stopResumeDrag);
+resumeViewport?.addEventListener("pointercancel", stopResumeDrag);
+resumeViewport?.addEventListener("dragstart", (event) => event.preventDefault());
+resumeModal?.addEventListener("click", (event) => {
+  if (event.target === resumeModal) closeResume();
+});
+window.addEventListener("resize", () => {
+  if (resumeModal?.classList.contains("is-open")) updateResumeZoom();
 });
 
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {

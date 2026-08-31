@@ -13,10 +13,10 @@
     <meta name="twitter:description" content="AI × DESIGN · Portfolio 2026" />
     <meta name="twitter:image" content="https://1114375886-afk.github.io/guobaoyou-portfolio-public/og-2026.png" />
     <link rel="icon" href="./favicon.svg" />
-    <link rel="stylesheet" href="./styles.css?v=20260829-shadow7" />
+    <link rel="stylesheet" href="./styles.css?v=20260831-contact19" />
     <script>document.documentElement.classList.add("js");</script>
     <script src="./glow-motion.js?v=20260829-shadow7" defer></script>
-    <script src="./script.js" defer></script>
+    <script src="./script.js?v=20260831-contact9" defer></script>
     <title>Bai YuPeng — AI Animation Portfolio</title>
   </head>
   <body>
@@ -31,8 +31,36 @@
 
       <section class="cover" id="cover" aria-labelledby="cover-title">
         <header class="coverHeader coverReveal">
-          <span class="coverKicker">AI <i>×</i> DESIGN</span>
-          <span class="namePlate">Bai YuPeng</span>
+          <span class="coverKicker"><span>AI × DESIGN</span></span>
+          <div class="contactHub" id="contact-hub">
+            <button class="contactPrompt" id="contact-prompt" type="button" aria-controls="contact-card" aria-expanded="false">
+              <span>联系我</span><i aria-hidden="true">→</i>
+            </button>
+            <button class="namePlate" id="contact-trigger" type="button" aria-controls="contact-card" aria-expanded="false">Bai YuPeng</button>
+
+            <aside class="contactCard" id="contact-card" aria-label="联系方式" aria-hidden="true">
+              <div class="contactCardIntro">
+                <img class="contactPortrait" src="./portrait-bai-yupeng.jpg" alt="白宇鹏个人照片" />
+                <p class="contactCardTitle">
+                  <b>白宇鹏</b>
+                  <span class="contactSchool">东北师范大学</span>
+                  <small><em>27 级</em><span>动画硕士</span></small>
+                </p>
+              </div>
+              <button class="contactItem copyItem" type="button" data-copy="13222400308">
+                <span>手机号</span><strong>132 2240 0308</strong><em>单击复制</em>
+              </button>
+              <button class="contactItem copyItem" type="button" data-copy="1114375886@qq.com">
+                <span>邮箱</span><strong>1114375886@qq.com</strong><em>单击复制</em>
+              </button>
+              <button class="contactItem copyItem" type="button" data-copy="BYP1114375886">
+                <span>微信</span><strong>BYP1114375886</strong><em>单击复制</em>
+              </button>
+              <button class="contactItem resumeItem" id="resume-open" type="button">
+                <span>简历</span><strong>查看完整简历</strong><em aria-hidden="true">↗</em>
+              </button>
+            </aside>
+          </div>
         </header>
 
         <div class="coverTitle coverReveal">
@@ -50,8 +78,10 @@
 
       <section class="portfolioStage" id="portfolio-stage" aria-label="作品集内容" aria-hidden="true">
         <header class="stageHeader">
-          <span>BAI YUPENG / SELECTED WORK</span>
-          <button class="homeButton" id="portfolio-home" type="button">返回封面</button>
+          <div class="stageHeaderActions">
+            <button class="homeButton" id="portfolio-home" type="button">返回封面</button>
+            <div class="stageContactSlot" id="stage-contact-slot"></div>
+          </div>
         </header>
 
         <div class="slideDeck">
@@ -105,7 +135,7 @@
               <p class="slideKicker">ABOUT / CONTACT</p>
               <h2>Bai YuPeng</h2>
               <p>关注 AI 动画、视觉设计与动态叙事，在技术与美感之间寻找准确、鲜明的表达。</p>
-              <a class="contactLink" href="mailto:hello@example.com">联系我 <span>↗</span></a>
+              <a class="contactLink" href="mailto:1114375886@qq.com">联系我 <span>↗</span></a>
             </div>
             <div class="slideWord" aria-hidden="true">HELLO</div>
           </article>
@@ -125,5 +155,138 @@
         </footer>
       </section>
     </main>
+
+    <div class="resumeModal" id="resume-modal" aria-hidden="true">
+      <p class="resumeBackdropHint" aria-hidden="true">点击空白处返回</p>
+      <section class="resumeDialog" role="dialog" aria-modal="true" aria-labelledby="resume-title">
+        <header class="resumeToolbar">
+          <div>
+            <span>RESUME / 2026</span>
+            <strong id="resume-title">白宇鹏个人简历</strong>
+          </div>
+          <div class="resumeZoom" aria-label="简历缩放控制">
+            <button id="resume-zoom-out" type="button" aria-label="缩小简历">−</button>
+            <output id="resume-zoom-label">100%</output>
+            <button id="resume-zoom-in" type="button" aria-label="放大简历">＋</button>
+          </div>
+        </header>
+
+        <div class="resumeViewport" id="resume-viewport">
+          <article class="digitalResume" id="digital-resume">
+            <header class="resumeHero">
+              <figure class="resumePortrait">
+                <img src="./portrait-bai-yupeng.jpg" alt="白宇鹏个人照片" />
+                <figcaption>BAI / 2026</figcaption>
+              </figure>
+              <div class="resumeIdentity">
+                <p>AI DESIGNER · MOTION · INTERACTION</p>
+                <h2>白宇鹏</h2>
+                <h3>BAI YUPENG</h3>
+                <span>硕士研究生 / 动态设计与 AI 创意</span>
+              </div>
+              <div class="resumeIntro">
+                <b>PROFILE</b>
+                <p>用视觉、动画与 AI 工具搭建内容体验，在技术与审美之间寻找准确、鲜明的表达。</p>
+              </div>
+            </header>
+
+            <div class="resumeContactStrip">
+              <span><b>PHONE</b> 132 2240 0308</span>
+              <span><b>EMAIL</b> 1114375886@qq.com</span>
+              <span><b>WECHAT</b> BYP1114375886</span>
+              <span><b>BASE</b> 无锡 · 宜兴</span>
+              <span><b>BORN</b> 2002.03.08</span>
+            </div>
+
+            <div class="resumeMain">
+              <aside class="resumeSide">
+                <section class="resumeSection">
+                  <p class="resumeSectionLabel"><span>01</span> EDUCATION</p>
+                  <h4>教育经历</h4>
+                  <div class="resumeTimeline">
+                    <div>
+                      <time>2024—2027</time>
+                      <strong>东北师范大学</strong>
+                      <p>动画设计 · 硕士</p>
+                    </div>
+                    <div>
+                      <time>2020—2024</time>
+                      <strong>东北师范大学</strong>
+                      <p>数字媒体艺术 · 本科</p>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="resumeSection">
+                  <p class="resumeSectionLabel"><span>02</span> SKILLS</p>
+                  <h4>技能</h4>
+                  <div class="skillGroup">
+                    <b>传统工具</b>
+                    <p>Photoshop · Illustrator · After Effects · Premiere · Figma · Procreate</p>
+                    <p>Blender · Maya · Unreal Engine</p>
+                  </div>
+                  <div class="skillGroup">
+                    <b>AIGC</b>
+                    <p>Midjourney · ChatGPT · Gemini · Nano Banana · Stable Diffusion</p>
+                    <p>即梦 · 可灵 · LibTV · Neowow · Vidu · Suno</p>
+                  </div>
+                  <p class="skillNote">能够灵活运用 AI 工具进行图像与音视频创作交付，快速转化新技术、解决实际问题，并了解各模型特点。</p>
+                </section>
+
+                <section class="resumeSection resumeCompact">
+                  <p class="resumeSectionLabel"><span>03</span> MORE</p>
+                  <h4>荣誉与爱好</h4>
+                  <ul>
+                    <li>米兰设计周国二 / 省一</li>
+                    <li>蓝桥杯国三 / 省二</li>
+                    <li>NCDA 国三 / 省二</li>
+                    <li>校一等奖学金、三等奖学金、优秀学生</li>
+                    <li>东北师范大学推免硕士</li>
+                  </ul>
+                  <p class="hobbyLine">书法 / 健身 / 羽毛球 / 影视</p>
+                </section>
+              </aside>
+
+              <div class="resumeBody">
+                <section class="resumeSection">
+                  <p class="resumeSectionLabel"><span>04</span> PROJECT EXPERIENCE</p>
+                  <h4>项目经验</h4>
+                  <article class="resumeEntry">
+                    <div><h5>AIGC 动画短片《虫潮之下》</h5><time>2026.06</time></div>
+                    <p>个人全流程制作，负责剧本、美术资产、分镜、配乐、剪辑与制片；使用 Image 2、Midjourney Niji 8、Nano Banana 2、Seedance 2.0、Suno 5 完成。</p>
+                  </article>
+                  <article class="resumeEntry">
+                    <div><h5>AIGC 动画短片《保护色》</h5><time>2026.06</time></div>
+                    <p>个人全流程制作，负责剧本、美术资产、分镜、音效、剪辑与制片；使用 Image 2、Nano Banana 2、Seedance 2.0 完成。</p>
+                  </article>
+                </section>
+
+                <section class="resumeSection">
+                  <p class="resumeSectionLabel"><span>05</span> INTERNSHIP EXPERIENCE</p>
+                  <h4>实习经历</h4>
+                  <article class="resumeEntry resumeJob">
+                    <div><h5>京东科技 · 交互设计师（AI 产品）</h5><time>2026.07—至今</time></div>
+                    <ul>
+                      <li>负责灵境平台产品营销内容制作，独立完成产品功能宣传视频、海报、Banner 等物料创意落地。</li>
+                      <li>独立完成 AI 影视全流程创作，通过案例拆解与工作流总结输出内容生产经验。</li>
+                      <li>参与产品体验测试，整理功能问题与体验优化需求，协同产品研发团队跟进与优化。</li>
+                      <li>负责 B 站、抖音账号运营，参与选题策划、内容制作发布并持续产出产品及 AI 创作相关内容。</li>
+                    </ul>
+                  </article>
+                </section>
+
+                <section class="resumeSection resumeEvaluation">
+                  <p class="resumeSectionLabel"><span>06</span> EVALUATION</p>
+                  <h4>自我评价</h4>
+                  <p>情绪稳定，抗压能力强；思维活跃、条理清晰、学习能力强，拥抱新技术。创新意识与团队意识强，善于解决问题，能够快速理解需求并推动落地。</p>
+                </section>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="resumeDismissHint">按住鼠标左键拖动 · 使用 ＋ / − 或 Ctrl + 滚轮缩放</p>
+      </section>
+    </div>
   </body>
 </html>
