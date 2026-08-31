@@ -289,6 +289,7 @@
           height: rect.height,
           lineIndex: Number(element.dataset.line),
           isSpace: element.classList.contains("is-space"),
+          isLit: true,
         };
       });
     };
@@ -310,6 +311,17 @@
         let deltaX = metric.centerX - currentX;
         let deltaY = metric.centerY - currentY;
         let distance = Math.hypot(deltaX, deltaY);
+        const lightStrength = Math.pow(clamp(1 - distance / projectionRadius, 0, 1), .85);
+        if (lightStrength <= .001) {
+          if (metric.isLit) {
+            element.style.setProperty("--near-shadow-color", "transparent");
+            element.style.setProperty("--far-shadow-color", "transparent");
+            element.style.setProperty("--ring-shadow-color", "transparent");
+            metric.isLit = false;
+          }
+          return;
+        }
+        metric.isLit = true;
         const influenceRadius = Math.max(metric.width, metric.height) * .64;
         const radialStrength = Math.pow(clamp(1 - distance / Math.max(influenceRadius, 1), 0, 1), 1.35);
 
@@ -323,7 +335,6 @@
         }
 
         const shadowLength = clamp(30 - distance * .018, 12, 28);
-        const lightStrength = Math.pow(clamp(1 - distance / projectionRadius, 0, 1), .85);
         const directionalStrength = 1 - radialStrength * .82;
         const directionalOffsetScale = 1 - radialStrength * .94;
         const ringSpread = clamp(
@@ -348,15 +359,9 @@
       });
     };
 
-    let lastShadowFrame = 0;
-    const followPointer = (time) => {
-      if (time - lastShadowFrame < 50) {
-        animationFrame = global.requestAnimationFrame(followPointer);
-        return;
-      }
-      lastShadowFrame = time;
-      currentX += (targetX - currentX) * .16;
-      currentY += (targetY - currentY) * .16;
+    const followPointer = () => {
+      currentX += (targetX - currentX) * .32;
+      currentY += (targetY - currentY) * .32;
       writeShadows();
 
       if (active || Math.abs(targetX - currentX) > .12 || Math.abs(targetY - currentY) > .12) {
