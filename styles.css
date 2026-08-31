@@ -188,9 +188,8 @@ a { text-decoration: none; }
   padding: 18px;
   border: 1px solid rgba(5,5,5,.18);
   border-radius: 24px;
-  background: rgba(255,255,255,.92);
+  background: #fff;
   box-shadow: 0 24px 70px rgba(5,5,5,.16);
-  backdrop-filter: blur(22px);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -264,13 +263,10 @@ a { text-decoration: none; }
 .copyItem.is-copied > em { opacity: 1; transform: translateX(0); }
 .copyItem.is-copied > em { color: #07863f; }
 .contactItem:focus-visible { outline: 2px solid #050505; outline-offset: -2px; }
-.resumeItem { margin-top: 9px; border: 0; border-radius: 14px; background: #050505; color: #fff; }
-.resumeItem > span { color: rgba(255,255,255,.62); }
+.resumeItem { grid-template-columns: minmax(0, 1fr) auto; margin-top: 9px; border: 0; border-radius: 14px; background: #050505; color: #fff; }
 .resumeItem > em { color: rgba(255,255,255,.7); opacity: 1; transform: none; }
 .resumeItem:hover,
 .resumeItem:focus-visible { background: #050505; color: #fff; }
-.resumeItem:hover > span,
-.resumeItem:focus-visible > span,
 .resumeItem:hover > em,
 .resumeItem:focus-visible > em { color: rgba(255,255,255,.7); opacity: 1; transform: translate(2px,-2px); }
 
