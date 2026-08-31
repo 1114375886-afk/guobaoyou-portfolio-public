@@ -1,11 +1,6 @@
 requestAnimationFrame(() => document.documentElement.classList.add("ready"));
 
 const stopGlowMotion = window.createGlowMotion?.(document.querySelector(".ambientGlows"));
-const stopTitleEffects = window.createTitleEffects?.(document.querySelector(".coverTitle"));
-window.addEventListener("pagehide", () => {
-  stopGlowMotion?.();
-  stopTitleEffects?.();
-}, { once: true });
 
 const shell = document.querySelector(".portfolioShell");
 const cover = document.querySelector(".cover");
@@ -19,7 +14,6 @@ const nextButton = document.querySelector("#slide-next");
 const currentLabel = document.querySelector("#slide-current");
 const slides = Array.from(document.querySelectorAll(".portfolioSlide"));
 const dots = Array.from(document.querySelectorAll(".slideDot"));
-const contactButtons = document.querySelectorAll(".contactButton");
 const contactHub = document.querySelector("#contact-hub");
 const contactPrompt = document.querySelector("#contact-prompt");
 const contactTrigger = document.querySelector("#contact-trigger");
@@ -51,6 +45,34 @@ let resumeReturnFocus;
 let resumeDragState;
 let projectChapterIndex = 0;
 let projectReturnFocus;
+let titleEffectsStopper = () => {};
+let titleEffectsActive = false;
+
+const startTitleEffects = () => {
+  if (
+    titleEffectsActive
+    || exploring
+    || !window.matchMedia("(pointer: fine)").matches
+    || window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) return;
+  titleEffectsStopper = window.createTitleEffects?.(document.querySelector(".coverTitle")) || (() => {});
+  titleEffectsActive = true;
+};
+
+const stopTitleEffects = () => {
+  if (!titleEffectsActive) return;
+  titleEffectsStopper();
+  titleEffectsStopper = () => {};
+  titleEffectsActive = false;
+};
+
+if (window.requestIdleCallback) window.requestIdleCallback(startTitleEffects, { timeout: 1400 });
+else window.setTimeout(startTitleEffects, 900);
+
+window.addEventListener("pagehide", () => {
+  stopGlowMotion?.();
+  stopTitleEffects();
+}, { once: true });
 
 const setContactOpen = (isOpen) => {
   window.clearTimeout(contactHideTimer);
@@ -154,6 +176,20 @@ const activateProjectChapter = (nextIndex) => {
   });
   if (projectChapterCounter) projectChapterCounter.value = `${String(normalizedIndex + 1).padStart(2, "0")} / ${String(projectChapters.length).padStart(2, "0")}`;
   if (normalizedIndex !== 0) projectFilm?.pause();
+  if (projectModal?.classList.contains("is-open")) hydrateProjectChapter(normalizedIndex);
+};
+
+const hydrateProjectChapter = (chapterIndex) => {
+  const chapter = projectChapters[chapterIndex];
+  if (!chapter) return;
+  chapter.querySelectorAll("img[data-project-src]").forEach((image) => {
+    image.src = image.dataset.projectSrc;
+    image.removeAttribute("data-project-src");
+  });
+  if (chapterIndex === 0 && projectFilm?.dataset.projectSrc && !projectFilm.src) {
+    projectFilm.src = projectFilm.dataset.projectSrc;
+    projectFilm.load();
+  }
 };
 
 const openProject = () => {
@@ -163,11 +199,16 @@ const openProject = () => {
   projectModal?.classList.add("is-open");
   projectModal?.setAttribute("aria-hidden", "false");
   projectOpen?.setAttribute("aria-expanded", "true");
+  hydrateProjectChapter(0);
   window.setTimeout(() => projectClose?.focus({ preventScroll: true }), 320);
 };
 
 const closeProject = () => {
   projectFilm?.pause();
+  if (projectFilm?.src) {
+    projectFilm.removeAttribute("src");
+    projectFilm.load();
+  }
   projectModal?.classList.remove("is-open");
   projectModal?.setAttribute("aria-hidden", "true");
   projectOpen?.setAttribute("aria-expanded", "false");
@@ -215,6 +256,7 @@ const activateSlide = (nextIndex) => {
 
 const openPortfolio = () => {
   exploring = true;
+  stopTitleEffects();
   setContactOpen(false);
   stageContactSlot.append(contactHub);
   shell.classList.add("is-exploring");
@@ -232,6 +274,7 @@ const closePortfolio = () => {
   cover.setAttribute("aria-hidden", "false");
   stage.setAttribute("aria-hidden", "true");
   entryButton.setAttribute("aria-expanded", "false");
+  window.setTimeout(startTitleEffects, 650);
   window.setTimeout(() => entryButton.focus({ preventScroll: true }), 500);
 };
 
@@ -322,21 +365,6 @@ projectModal?.addEventListener("click", (event) => {
 window.addEventListener("resize", () => {
   if (resumeModal?.classList.contains("is-open")) updateResumeZoom();
 });
-
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  contactButtons.forEach((button) => {
-    button.addEventListener("pointermove", (event) => {
-      const rect = button.getBoundingClientRect();
-      const x = (event.clientX - rect.left - rect.width / 2) * 0.1;
-      const y = (event.clientY - rect.top - rect.height / 2) * 0.18;
-      button.style.transform = `translate(${x}px, ${y}px) scale(1.035)`;
-    });
-
-    button.addEventListener("pointerleave", () => {
-      button.style.transform = "translate(0, 0) scale(1)";
-    });
-  });
-}
 
 updateNavigation();
 activateProjectChapter(0);
