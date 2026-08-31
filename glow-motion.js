@@ -248,10 +248,25 @@
     const lightSurface = global;
     const leaveSurface = document.documentElement;
     const projectedLines = Array.from(projection.children);
+    const projectedCharacters = projectedLines.flatMap((line, lineIndex) => {
+      const characters = Array.from(line.textContent);
+      line.textContent = "";
+
+      return characters.map((character) => {
+        const characterElement = document.createElement("span");
+        characterElement.className = "projectionChar";
+        characterElement.dataset.char = character;
+        characterElement.dataset.line = String(lineIndex);
+        characterElement.textContent = character;
+        if (!character.trim()) characterElement.classList.add("is-space");
+        line.appendChild(characterElement);
+        return characterElement;
+      });
+    });
     const shadowPalettes = [
-      ["rgba(35,94,68,.22)", "rgba(73,224,146,.11)"],
-      ["rgba(42,47,72,.3)", "rgba(89,124,255,.15)"],
-      ["rgba(136,79,18,.28)", "rgba(255,170,67,.14)"],
+      { near: [35, 94, 68, .3], far: [73, 224, 146, .14], ring: [35, 94, 68, .055], softness: 1.35, farBlur: 19 },
+      { near: [42, 47, 72, .4], far: [89, 124, 255, .21], ring: [42, 47, 72, .07], softness: 1, farBlur: 18 },
+      { near: [136, 79, 18, .39], far: [255, 170, 67, .21], ring: [136, 79, 18, .065], softness: 1, farBlur: 16 },
     ];
     const reducedMotion = global.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const initialRect = title.getBoundingClientRect();
@@ -259,50 +274,85 @@
     let targetY = initialRect.top + initialRect.height / 2;
     let currentX = targetX;
     let currentY = targetY;
-    let projectionRect = projection.getBoundingClientRect();
-    let lineMetrics = [];
+    let characterMetrics = [];
     let animationFrame = 0;
     let active = false;
 
-    const measureLines = () => {
-      projectionRect = projection.getBoundingClientRect();
-      lineMetrics = projectedLines.map((element, lineIndex) => {
+    const measureCharacters = () => {
+      characterMetrics = projectedCharacters.map((element) => {
         const rect = element.getBoundingClientRect();
-        const palette = shadowPalettes[lineIndex] || shadowPalettes[0];
-        element.style.setProperty("--near-shadow-color", palette[0]);
-        element.style.setProperty("--far-shadow-color", palette[1]);
         return {
           element,
           centerX: rect.left + rect.width / 2,
           centerY: rect.top + rect.height / 2,
+          width: rect.width,
+          height: rect.height,
+          lineIndex: Number(element.dataset.line),
+          isSpace: element.classList.contains("is-space"),
         };
       });
     };
 
+    const rgba = (color, alpha) => `rgba(${color[0]},${color[1]},${color[2]},${alpha.toFixed(3)})`;
+
     const writeShadows = () => {
+      const projectionRect = projection.getBoundingClientRect();
       projection.style.setProperty("--light-x", `${(currentX - projectionRect.left).toFixed(2)}px`);
       projection.style.setProperty("--light-y", `${(currentY - projectionRect.top).toFixed(2)}px`);
 
-      if (!lineMetrics.length) measureLines();
-      lineMetrics.forEach((metric) => {
+      if (!characterMetrics.length) measureCharacters();
+      characterMetrics.forEach((metric) => {
+        if (metric.isSpace) return;
+
         const { element } = metric;
+        const palette = shadowPalettes[metric.lineIndex] || shadowPalettes[0];
         let deltaX = metric.centerX - currentX;
         let deltaY = metric.centerY - currentY;
-        const distance = Math.max(1, Math.hypot(deltaX, deltaY));
-        deltaX /= distance;
-        deltaY /= distance;
-        const shadowLength = clamp(30 - distance * .012, 15, 28);
+        let distance = Math.hypot(deltaX, deltaY);
+        const influenceRadius = Math.max(metric.width, metric.height) * .64;
+        const radialStrength = Math.pow(clamp(1 - distance / Math.max(influenceRadius, 1), 0, 1), 1.35);
 
-        element.style.setProperty("--shadow-x", `${(deltaX * shadowLength * .48).toFixed(2)}px`);
-        element.style.setProperty("--shadow-y", `${(deltaY * shadowLength * .48).toFixed(2)}px`);
-        element.style.setProperty("--shadow-far-x", `${(deltaX * shadowLength).toFixed(2)}px`);
-        element.style.setProperty("--shadow-far-y", `${(deltaY * shadowLength).toFixed(2)}px`);
+        let directionX = 0;
+        let directionY = 0;
+        if (distance > .5) {
+          directionX = deltaX / distance;
+          directionY = deltaY / distance;
+        } else {
+          distance = 0;
+        }
+
+        const shadowLength = clamp(30 - distance * .018, 12, 28);
+        const fadeStart = Math.min(global.innerWidth, global.innerHeight) * .22;
+        const fadeEnd = Math.max(global.innerWidth, global.innerHeight) * .62;
+        const distanceFalloff = 1 - clamp((distance - fadeStart) / Math.max(fadeEnd - fadeStart, 1), 0, 1);
+        const lightStrength = .18 + distanceFalloff * .82;
+        const directionalStrength = 1 - radialStrength * .82;
+        const directionalOffsetScale = 1 - radialStrength * .94;
+        const ringSpread = clamp(
+          Math.max(metric.width, metric.height) * (.11 + radialStrength * .075),
+          6,
+          18,
+        );
+        const ringDiagonal = ringSpread * .707;
+
+        element.style.setProperty("--shadow-x", `${(directionX * shadowLength * .45 * directionalOffsetScale).toFixed(2)}px`);
+        element.style.setProperty("--shadow-y", `${(directionY * shadowLength * .45 * directionalOffsetScale).toFixed(2)}px`);
+        element.style.setProperty("--shadow-far-x", `${(directionX * shadowLength * .82 * directionalOffsetScale).toFixed(2)}px`);
+        element.style.setProperty("--shadow-far-y", `${(directionY * shadowLength * .82 * directionalOffsetScale).toFixed(2)}px`);
+        element.style.setProperty("--shadow-blur", `${((4 + shadowLength * .13) * palette.softness).toFixed(2)}px`);
+        element.style.setProperty("--shadow-far-blur", `${palette.farBlur}px`);
+        element.style.setProperty("--ring-spread", `${ringSpread.toFixed(2)}px`);
+        element.style.setProperty("--ring-diagonal", `${ringDiagonal.toFixed(2)}px`);
+        element.style.setProperty("--ring-blur", `${(4.5 + ringSpread * .22).toFixed(2)}px`);
+        element.style.setProperty("--near-shadow-color", rgba(palette.near, palette.near[3] * directionalStrength * lightStrength));
+        element.style.setProperty("--far-shadow-color", rgba(palette.far, palette.far[3] * directionalStrength * lightStrength));
+        element.style.setProperty("--ring-shadow-color", rgba(palette.ring, palette.ring[3] * radialStrength * lightStrength));
       });
     };
 
     let lastShadowFrame = 0;
     const followPointer = (time) => {
-      if (time - lastShadowFrame < 32) {
+      if (time - lastShadowFrame < 50) {
         animationFrame = global.requestAnimationFrame(followPointer);
         return;
       }
@@ -328,7 +378,7 @@
       targetY = event.clientY;
 
       if (!active) {
-        measureLines();
+        measureCharacters();
         active = true;
         projection.classList.add("is-active");
       }
@@ -348,14 +398,14 @@
     };
 
     const onResize = () => {
-      measureLines();
+      measureCharacters();
       writeShadows();
     };
 
     lightSurface.addEventListener("pointermove", updateTarget, { passive: true });
     leaveSurface.addEventListener("pointerleave", onPointerLeave);
     global.addEventListener("resize", onResize, { passive: true });
-    measureLines();
+    measureCharacters();
     writeShadows();
 
     return function stopTitleEffects() {
