@@ -87,14 +87,14 @@ const scheduleContactClose = () => {
   window.clearTimeout(contactHideTimer);
   contactHideTimer = window.setTimeout(() => {
     if (!contactHub?.matches(":hover") && !contactHub?.contains(document.activeElement)) setContactOpen(false);
-  }, 360);
+  }, 140);
 };
 
 const schedulePointerContactClose = () => {
   window.clearTimeout(contactHideTimer);
   contactHideTimer = window.setTimeout(() => {
     if (!contactHub?.matches(":hover")) setContactOpen(false);
-  }, 360);
+  }, 140);
 };
 
 const fallbackCopy = (value) => {
