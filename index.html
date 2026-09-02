@@ -13,7 +13,7 @@
     <meta name="twitter:description" content="AI × DESIGN · Portfolio 2026" />
     <meta name="twitter:image" content="https://1114375886-afk.github.io/guobaoyou-portfolio-public/og-2026.png" />
     <link rel="icon" href="./favicon.svg" />
-    <link rel="stylesheet" href="./styles.css?v=20260831-hit4" />
+    <link rel="stylesheet" href="./styles.css?v=20260902-sections1" />
     <script>document.documentElement.classList.add("js");</script>
     <script src="./glow-motion.js?v=20260831-fps60" defer></script>
     <script src="./script.js?v=20260831-contactfast6" defer></script>
@@ -93,7 +93,7 @@
               <p class="slideKicker">AIGC 动画短片 · 2026</p>
               <h2>虫潮之下</h2>
               <p>荒原里习以为常的一场虫潮，因为甲虫体内那枚不该存在的电子元件，露出另一重真相。</p>
-              <ul><li>剧本</li><li>角色设计</li><li>分镜与剪辑</li><li>AI 影像</li></ul>
+              <ul><li>正片</li><li>剧本</li><li>角色设计</li><li>制片</li></ul>
               <button class="projectOpenButton" id="project-open" type="button" aria-controls="project-modal" aria-expanded="false">
                 <span>查看完整项目</span><i aria-hidden="true">↗</i>
               </button>
@@ -174,9 +174,9 @@
 
         <nav class="projectNav" role="tablist" aria-label="项目章节">
           <button class="projectTab is-active" type="button" role="tab" data-project-target="0" aria-selected="true"><span>01</span> 正片 / FILM</button>
-          <button class="projectTab" type="button" role="tab" data-project-target="1" aria-selected="false"><span>02</span> 角色 / CAST</button>
-          <button class="projectTab" type="button" role="tab" data-project-target="2" aria-selected="false"><span>03</span> 世界 / WORLD</button>
-          <button class="projectTab" type="button" role="tab" data-project-target="3" aria-selected="false"><span>04</span> 制作 / PROCESS</button>
+          <button class="projectTab" type="button" role="tab" data-project-target="1" aria-selected="false"><span>02</span> 剧本 / SCRIPT</button>
+          <button class="projectTab" type="button" role="tab" data-project-target="2" aria-selected="false"><span>03</span> 角色设计 / CHARACTER</button>
+          <button class="projectTab" type="button" role="tab" data-project-target="3" aria-selected="false"><span>04</span> 制片 / PRODUCTION</button>
         </nav>
 
         <div class="projectChapters">
@@ -199,9 +199,21 @@
             </div>
           </article>
 
-          <article class="projectChapter castChapter" data-project-chapter="1" role="tabpanel">
+          <article class="projectChapter worldChapter" data-project-chapter="1" role="tabpanel">
+            <div class="worldStatement">
+              <p class="projectEyebrow">SCRIPT DEVELOPMENT / 剧本</p>
+              <h2>一场熟悉的虫潮，<br />撕开被隐藏的真相。</h2>
+              <p>故事采用“废土日常—虫潮来袭—默契反击—异常线索”的四段式结构。主角和狗从熟练应对危机，到在甲虫体内发现电子元件，叙事由生存行动转向阴谋悬念。</p>
+            </div>
+            <figure class="worldImage worldHero"><img data-project-src="./assets/projects/beneath-the-swarm/stills/world-ruins.jpg" loading="lazy" decoding="async" alt="被风沙掩埋的城市与汽车残骸" /><figcaption>01 / 废土日常</figcaption></figure>
+            <figure class="worldImage worldCabin"><img data-project-src="./assets/projects/beneath-the-swarm/stills/cabin-porch.jpg" loading="lazy" decoding="async" alt="主角在荒原木屋门廊休息" /><figcaption>02 / 虫潮来袭</figcaption></figure>
+            <figure class="worldImage worldSwarm"><img data-project-src="./assets/projects/beneath-the-swarm/stills/swarm-arrives.jpg" loading="lazy" decoding="async" alt="虫群越过沙漠袭来" /><figcaption>03 / 默契反击</figcaption></figure>
+            <figure class="worldImage worldClue"><img data-project-src="./assets/projects/beneath-the-swarm/stills/tech-beetle.jpg" loading="lazy" decoding="async" alt="机械结构的甲虫靠近荒原遗骸" /><figcaption>04 / 异常线索</figcaption></figure>
+          </article>
+
+          <article class="projectChapter castChapter" data-project-chapter="2" role="tabpanel">
             <header class="chapterIntro">
-              <p class="projectEyebrow">CHARACTER DOSSIER / 角色档案</p>
+              <p class="projectEyebrow">CHARACTER DESIGN / 角色设计</p>
               <h2>一老一狗，<br />荒原里的最佳拍档。</h2>
               <p>角色轮廓一硬一软：主角稳重克制，狗则承担警觉与喜剧节奏。两者在同一画面里形成清晰的性格反差。</p>
             </header>
@@ -227,27 +239,15 @@
             </div>
           </article>
 
-          <article class="projectChapter worldChapter" data-project-chapter="2" role="tabpanel">
-            <div class="worldStatement">
-              <p class="projectEyebrow">WORLD BUILDING / 世界观</p>
-              <h2>文明退场后，<br />风沙接管了城市。</h2>
-              <p>低饱和沙金色贯穿全片。汽车残骸、废弃旅馆与木屋构成生存空间；生物外壳与精密电子的并置，则把故事从“灾难”推向“阴谋”。</p>
-            </div>
-            <figure class="worldImage worldHero"><img data-project-src="./assets/projects/beneath-the-swarm/stills/world-ruins.jpg" loading="lazy" decoding="async" alt="被风沙掩埋的城市与汽车残骸" /><figcaption>01 / 城市残骸</figcaption></figure>
-            <figure class="worldImage worldCabin"><img data-project-src="./assets/projects/beneath-the-swarm/stills/cabin-porch.jpg" loading="lazy" decoding="async" alt="主角在荒原木屋门廊休息" /><figcaption>02 / 木屋日常</figcaption></figure>
-            <figure class="worldImage worldSwarm"><img data-project-src="./assets/projects/beneath-the-swarm/stills/swarm-arrives.jpg" loading="lazy" decoding="async" alt="虫群越过沙漠袭来" /><figcaption>03 / 虫潮来临</figcaption></figure>
-            <figure class="worldImage worldClue"><img data-project-src="./assets/projects/beneath-the-swarm/stills/tech-beetle.jpg" loading="lazy" decoding="async" alt="机械结构的甲虫靠近荒原遗骸" /><figcaption>04 / 异常线索</figcaption></figure>
-          </article>
-
           <article class="projectChapter processChapter" data-project-chapter="3" role="tabpanel">
             <div class="processCopy">
-              <p class="projectEyebrow">FROM SCRIPT TO SCREEN / 制作路径</p>
-              <h2>用统一的角色与色彩，<br />把 AI 镜头剪成一部片。</h2>
+              <p class="projectEyebrow">PRODUCTION / 制片</p>
+              <h2>统筹资产、镜头与声音，<br />把 AI 素材组织成一部片。</h2>
               <ol class="processSteps">
-                <li><span>01</span><div><b>剧本与节奏</b><p>先建立“平静—虫潮—反击—线索”的四段式叙事。</p></div></li>
-                <li><span>02</span><div><b>角色与世界资产</b><p>固定人物、狗、虫体与废土环境的造型和色彩规则。</p></div></li>
-                <li><span>03</span><div><b>镜头生成与筛选</b><p>围绕景别、动作方向和光线连续性生成可衔接镜头。</p></div></li>
-                <li><span>04</span><div><b>声音与成片</b><p>通过剪辑、配乐与音效，补足冲击感和黑色幽默节奏。</p></div></li>
+                <li><span>01</span><div><b>剧本统筹</b><p>先建立“平静—虫潮—反击—线索”的四段式叙事。</p></div></li>
+                <li><span>02</span><div><b>角色与场景资产</b><p>固定人物、狗、虫体与废土环境的造型和色彩规则。</p></div></li>
+                <li><span>03</span><div><b>镜头生产与筛选</b><p>围绕景别、动作方向和光线连续性生成可衔接镜头。</p></div></li>
+                <li><span>04</span><div><b>剪辑、声音与交付</b><p>通过剪辑、配乐与音效，补足冲击感和黑色幽默节奏。</p></div></li>
               </ol>
               <p class="processTools">IMAGE 2 · MIDJOURNEY NIJI 8 · NANO BANANA 2 · SEEDANCE 2.0 · SUNO 5</p>
             </div>
