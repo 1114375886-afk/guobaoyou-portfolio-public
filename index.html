@@ -94,7 +94,7 @@
               <h2>虫潮之下</h2>
               <p>一天中午，克里斯如往常一样处理荒漠中常来麻烦。一枚本不该出现的电子元件打破了平衡。虫潮之下，是否还有更深的阴谋......</p>
               <ul><li>正片</li><li>剧本</li><li>角色设计</li><li>制片</li></ul>
-              <button class="projectOpenButton" id="project-open" type="button" aria-controls="project-modal" aria-expanded="false">
+              <button class="projectOpenButton" id="project-open" type="button" data-project-open="swarm" aria-controls="project-modal" aria-expanded="false">
                 <span>查看完整项目</span><i aria-hidden="true">↗</i>
               </button>
             </div>
@@ -104,15 +104,23 @@
             </div>
           </article>
 
-          <article class="portfolioSlide" data-slide="1" data-tone="rose">
-            <div class="slideNumber">02</div>
-            <div class="slideCopy">
-              <p class="slideKicker">品牌系统 · 空间导视</p>
-              <h2>栖间酒店</h2>
-              <p>以留白、光影和缓慢节奏，塑造介于城市与自然之间的居住体验。</p>
-              <ul><li>视觉识别</li><li>空间语言</li><li>品牌叙事</li></ul>
+          <article class="portfolioSlide camouflageProjectSlide" data-slide="1" data-tone="forest">
+            <img class="camouflageProjectImage" src="./assets/projects/camouflage/cover.png" alt="两只变色龙在森林树枝上望向一颗红色果实" />
+            <div class="camouflageProjectShade" aria-hidden="true"></div>
+            <div class="featuredProjectIndex">02 / AIGC FILM</div>
+            <div class="featuredProjectCopy camouflageProjectCopy">
+              <p class="slideKicker">AIGC 动画短片 · 2026</p>
+              <h2>保护色</h2>
+              <p>两只变色龙在一颗红色果实前相遇，伪装、欲望与成长由此展开。</p>
+              <ul><li>正片</li><li>剧本</li><li>角色设计</li><li>制片</li></ul>
+              <button class="projectOpenButton" id="camouflage-open" type="button" data-project-open="camouflage" aria-controls="camouflage-modal" aria-expanded="false">
+                <span>查看完整项目</span><i aria-hidden="true">↗</i>
+              </button>
             </div>
-            <div class="slideWord" aria-hidden="true">REST</div>
+            <div class="featuredProjectMeta" aria-hidden="true">
+              <span>CAMOUFLAGE</span>
+              <span>FOREST / DESIRE / GROWTH</span>
+            </div>
           </article>
 
           <article class="portfolioSlide" data-slide="2" data-tone="blue">
@@ -164,7 +172,7 @@
       </section>
     </main>
 
-    <div class="projectModal" id="project-modal" aria-hidden="true">
+    <div class="projectModal" id="project-modal" data-project-modal="swarm" aria-hidden="true">
       <section class="projectDossier" role="dialog" aria-modal="true" aria-labelledby="project-title">
         <header class="projectHeader">
           <button class="projectClose" id="project-close" type="button">← 返回作品集</button>
@@ -261,9 +269,113 @@
         </div>
 
         <footer class="projectFooter">
-          <button id="project-prev" type="button" aria-label="上一个项目章节">← 上一章</button>
+          <button id="project-prev" data-project-prev type="button" aria-label="上一个项目章节">← 上一章</button>
           <p>点击章节标题浏览项目，不会跳转到新页面</p>
-          <button id="project-next" type="button" aria-label="下一个项目章节">下一章 →</button>
+          <button id="project-next" data-project-next type="button" aria-label="下一个项目章节">下一章 →</button>
+        </footer>
+      </section>
+    </div>
+
+    <div class="projectModal camouflageModal" id="camouflage-modal" data-project-modal="camouflage" aria-hidden="true">
+      <section class="projectDossier" role="dialog" aria-modal="true" aria-labelledby="camouflage-title">
+        <header class="projectHeader">
+          <button class="projectClose" type="button">← 返回作品集</button>
+          <p><span>BAI YUPENG / 2026</span><strong id="camouflage-title">保护色</strong></p>
+          <output class="projectChapterCounter">01 / 04</output>
+        </header>
+
+        <nav class="projectNav" role="tablist" aria-label="《保护色》项目章节">
+          <button class="projectTab is-active" type="button" role="tab" data-project-target="0" aria-selected="true"><span>01</span> 正片 / FILM</button>
+          <button class="projectTab" type="button" role="tab" data-project-target="1" aria-selected="false"><span>02</span> 剧本 / SCRIPT</button>
+          <button class="projectTab" type="button" role="tab" data-project-target="2" aria-selected="false"><span>03</span> 角色设计 / CHARACTER</button>
+          <button class="projectTab" type="button" role="tab" data-project-target="3" aria-selected="false"><span>04</span> 制片 / PRODUCTION</button>
+        </nav>
+
+        <div class="projectChapters">
+          <article class="projectChapter filmChapter is-active" data-project-chapter="0" role="tabpanel">
+            <div class="filmFrame">
+              <video controls playsinline preload="none" poster="./assets/projects/camouflage/poster.png" data-project-src="https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/camouflage-video-v1-20260902/camouflage-web.mp4">
+                你的浏览器暂不支持视频播放。
+              </video>
+              <span class="filmFrameLabel">AIGC ANIMATION / ORIGINAL FILM</span>
+            </div>
+            <div class="filmSynopsis">
+              <p class="projectEyebrow">CAMOUFLAGE</p>
+              <h2>藏进环境，<br />也藏不住欲望。</h2>
+              <p>森林里，一颗鲜红果实打破了树梢的平静。两只性格迥异的变色龙围绕它展开追逐，在伪装与显露之间经历一场轻巧、幽默的成长冒险。</p>
+              <dl class="filmFacts">
+                <div><dt>类型</dt><dd>森林冒险 / 轻喜剧</dd></div>
+                <div><dt>形式</dt><dd>AIGC 动画短片</dd></div>
+                <div><dt>职责</dt><dd>个人全流程制作</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projectChapter worldChapter" data-project-chapter="1" role="tabpanel">
+            <div class="worldStatement">
+              <p class="projectEyebrow">SCRIPT DEVELOPMENT / 剧本</p>
+              <h2>一颗红色果实，<br />打破树梢的平静。</h2>
+              <p>故事围绕“发现—争夺—变化—和解”展开。唯一的高饱和红色成为欲望焦点，角色从隐匿到显露的颜色变化，也推动无对白叙事自然向前。</p>
+            </div>
+            <figure class="worldImage worldHero"><img data-project-src="./assets/projects/camouflage/forest-stage.png" loading="lazy" decoding="async" alt="阳光下的森林树枝与红色果实" /><figcaption>01 / 发现</figcaption></figure>
+            <figure class="worldImage worldCabin"><img data-project-src="./assets/projects/camouflage/duo-camouflage.png" loading="lazy" decoding="async" alt="两只棕色变色龙融入树枝" /><figcaption>02 / 隐匿</figcaption></figure>
+            <figure class="worldImage worldSwarm"><img data-project-src="./assets/projects/camouflage/duo-color.png" loading="lazy" decoding="async" alt="绿色与棕色变色龙对峙" /><figcaption>03 / 争夺</figcaption></figure>
+            <figure class="worldImage worldClue"><img data-project-src="./assets/projects/camouflage/brown-berry.png" loading="lazy" decoding="async" alt="棕色变色龙靠近红色果实" /><figcaption>04 / 变化</figcaption></figure>
+          </article>
+
+          <article class="projectChapter castChapter" data-project-chapter="2" role="tabpanel">
+            <header class="chapterIntro">
+              <p class="projectEyebrow">CHARACTER DESIGN / 角色设计</p>
+              <h2>同一种天赋，<br />两种完全不同的性格。</h2>
+              <p>绿色角色外放、敏捷，棕色角色沉稳、善于隐匿。体型、眼神和姿态的反差，让关系与喜剧节奏在无对白的画面里自然成立。</p>
+            </header>
+            <div class="castGrid">
+              <article class="castCard keeperCard">
+                <div class="castImage"><img data-project-src="./assets/projects/camouflage/character-green.png" loading="lazy" decoding="async" alt="绿色变色龙角色设定" /></div>
+                <div class="castCopy">
+                  <span>01 / THE SHOWMAN</span>
+                  <h3>耀眼的行动派</h3>
+                  <p>相信速度和姿态能解决一切。鲜绿色轮廓和夸张表情强化他的自信，也为意外发生时的反差埋下笑点。</p>
+                  <ul><li>外放</li><li>敏捷</li><li>表现欲</li></ul>
+                </div>
+              </article>
+              <article class="castCard houndCard">
+                <div class="castImage"><img data-project-src="./assets/projects/camouflage/character-brown.png" loading="lazy" decoding="async" alt="棕色变色龙角色设定" /></div>
+                <div class="castCopy">
+                  <span>02 / THE OBSERVER</span>
+                  <h3>安静的伪装者</h3>
+                  <p>更擅长观察和等待，能够融入树干般的颜色。克制的动作与微妙眼神，让他的幽默感来自停顿而非喧闹。</p>
+                  <ul><li>沉稳</li><li>谨慎</li><li>善于隐藏</li></ul>
+                </div>
+              </article>
+            </div>
+          </article>
+
+          <article class="projectChapter processChapter" data-project-chapter="3" role="tabpanel">
+            <div class="processCopy">
+              <p class="projectEyebrow">PRODUCTION / 制片</p>
+              <h2>先固定角色语言，<br />再让镜头自由生长。</h2>
+              <ol class="processSteps">
+                <li><span>01</span><div><b>故事与动作节拍</b><p>围绕四段式结构梳理无对白叙事。</p></div></li>
+                <li><span>02</span><div><b>角色资产建立</b><p>统一眼睛、鳞片、体型与颜色变化规则。</p></div></li>
+                <li><span>03</span><div><b>场景与镜头生产</b><p>用树枝、果实和逆光建立稳定空间。</p></div></li>
+                <li><span>04</span><div><b>剪辑、声音与交付</b><p>以动作停顿、反应镜头和音效完成喜剧节奏。</p></div></li>
+              </ol>
+              <p class="processTools">IMAGE 2 · NANO BANANA 2 · SEEDANCE 2.0</p>
+            </div>
+            <div class="processFrames" aria-label="角色与关键画面">
+              <figure class="processFrame processFrameWide"><img data-project-src="./assets/projects/camouflage/character-model.png" loading="lazy" decoding="async" alt="变色龙角色侧面造型探索" /><figcaption>角色轮廓</figcaption></figure>
+              <figure class="processFrame"><img data-project-src="./assets/projects/camouflage/shot-relaxed.png" loading="lazy" decoding="async" alt="戴墨镜的绿色变色龙躺在树枝上" /><figcaption>性格建立</figcaption></figure>
+              <figure class="processFrame"><img data-project-src="./assets/projects/camouflage/green-hero.png" loading="lazy" decoding="async" alt="绿色变色龙直立在树干旁" /><figcaption>动作测试</figcaption></figure>
+              <figure class="processFrame processFrameWide"><img data-project-src="./assets/projects/camouflage/shot-action.png" loading="lazy" decoding="async" alt="戴墨镜的绿色变色龙在树枝上跳起" /><figcaption>喜剧动作</figcaption></figure>
+            </div>
+          </article>
+        </div>
+
+        <footer class="projectFooter">
+          <button data-project-prev type="button" aria-label="上一个项目章节">← 上一章</button>
+          <p>点击章节标题浏览项目，不会跳转到新页面</p>
+          <button data-project-next type="button" aria-label="下一个项目章节">下一章 →</button>
         </footer>
       </section>
     </div>
@@ -402,3 +514,4 @@
     </div>
   </body>
 </html>
+
