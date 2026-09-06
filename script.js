@@ -27,15 +27,8 @@ const digitalResume = document.querySelector("#digital-resume");
 const resumeZoomOut = document.querySelector("#resume-zoom-out");
 const resumeZoomIn = document.querySelector("#resume-zoom-in");
 const resumeZoomLabel = document.querySelector("#resume-zoom-label");
-const projectOpen = document.querySelector("#project-open");
-const projectModal = document.querySelector("#project-modal");
-const projectClose = document.querySelector("#project-close");
-const projectTabs = Array.from(document.querySelectorAll(".projectTab"));
-const projectChapters = Array.from(document.querySelectorAll(".projectChapter"));
-const projectChapterCounter = document.querySelector("#project-chapter-counter");
-const projectPrevious = document.querySelector("#project-prev");
-const projectNext = document.querySelector("#project-next");
-const projectFilm = document.querySelector("#project-film");
+const projectOpenButtons = Array.from(document.querySelectorAll("[data-project-open]"));
+const projectModals = Array.from(document.querySelectorAll("[data-project-modal]"));
 
 let activeIndex = 0;
 let exploring = false;
@@ -44,8 +37,7 @@ let contactHideTimer;
 let resumeZoom = 1;
 let resumeReturnFocus;
 let resumeDragState;
-let projectChapterIndex = 0;
-let projectReturnFocus;
+let activeProjectController;
 let titleEffectsStopper = () => {};
 let titleEffectsActive = false;
 
@@ -160,61 +152,98 @@ const closeResume = () => {
   resumeReturnFocus?.focus?.({ preventScroll: true });
 };
 
-const activateProjectChapter = (nextIndex) => {
-  if (!projectChapters.length) return;
-  const normalizedIndex = (nextIndex + projectChapters.length) % projectChapters.length;
-  projectChapterIndex = normalizedIndex;
-  projectChapters.forEach((chapter, index) => {
-    const selected = index === normalizedIndex;
-    chapter.classList.toggle("is-active", selected);
-    chapter.setAttribute("aria-hidden", String(!selected));
+const createProjectController = (modal) => {
+  const projectKey = modal.dataset.projectModal;
+  const openButton = projectOpenButtons.find((button) => button.dataset.projectOpen === projectKey);
+  const closeButton = modal.querySelector(".projectClose");
+  const tabs = Array.from(modal.querySelectorAll(".projectTab"));
+  const chapters = Array.from(modal.querySelectorAll(".projectChapter"));
+  const counter = modal.querySelector(".projectChapterCounter");
+  const previous = modal.querySelector("[data-project-prev]");
+  const next = modal.querySelector("[data-project-next]");
+  const film = modal.querySelector("video[data-project-src]");
+  let chapterIndex = 0;
+  let returnFocus;
+
+  const hydrate = (nextIndex) => {
+    const chapter = chapters[nextIndex];
+    if (!chapter) return;
+    chapter.querySelectorAll("img[data-project-src]").forEach((image) => {
+      image.src = image.dataset.projectSrc;
+      image.removeAttribute("data-project-src");
+    });
+    if (nextIndex === 0 && film?.dataset.projectSrc && !film.src) {
+      film.src = film.dataset.projectSrc;
+      film.load();
+    }
+  };
+
+  const activate = (nextIndex) => {
+    if (!chapters.length) return;
+    const normalizedIndex = (nextIndex + chapters.length) % chapters.length;
+    chapterIndex = normalizedIndex;
+    chapters.forEach((chapter, index) => {
+      const selected = index === normalizedIndex;
+      chapter.classList.toggle("is-active", selected);
+      chapter.setAttribute("aria-hidden", String(!selected));
+    });
+    tabs.forEach((tab, index) => {
+      const selected = index === normalizedIndex;
+      tab.classList.toggle("is-active", selected);
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    if (counter) counter.value = `${String(normalizedIndex + 1).padStart(2, "0")} / ${String(chapters.length).padStart(2, "0")}`;
+    if (normalizedIndex !== 0) film?.pause();
+    if (modal.classList.contains("is-open")) hydrate(normalizedIndex);
+  };
+
+  const open = () => {
+    returnFocus = document.activeElement;
+    setContactOpen(false);
+    activate(0);
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    openButton?.setAttribute("aria-expanded", "true");
+    activeProjectController = controller;
+    hydrate(0);
+    window.setTimeout(() => closeButton?.focus({ preventScroll: true }), 320);
+  };
+
+  const close = () => {
+    film?.pause();
+    if (film?.src) {
+      film.removeAttribute("src");
+      film.load();
+    }
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    openButton?.setAttribute("aria-expanded", "false");
+    if (activeProjectController === controller) activeProjectController = undefined;
+    returnFocus?.focus?.({ preventScroll: true });
+  };
+
+  const controller = {
+    modal,
+    open,
+    close,
+    next: () => activate(chapterIndex + 1),
+    previous: () => activate(chapterIndex - 1)
+  };
+
+  openButton?.addEventListener("click", open);
+  closeButton?.addEventListener("click", close);
+  previous?.addEventListener("click", controller.previous);
+  next?.addEventListener("click", controller.next);
+  tabs.forEach((tab) => tab.addEventListener("click", () => activate(Number(tab.dataset.projectTarget))));
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) close();
   });
-  projectTabs.forEach((tab, index) => {
-    const selected = index === normalizedIndex;
-    tab.classList.toggle("is-active", selected);
-    tab.setAttribute("aria-selected", String(selected));
-    tab.tabIndex = selected ? 0 : -1;
-  });
-  if (projectChapterCounter) projectChapterCounter.value = `${String(normalizedIndex + 1).padStart(2, "0")} / ${String(projectChapters.length).padStart(2, "0")}`;
-  if (normalizedIndex !== 0) projectFilm?.pause();
-  if (projectModal?.classList.contains("is-open")) hydrateProjectChapter(normalizedIndex);
+  activate(0);
+  return controller;
 };
 
-const hydrateProjectChapter = (chapterIndex) => {
-  const chapter = projectChapters[chapterIndex];
-  if (!chapter) return;
-  chapter.querySelectorAll("img[data-project-src]").forEach((image) => {
-    image.src = image.dataset.projectSrc;
-    image.removeAttribute("data-project-src");
-  });
-  if (chapterIndex === 0 && projectFilm?.dataset.projectSrc && !projectFilm.src) {
-    projectFilm.src = projectFilm.dataset.projectSrc;
-    projectFilm.load();
-  }
-};
-
-const openProject = () => {
-  projectReturnFocus = document.activeElement;
-  setContactOpen(false);
-  activateProjectChapter(0);
-  projectModal?.classList.add("is-open");
-  projectModal?.setAttribute("aria-hidden", "false");
-  projectOpen?.setAttribute("aria-expanded", "true");
-  hydrateProjectChapter(0);
-  window.setTimeout(() => projectClose?.focus({ preventScroll: true }), 320);
-};
-
-const closeProject = () => {
-  projectFilm?.pause();
-  if (projectFilm?.src) {
-    projectFilm.removeAttribute("src");
-    projectFilm.load();
-  }
-  projectModal?.classList.remove("is-open");
-  projectModal?.setAttribute("aria-hidden", "true");
-  projectOpen?.setAttribute("aria-expanded", "false");
-  projectReturnFocus?.focus?.({ preventScroll: true });
-};
+const projectControllers = projectModals.map(createProjectController);
 
 const updateNavigation = () => {
   currentLabel.textContent = String(activeIndex + 1).padStart(2, "0");
@@ -300,10 +329,10 @@ dots.forEach((dot) => dot.addEventListener("click", () => activateSlide(Number(d
 
 document.addEventListener("keydown", (event) => {
   if (resumeModal?.classList.contains("is-open")) return;
-  if (projectModal?.classList.contains("is-open")) {
-    if (event.key === "Escape") closeProject();
-    if (event.key === "ArrowRight") activateProjectChapter(projectChapterIndex + 1);
-    if (event.key === "ArrowLeft") activateProjectChapter(projectChapterIndex - 1);
+  if (activeProjectController?.modal.classList.contains("is-open")) {
+    if (event.key === "Escape") activeProjectController.close();
+    if (event.key === "ArrowRight") activeProjectController.next();
+    if (event.key === "ArrowLeft") activeProjectController.previous();
     return;
   }
   if (!exploring) return;
@@ -368,17 +397,8 @@ resumeViewport?.addEventListener("dragstart", (event) => event.preventDefault())
 resumeModal?.addEventListener("click", (event) => {
   if (event.target === resumeModal) closeResume();
 });
-projectOpen?.addEventListener("click", openProject);
-projectClose?.addEventListener("click", closeProject);
-projectPrevious?.addEventListener("click", () => activateProjectChapter(projectChapterIndex - 1));
-projectNext?.addEventListener("click", () => activateProjectChapter(projectChapterIndex + 1));
-projectTabs.forEach((tab) => tab.addEventListener("click", () => activateProjectChapter(Number(tab.dataset.projectTarget))));
-projectModal?.addEventListener("click", (event) => {
-  if (event.target === projectModal) closeProject();
-});
 window.addEventListener("resize", () => {
   if (resumeModal?.classList.contains("is-open")) updateResumeZoom();
 });
 
 updateNavigation();
-activateProjectChapter(0);
