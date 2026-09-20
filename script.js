@@ -328,6 +328,7 @@ nextButton.addEventListener("click", () => activateSlide(activeIndex + 1));
 dots.forEach((dot) => dot.addEventListener("click", () => activateSlide(Number(dot.dataset.target))));
 
 document.addEventListener("keydown", (event) => {
+  if (document.querySelector("#practice-player")?.open) return;
   if (resumeModal?.classList.contains("is-open")) return;
   if (activeProjectController?.modal.classList.contains("is-open")) {
     if (event.key === "Escape") activeProjectController.close();

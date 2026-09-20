@@ -14,9 +14,11 @@
     <meta name="twitter:image" content="https://1114375886-afk.github.io/guobaoyou-portfolio-public/og-2026.png" />
     <link rel="icon" href="./favicon.svg" />
     <link rel="stylesheet" href="./styles.css?v=20260902-sections1" />
+    <link rel="stylesheet" href="./practice.css?v=20260920-1" />
     <script>document.documentElement.classList.add("js");</script>
     <script src="./glow-motion.js?v=20260831-fps60" defer></script>
-    <script src="./script.js?v=20260831-contactfast6" defer></script>
+    <script src="./script.js?v=20260920-practice1" defer></script>
+    <script src="./practice.js?v=20260920-1" defer></script>
     <title>Bai YuPeng — AI Animation Portfolio</title>
   </head>
   <body>
@@ -122,6 +124,18 @@
               <span>FOREST / DESIRE / GROWTH</span>
             </div>
           </article>
+          <article class="portfolioSlide practiceSlide" data-slide="2" aria-labelledby="practice-title">
+            <header class="practiceHeading">
+              <div><p class="practiceKicker">03 / MOTION STUDIES</p><h2 id="practice-title">练习作品</h2></div>
+              <span class="practiceLabel">片段练习 · 2026</span>
+            </header>
+            <button class="practicePreview" id="practice-open" type="button" aria-label="播放练习作品 01 完整视频，56 秒" aria-haspopup="dialog" aria-controls="practice-player">
+              <video id="practice-preview" muted loop playsinline preload="none" poster="./assets/projects/practice-01-poster.jpg" data-preview-src="./assets/projects/practice-01-preview.mp4" aria-hidden="true" tabindex="-1"></video>
+              <span class="practicePlay" aria-hidden="true">▶</span>
+              <span class="practicePreviewCaption"><span>观看完整视频 <i aria-hidden="true">↗</i></span><span>00:56</span></span>
+            </button>
+            <div class="practiceFootnote"><span>练习 01</span><span>静音预览 · 点击播放完整视频</span></div>
+          </article>
         </div>
 
         <footer class="stageControls">
@@ -129,12 +143,23 @@
           <div class="slideDots" role="tablist" aria-label="选择内容">
             <button class="slideDot is-active" type="button" data-target="0" aria-label="查看第 1 项" aria-selected="true"></button>
             <button class="slideDot" type="button" data-target="1" aria-label="查看第 2 项" aria-selected="false"></button>
+            <button class="slideDot" type="button" data-target="2" aria-label="查看练习作品" aria-selected="false"></button>
           </div>
-          <span class="slideCounter"><b id="slide-current">01</b> / 02</span>
+          <span class="slideCounter"><b id="slide-current">01</b> / 03</span>
           <button class="roundControl" id="slide-next" type="button" aria-label="下一个内容">→</button>
         </footer>
       </section>
     </main>
+
+    <dialog class="practicePlayer" id="practice-player" aria-labelledby="practice-player-title">
+      <header class="practicePlayerHeader">
+        <div><span>PRACTICE / 01</span><h2 id="practice-player-title">练习作品 01</h2></div>
+        <button id="practice-close" type="button" autofocus aria-label="关闭视频">关闭 <span aria-hidden="true">×</span></button>
+      </header>
+      <video id="practice-film" controls playsinline preload="none" poster="./assets/projects/practice-01-poster.jpg" data-film-src="./assets/projects/practice-01.mp4">你的浏览器暂不支持视频播放。</video>
+      <p class="practicePlayerStatus" id="practice-playback-status" role="status"></p>
+      <footer><span>00:56 · 练习作品</span><a href="./assets/projects/practice-01.mp4" target="_blank" rel="noopener">单独打开视频 ↗</a></footer>
+    </dialog>
 
     <div class="projectModal" id="project-modal" data-project-modal="swarm" aria-hidden="true">
       <section class="projectDossier" role="dialog" aria-modal="true" aria-labelledby="project-title">
