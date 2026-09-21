@@ -790,6 +790,8 @@ a { text-decoration: none; }
 .camouflageProjectCopy h2 { color: #f3f0c9; text-shadow: 0 14px 45px rgba(0,0,0,.3); }
 .camouflageProjectCopy .slideKicker { color: #d3e87d; }
 .camouflageProjectCopy .projectOpenButton { border-color: rgba(237,246,194,.75); background: rgba(15,34,12,.46); }
+.camouflageProjectCopy .projectOpenButton:hover,
+.camouflageProjectCopy .projectOpenButton:focus-visible { border-color: #fff; background: #fff; color: #050505; }
 .camouflageModal .projectDossier { background: #071008; }
 .camouflageModal .projectTab.is-active { background: #dce98b; color: #10180c; }
 .camouflageModal .projectEyebrow { color: #b7cb70; }
