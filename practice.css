@@ -3,27 +3,31 @@
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   align-items: stretch;
-  gap: clamp(12px, 2.2vh, 24px);
-  padding: clamp(18px, 3vw, 44px);
+  gap: 14px;
+  padding: clamp(18px, 2.2vw, 30px);
   color: #171919;
   background: #f2f3ed;
   overflow: hidden;
 }
 .practiceHeading { display: flex; justify-content: space-between; align-items: end; gap: 16px; }
-.practiceKicker { margin: 0 0 9px; font-size: .62rem; font-weight: 700; letter-spacing: .18em; color: #68716a; }
-.practiceHeading h2 { margin: 0; font-size: clamp(1.6rem, 3vw, 3rem); letter-spacing: -.05em; line-height: 1.1; }
-.practiceLabel { padding: 8px 12px; border: 1px solid #ccd1c8; border-radius: 999px; font-size: .65rem; white-space: nowrap; }
-.practicePreview { position: relative; display: block; min-height: 0; width: auto; height: 100%; aspect-ratio: 1682 / 946; max-width: 100%; justify-self: center; padding: 0; overflow: hidden; border-radius: 8px; background: #080a09; color: #fff; isolation: isolate; }
-.practicePreview video { width: 100%; height: 100%; display: block; object-fit: contain; pointer-events: none; }
-.practicePreview::after { position: absolute; content: ""; inset: 50% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.65)); pointer-events: none; }
-.practicePlay { position: absolute; z-index: 1; top: 50%; left: 50%; display: grid; place-items: center; width: 64px; height: 64px; padding-left: 4px; border: 1px solid #ffffff88; border-radius: 50%; background: #ffffff20; backdrop-filter: blur(8px); font-size: 20px; transform: translate(-50%, -50%); transition: background .2s, scale .2s; }
-.practicePreview:hover .practicePlay { background: #ffffff40; scale: 1.08; }
-.practicePreview:focus-visible { outline: 3px solid #345b3b; outline-offset: 5px; }
-.practicePreviewCaption { position: absolute; z-index: 1; bottom: 20px; left: 22px; right: 22px; display: flex; justify-content: space-between; gap: 12px; font-size: .78rem; font-weight: 600; }
-.practicePreviewCaption i { margin-left: 8px; font-style: normal; }
-.practicePreviewCaption > span:last-child { font-variant-numeric: tabular-nums; color: #ffffffbb; }
-.practiceFootnote { display: flex; justify-content: space-between; gap: 12px; font-size: .66rem; color: #68716a; }
-.practiceFootnote > span:first-child { color: #272e29; font-weight: 700; }
+.practiceKicker { margin: 0 0 8px; font-size: .6rem; font-weight: 700; letter-spacing: .18em; color: #68716a; }
+.practiceHeading h2 { margin: 0; font-size: clamp(1.5rem, 2.4vw, 2.4rem); letter-spacing: -.05em; line-height: 1.1; }
+.practiceLabel { padding: 7px 10px; border: 1px solid #ccd1c8; border-radius: 999px; font-size: .62rem; white-space: nowrap; }
+.practiceGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: max-content; align-content: start; align-items: start; gap: 12px 16px; width: 100%; max-width: 680px; justify-self: center; min-height: 0; padding: 5px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #aab6a7 transparent; }
+.practiceCard { min-width: 0; padding: 0; border: 1px solid #d9dfd5; border-radius: 9px; background: #ffffffb8; overflow: hidden; text-align: left; transition: border-color .2s, box-shadow .2s; }
+.practiceCard:hover { border-color: #92a48b; box-shadow: 0 4px 12px #14220e10; }
+.practiceCard:focus-visible { outline: 2px solid #345b3b; outline-offset: 2px; }
+.practiceThumbnail { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #080a09; color: #fff; isolation: isolate; }
+.practiceThumbnail video { width: 100%; height: 100%; display: block; object-fit: contain; pointer-events: none; }
+.practicePlay { position: absolute; z-index: 1; top: 50%; left: 50%; display: grid; place-items: center; width: 36px; height: 36px; padding-left: 2px; border: 1px solid #ffffff88; border-radius: 50%; background: #0004; backdrop-filter: blur(5px); font-size: 12px; transform: translate(-50%, -50%); transition: background .2s; }
+.practiceCard:hover .practicePlay { background: #ffffff40; }
+.practiceDuration { position: absolute; right: 7px; bottom: 7px; padding: 3px 5px; border-radius: 4px; background: #000a; color: #fff; font-size: .6rem; font-variant-numeric: tabular-nums; }
+.practiceCardCaption { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 8px 10px; font-size: .76rem; font-weight: 600; }
+.practiceCardCaption > span { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.practiceCardCaption small { color: #84917d; font-size: .55rem; font-weight: 400; }
+.practiceCardCaption i { color: #68716a; font-style: normal; }
+.practiceFootnote { display: flex; justify-content: space-between; gap: 12px; font-size: .6rem; color: #68716a; }
+.practiceFootnote > span:first-child { letter-spacing: .08em; }
 .practicePlayer { width: min(1120px, 94vw); max-width: 94vw; max-height: 94svh; padding: 0; overflow: auto; border: 1px solid #333; border-radius: 14px; background: #101211; color: #fff; box-shadow: 0 30px 100px #0008; }
 .practicePlayer::backdrop { background: #050706dd; backdrop-filter: blur(12px); }
 .practicePlayerHeader { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; }
@@ -34,27 +38,28 @@
 .practicePlayerHeader button span { font-size: 1.4rem; }
 .practicePlayerHeader button:hover { background: #ffffff1a; }
 .practicePlayer :focus-visible { outline: 2px solid #c4e7be; outline-offset: 3px; }
-.practicePlayer > video { display: block; width: 100%; max-height: calc(94svh - 150px); aspect-ratio: 1682 / 946; background: #000; object-fit: contain; }
+.practicePlayer > video { display: block; width: 100%; max-height: calc(94svh - 150px); aspect-ratio: 16 / 9; background: #000; object-fit: contain; }
 .practicePlayer > footer { display: flex; justify-content: space-between; gap: 16px; padding: 16px 22px; color: #a5ada6; font-size: .65rem; }
 .practicePlayer > footer a { text-decoration: underline; text-underline-offset: 3px; }
 .practicePlayerStatus { margin: 0; padding: 0 22px; color: #d2dbc9; font-size: .75rem; line-height: 1.5; }
 .practicePlayerStatus:empty { display: none; }
 @media (max-width: 760px) {
-  .portfolioSlide.practiceSlide { gap: 16px; padding: 20px 16px; }
-  .practiceHeading { align-items: start; flex-direction: column; gap: 12px; }
-  .practiceHeading h2 { font-size: 2rem; }
-  .practicePreview { width: 100%; height: auto; max-height: 100%; align-self: center; }
-  .practicePreviewCaption { bottom: 14px; left: 14px; right: 14px; font-size: .7rem; }
-  .practicePlay { width: 52px; height: 52px; font-size: 16px; }
-  .practiceFootnote { flex-wrap: wrap; font-size: .6rem; }
+  .portfolioSlide.practiceSlide { gap: 16px; padding: 20px 14px; }
+  .practiceGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
+  .practiceHeading { flex-wrap: wrap; align-items: center; gap: 10px; }
+  .practiceHeading h2 { font-size: 1.7rem; }
+  .practiceCardCaption { font-size: .7rem; padding: 9px 7px; }
+  .practiceCardCaption > span { gap: 5px; }
+  .practiceFootnote > span:first-child { display: none; }
   .practicePlayerHeader { padding: 12px; }
   .practicePlayerHeader > div { flex-direction: column; gap: 6px; }
   .practicePlayer > footer { padding: 14px 12px; }
 }
+@media (max-width: 340px) {
+  .practiceGrid { grid-template-columns: 1fr; }
+}
 @media (max-height: 560px) {
   .portfolioSlide.practiceSlide { padding: 12px 18px; gap: 8px; }
-  .practiceHeading { flex-direction: row; align-items: center; }
   .practiceHeading h2 { font-size: 1.4rem; }
   .practiceKicker, .practiceLabel, .practiceFootnote { display: none; }
-  .practicePreviewCaption { bottom: 10px; }
 }

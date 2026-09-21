@@ -14,11 +14,11 @@
     <meta name="twitter:image" content="https://1114375886-afk.github.io/guobaoyou-portfolio-public/og-2026.png" />
     <link rel="icon" href="./favicon.svg" />
     <link rel="stylesheet" href="./styles.css?v=20260902-sections1" />
-    <link rel="stylesheet" href="./practice.css?v=20260920-1" />
+    <link rel="stylesheet" href="./practice.css?v=20260921-grid1" />
     <script>document.documentElement.classList.add("js");</script>
     <script src="./glow-motion.js?v=20260831-fps60" defer></script>
     <script src="./script.js?v=20260920-practice1" defer></script>
-    <script src="./practice.js?v=20260920-1" defer></script>
+    <script src="./practice.js?v=20260921-grid1" defer></script>
     <title>Bai YuPeng — AI Animation Portfolio</title>
   </head>
   <body>
@@ -127,14 +127,31 @@
           <article class="portfolioSlide practiceSlide" data-slide="2" aria-labelledby="practice-title">
             <header class="practiceHeading">
               <div><p class="practiceKicker">03 / MOTION STUDIES</p><h2 id="practice-title">练习作品</h2></div>
-              <span class="practiceLabel">片段练习 · 2026</span>
+              <span class="practiceLabel">05 个片段 · 2026</span>
             </header>
-            <button class="practicePreview" id="practice-open" type="button" aria-label="播放练习作品 01 完整视频，56 秒" aria-haspopup="dialog" aria-controls="practice-player">
-              <video id="practice-preview" muted loop playsinline preload="none" poster="./assets/projects/practice-01-poster.jpg" data-preview-src="./assets/projects/practice-01-preview.mp4" aria-hidden="true" tabindex="-1"></video>
-              <span class="practicePlay" aria-hidden="true">▶</span>
-              <span class="practicePreviewCaption"><span>观看完整视频 <i aria-hidden="true">↗</i></span><span>00:56</span></span>
-            </button>
-            <div class="practiceFootnote"><span>练习 01</span><span>静音预览 · 点击播放完整视频</span></div>
+            <div class="practiceGrid" role="group" aria-label="练习作品视频列表">
+              <button class="practiceCard" type="button" data-title="情绪镜头" data-duration="00:56" data-film-src="./assets/projects/practice-01.mp4" aria-label="播放情绪镜头完整视频" aria-haspopup="dialog" aria-controls="practice-player">
+                <span class="practiceThumbnail"><video muted loop playsinline preload="none" poster="./assets/projects/practice-01-poster.jpg" data-preview-src="./assets/projects/practice-01-preview.mp4" aria-hidden="true" tabindex="-1"></video><span class="practicePlay" aria-hidden="true">▶</span><span class="practiceDuration">00:56</span></span>
+                <span class="practiceCardCaption"><span><small>01</small>情绪镜头</span><i aria-hidden="true">↗</i></span>
+              </button>
+              <button class="practiceCard" type="button" data-title="动态预览" data-duration="00:47" data-film-src="https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/practice-videos-v1-20260921/motion-study.mp4" aria-label="播放动态预览完整视频" aria-haspopup="dialog" aria-controls="practice-player">
+                <span class="practiceThumbnail"><video muted loop playsinline preload="none" poster="./assets/projects/motion-study-poster.jpg" data-preview-src="./assets/projects/motion-study-preview.mp4" aria-hidden="true" tabindex="-1"></video><span class="practicePlay" aria-hidden="true">▶</span><span class="practiceDuration">00:47</span></span>
+                <span class="practiceCardCaption"><span><small>02</small>动态预览</span><i aria-hidden="true">↗</i></span>
+              </button>
+              <button class="practiceCard" type="button" data-title="分镜" data-duration="00:43" data-film-src="https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/practice-videos-v1-20260921/storyboard-study.mp4" aria-label="播放分镜完整视频" aria-haspopup="dialog" aria-controls="practice-player">
+                <span class="practiceThumbnail"><video muted loop playsinline preload="none" poster="./assets/projects/storyboard-study-poster.jpg" data-preview-src="./assets/projects/storyboard-study-preview.mp4" aria-hidden="true" tabindex="-1"></video><span class="practicePlay" aria-hidden="true">▶</span><span class="practiceDuration">00:43</span></span>
+                <span class="practiceCardCaption"><span><small>03</small>分镜</span><i aria-hidden="true">↗</i></span>
+              </button>
+              <button class="practiceCard" type="button" data-title="遗憾邮差练习" data-duration="01:40" data-film-src="https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/practice-videos-v1-20260921/postman-study.mp4" aria-label="播放遗憾邮差练习完整视频" aria-haspopup="dialog" aria-controls="practice-player">
+                <span class="practiceThumbnail"><video muted loop playsinline preload="none" poster="./assets/projects/postman-study-poster.jpg" data-preview-src="./assets/projects/postman-study-preview.mp4" aria-hidden="true" tabindex="-1"></video><span class="practicePlay" aria-hidden="true">▶</span><span class="practiceDuration">01:40</span></span>
+                <span class="practiceCardCaption"><span><small>04</small>遗憾邮差练习</span><i aria-hidden="true">↗</i></span>
+              </button>
+              <button class="practiceCard" type="button" data-title="导演台" data-duration="00:56" data-film-src="https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/practice-videos-v1-20260921/director-desk.mp4" aria-label="播放导演台完整视频" aria-haspopup="dialog" aria-controls="practice-player">
+                <span class="practiceThumbnail"><video muted loop playsinline preload="none" poster="./assets/projects/director-desk-poster.jpg" data-preview-src="./assets/projects/director-desk-preview.mp4" aria-hidden="true" tabindex="-1"></video><span class="practicePlay" aria-hidden="true">▶</span><span class="practiceDuration">00:56</span></span>
+                <span class="practiceCardCaption"><span><small>05</small>导演台</span><i aria-hidden="true">↗</i></span>
+              </button>
+            </div>
+            <div class="practiceFootnote"><span>EXPERIMENTS / SELECTED CLIPS</span><span>点击预览，观看完整视频</span></div>
           </article>
         </div>
 
@@ -153,12 +170,12 @@
 
     <dialog class="practicePlayer" id="practice-player" aria-labelledby="practice-player-title">
       <header class="practicePlayerHeader">
-        <div><span>PRACTICE / 01</span><h2 id="practice-player-title">练习作品 01</h2></div>
+        <div><span id="practice-player-index">PRACTICE / 01</span><h2 id="practice-player-title">情绪镜头</h2></div>
         <button id="practice-close" type="button" autofocus aria-label="关闭视频">关闭 <span aria-hidden="true">×</span></button>
       </header>
-      <video id="practice-film" controls playsinline preload="none" poster="./assets/projects/practice-01-poster.jpg" data-film-src="./assets/projects/practice-01.mp4">你的浏览器暂不支持视频播放。</video>
+      <video id="practice-film" controls playsinline preload="none">你的浏览器暂不支持视频播放。</video>
       <p class="practicePlayerStatus" id="practice-playback-status" role="status"></p>
-      <footer><span>00:56 · 练习作品</span><a href="./assets/projects/practice-01.mp4" target="_blank" rel="noopener">单独打开视频 ↗</a></footer>
+      <footer><span id="practice-player-meta">00:56 · 练习作品</span><a id="practice-video-link" href="./assets/projects/practice-01.mp4" target="_blank" rel="noopener">单独打开视频 ↗</a></footer>
     </dialog>
 
     <div class="projectModal" id="project-modal" data-project-modal="swarm" aria-hidden="true">
