@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data: blob: https://github.com https://*.githubusercontent.com; media-src 'self' blob: https://github.com https://*.githubusercontent.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+    <link rel="stylesheet" href="./admin.css?v=20260928-admin1" />
+    <script src="./admin.js?v=20260928-admin1" defer></script>
+    <title>Portfolio Admin — Bai YuPeng</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p>PORTFOLIO / ADMIN</p>
+        <h1>作品集管理端</h1>
+      </div>
+      <nav>
+        <a href="../" target="_blank" rel="noopener">查看网站 ↗</a>
+        <button id="logout" type="button" hidden>退出连接</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="loginPanel" id="login-panel">
+        <div class="loginIntro">
+          <span>01 / CONNECT</span>
+          <h2>连接 GitHub 后<br />直接编辑并发布。</h2>
+          <p>管理端只使用纯 HTML / CSS / JavaScript。访问令牌不会写入代码、仓库或网址。</p>
+        </div>
+        <form id="login-form">
+          <label>
+            <span>GitHub Fine-grained Token</span>
+            <input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" required />
+          </label>
+          <label class="rememberRow">
+            <input id="remember-token" type="checkbox" checked />
+            <span>仅在当前浏览器标签页保存</span>
+          </label>
+          <button class="primaryButton" type="submit">连接仓库</button>
+          <details>
+            <summary>令牌需要什么权限？</summary>
+            <p>仅选择仓库 <code>guobaoyou-portfolio-public</code>，授予 Contents「Read and write」。不需要账户管理或其他仓库权限。</p>
+          </details>
+        </form>
+      </section>
+
+      <section class="workspace" id="workspace" hidden>
+        <aside class="sidebar">
+          <p class="repoLabel">1114375886-afk / guobaoyou-portfolio-public</p>
+          <nav aria-label="管理端章节">
+            <a href="#site-section">封面与联系</a>
+            <a href="#project-section">主项目</a>
+            <a href="#practice-section">练习作品</a>
+            <a href="#advanced-section">高级数据</a>
+          </nav>
+          <div class="publishNote">
+            <span>自动发布</span>
+            <p>保存后会提交到 main 分支，GitHub Pages 通常在几分钟内更新。</p>
+          </div>
+        </aside>
+
+        <div class="editorColumn">
+          <section class="editorSection" id="site-section">
+            <header><span>01</span><div><h2>封面与联系</h2><p>修改首页文案、个人信息与头像。</p></div></header>
+            <div class="fieldGrid" id="site-fields"></div>
+          </section>
+
+          <section class="editorSection" id="project-section">
+            <header><span>02</span><div><h2>主项目</h2><p>修改项目卡片、详情页文字、封面和正片。</p></div></header>
+            <div id="project-fields"></div>
+          </section>
+
+          <section class="editorSection" id="practice-section">
+            <header><span>03</span><div><h2>练习作品</h2><p>修改标题、时长、封面、悬停预览和完整视频。</p></div></header>
+            <div class="practiceEditorGrid" id="practice-fields"></div>
+          </section>
+
+          <section class="editorSection" id="advanced-section">
+            <header><span>04</span><div><h2>高级数据</h2><p>熟悉 JSON 时，可直接编辑完整内容数据。</p></div></header>
+            <label class="field fieldWide">
+              <span>content.json</span>
+              <textarea id="json-editor" rows="22" spellcheck="false"></textarea>
+              <small>应用 JSON 后仍需点击“保存并发布”。</small>
+            </label>
+            <button class="secondaryButton" id="apply-json" type="button">应用 JSON</button>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="publishBar" id="publish-bar" hidden>
+      <div>
+        <span class="statusDot" aria-hidden="true"></span>
+        <p id="status" role="status">内容已载入，可以编辑。</p>
+      </div>
+      <button class="primaryButton" id="save" type="button">保存并发布</button>
+    </footer>
+
+    <input id="file-input" type="file" hidden />
+  </body>
+</html>

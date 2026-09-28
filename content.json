@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "version": 1,
+    "updatedAt": "2026-09-28T00:00:00.000Z"
+  },
+  "site": {
+    "kicker": "AI × DESIGN",
+    "coverSubtitle": "AI ANIMATION",
+    "coverTitle": "PORTFOLIO",
+    "coverYear": "2026",
+    "entryLabel": "进入作品集",
+    "contactLabel": "联系我"
+  },
+  "contact": {
+    "displayName": "Bai YuPeng",
+    "fullName": "白宇鹏",
+    "school": "东北师范大学",
+    "grade": "27 级",
+    "degree": "动画硕士",
+    "phone": "13222400308",
+    "phoneDisplay": "132 2240 0308",
+    "email": "1114375886@qq.com",
+    "wechat": "BYP1114375886",
+    "portrait": "./portrait-bai-yupeng.jpg"
+  },
+  "projects": [
+    {
+      "id": "swarm",
+      "kicker": "AIGC 动画短片 · 2026",
+      "title": "虫潮之下",
+      "summary": "一天中午，克里斯如往常一样处理荒漠中常来麻烦。一枚本不该出现的电子元件打破了平衡。虫潮之下，是否还有更深的阴谋......",
+      "tags": ["正片", "剧本", "美术资产", "制片"],
+      "cover": "./assets/projects/beneath-the-swarm/stills/portfolio-cover-drive-v2.jpg",
+      "coverAlt": "《虫潮之下》主角与狗驾车穿越沙尘废土",
+      "filmSrc": "https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/video-v2-20260902/beneath-the-swarm-v2.mp4",
+      "filmPoster": "./assets/projects/beneath-the-swarm/stills/video-poster-beneath-swarm.jpg",
+      "modalEyebrow": "BENEATH THE SWARM",
+      "modalHeadline": "废土日常，\n被一枚芯片打断。",
+      "modalSummary": "末世后的沙漠里，城市只剩被风沙吞没的残骸。主角与他的狗守着一间荒无人烟的木屋，以应付丧尸虫潮为日常。直到一次战斗后，他们在甲虫体内发现高科技电子物品——这场虫灾，也许从来不是自然发生。",
+      "facts": ["末世废土 / 黑色幽默", "AIGC 动画短片", "个人全流程制作"]
+    },
+    {
+      "id": "camouflage",
+      "kicker": "AIGC 动画短片 · 2026",
+      "title": "保护色",
+      "summary": "两只变色龙在一颗红色果实前相遇，伪装、欲望与成长由此展开。",
+      "tags": ["正片", "剧本", "美术资产", "制片"],
+      "cover": "./assets/projects/camouflage/cover-v2.jpg",
+      "coverAlt": "两只变色龙在金色森林的树枝上望向一颗红色果实",
+      "filmSrc": "https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/camouflage-video-v1-20260902/camouflage-web.mp4",
+      "filmPoster": "./assets/projects/camouflage/cover-v2.jpg",
+      "modalEyebrow": "CAMOUFLAGE",
+      "modalHeadline": "藏进环境，\n也藏不住欲望。",
+      "modalSummary": "森林里，一颗鲜红果实打破了树梢的平静。两只性格迥异的变色龙围绕它展开追逐，在伪装与显露之间经历一场轻巧、幽默的成长冒险。",
+      "facts": ["森林冒险 / 轻喜剧", "AIGC 动画短片", "个人全流程制作"]
+    }
+  ],
+  "practice": [
+    {
+      "id": "practice-01",
+      "title": "情绪镜头",
+      "duration": "00:56",
+      "poster": "./assets/projects/practice-01-poster.jpg",
+      "previewSrc": "./assets/projects/practice-01-preview.mp4",
+      "filmSrc": "./assets/projects/practice-01.mp4"
+    },
+    {
+      "id": "motion-study",
+      "title": "动态预览",
+      "duration": "00:47",
+      "poster": "./assets/projects/motion-study-poster.jpg",
+      "previewSrc": "./assets/projects/motion-study-preview.mp4",
+      "filmSrc": "https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/practice-videos-v1-20260921/motion-study.mp4"
+    },
+    {
+      "id": "storyboard-study",
+      "title": "分镜",
+      "duration": "00:43",
+      "poster": "./assets/projects/storyboard-study-poster.jpg",
+      "previewSrc": "./assets/projects/storyboard-study-preview.mp4",
+      "filmSrc": "https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/practice-videos-v1-20260921/storyboard-study.mp4"
+    },
+    {
+      "id": "postman-study",
+      "title": "遗憾邮差练习",
+      "duration": "01:40",
+      "poster": "./assets/projects/postman-study-poster.jpg",
+      "previewSrc": "./assets/projects/postman-study-preview.mp4",
+      "filmSrc": "https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/practice-videos-v1-20260921/postman-study.mp4"
+    },
+    {
+      "id": "director-desk",
+      "title": "导演台",
+      "duration": "00:56",
+      "poster": "./assets/projects/director-desk-poster.jpg",
+      "previewSrc": "./assets/projects/director-desk-preview.mp4",
+      "filmSrc": "https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/practice-videos-v1-20260921/director-desk.mp4"
+    }
+  ]
+}
