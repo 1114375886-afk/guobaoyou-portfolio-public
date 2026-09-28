@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "updatedAt": "2026-09-28T00:00:00.000Z"
+    "updatedAt": "2026-09-28T04:28:48.216Z"
   },
   "site": {
     "kicker": "AI × DESIGN",
@@ -29,36 +29,54 @@
       "kicker": "AIGC 动画短片 · 2026",
       "title": "虫潮之下",
       "summary": "一天中午，克里斯如往常一样处理荒漠中常来麻烦。一枚本不该出现的电子元件打破了平衡。虫潮之下，是否还有更深的阴谋......",
-      "tags": ["正片", "剧本", "美术资产", "制片"],
+      "tags": [
+        "正片",
+        "剧本",
+        "美术资产",
+        "制片"
+      ],
       "cover": "./assets/projects/beneath-the-swarm/stills/portfolio-cover-drive-v2.jpg",
       "coverAlt": "《虫潮之下》主角与狗驾车穿越沙尘废土",
       "filmSrc": "https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/video-v2-20260902/beneath-the-swarm-v2.mp4",
       "filmPoster": "./assets/projects/beneath-the-swarm/stills/video-poster-beneath-swarm.jpg",
       "modalEyebrow": "BENEATH THE SWARM",
-      "modalHeadline": "废土日常，\n被一枚芯片打断。",
-      "modalSummary": "末世后的沙漠里，城市只剩被风沙吞没的残骸。主角与他的狗守着一间荒无人烟的木屋，以应付丧尸虫潮为日常。直到一次战斗后，他们在甲虫体内发现高科技电子物品——这场虫灾，也许从来不是自然发生。",
-      "facts": ["末世废土 / 黑色幽默", "AIGC 动画短片", "个人全流程制作"]
+      "modalHeadline": "一枚不该出现的芯片打破了宁静，是新的希望，还是阴谋？",
+      "modalSummary": "末世后的沙漠里，城市只剩被风沙吞没的残骸。一位猎人与他的伙伴守着一间荒无人烟的木屋，以应付丧尸虫潮为日常。直到一次战斗后，他们在甲虫体内发现高科技电子物品——这些意外，也许从来不是自然发生。",
+      "facts": [
+        "末世废土",
+        "AIGC 动画短片",
+        "个人全流程制作"
+      ]
     },
     {
       "id": "camouflage",
       "kicker": "AIGC 动画短片 · 2026",
       "title": "保护色",
-      "summary": "两只变色龙在一颗红色果实前相遇，伪装、欲望与成长由此展开。",
-      "tags": ["正片", "剧本", "美术资产", "制片"],
+      "summary": "变色龙失色，焉知非福？",
+      "tags": [
+        "正片",
+        "剧本",
+        "美术资产",
+        "制片"
+      ],
       "cover": "./assets/projects/camouflage/cover-v2.jpg",
-      "coverAlt": "两只变色龙在金色森林的树枝上望向一颗红色果实",
+      "coverAlt": "两只变色龙在森林中的戏剧故事",
       "filmSrc": "https://github.com/1114375886-afk/guobaoyou-portfolio-public/releases/download/camouflage-video-v1-20260902/camouflage-web.mp4",
       "filmPoster": "./assets/projects/camouflage/cover-v2.jpg",
       "modalEyebrow": "CAMOUFLAGE",
       "modalHeadline": "藏进环境，\n也藏不住欲望。",
-      "modalSummary": "森林里，一颗鲜红果实打破了树梢的平静。两只性格迥异的变色龙围绕它展开追逐，在伪装与显露之间经历一场轻巧、幽默的成长冒险。",
-      "facts": ["森林冒险 / 轻喜剧", "AIGC 动画短片", "个人全流程制作"]
+      "modalSummary": "一只生来就不会变色的变色龙，被另一只有着强大能力的同伴嘲笑，却因祸得福",
+      "facts": [
+        "轻喜剧",
+        "AIGC 动画短片",
+        "个人全流程制作"
+      ]
     }
   ],
   "practice": [
     {
       "id": "practice-01",
-      "title": "情绪镜头",
+      "title": "情绪镜头（节）",
       "duration": "00:56",
       "poster": "./assets/projects/practice-01-poster.jpg",
       "previewSrc": "./assets/projects/practice-01-preview.mp4",
@@ -66,7 +84,7 @@
     },
     {
       "id": "motion-study",
-      "title": "动态预览",
+      "title": "运营物料（动态预演）",
       "duration": "00:47",
       "poster": "./assets/projects/motion-study-poster.jpg",
       "previewSrc": "./assets/projects/motion-study-preview.mp4",
@@ -74,7 +92,7 @@
     },
     {
       "id": "storyboard-study",
-      "title": "分镜",
+      "title": "迪士尼风格（节）",
       "duration": "00:43",
       "poster": "./assets/projects/storyboard-study-poster.jpg",
       "previewSrc": "./assets/projects/storyboard-study-preview.mp4",
@@ -82,7 +100,7 @@
     },
     {
       "id": "postman-study",
-      "title": "遗憾邮差练习",
+      "title": "遗憾邮差（节）",
       "duration": "01:40",
       "poster": "./assets/projects/postman-study-poster.jpg",
       "previewSrc": "./assets/projects/postman-study-preview.mp4",
@@ -90,7 +108,7 @@
     },
     {
       "id": "director-desk",
-      "title": "导演台",
+      "title": "运营物料（导演台）",
       "duration": "00:56",
       "poster": "./assets/projects/director-desk-poster.jpg",
       "previewSrc": "./assets/projects/director-desk-preview.mp4",
