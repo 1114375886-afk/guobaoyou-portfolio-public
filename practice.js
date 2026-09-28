@@ -10,15 +10,22 @@
   let hoveredCard = null;
   let playRequest = 0;
 
+  const resetPreview = preview => {
+    preview.pause();
+    if (!preview.hasAttribute('src')) return;
+    preview.removeAttribute('src');
+    preview.load();
+  };
+
   const syncPreviews = () => {
     const visible = shell.classList.contains('is-exploring')
       && slide.classList.contains('is-active') && !dialog.open
       && !document.hidden && !reducedMotion.matches;
-    const focused = cards.find(card => card.contains(document.activeElement));
+    const focused = cards.find(card => card.matches(':focus-visible'));
     const selected = hoveredCard || focused;
     cards.forEach(card => {
       const preview = card.querySelector('video');
-      if (!visible || card !== selected) { preview.pause(); return; }
+      if (!visible || card !== selected) { resetPreview(preview); return; }
       if (!preview.getAttribute('src')) preview.src = preview.dataset.previewSrc;
       preview.muted = true;
       preview.play().catch(() => {}); // Keep the poster when autoplay is unavailable.
@@ -31,12 +38,16 @@
       hoveredCard = card;
       syncPreviews();
     });
-    card.addEventListener('pointerleave', () => { hoveredCard = null; syncPreviews(); });
+    card.addEventListener('pointerleave', () => {
+      hoveredCard = null;
+      resetPreview(card.querySelector('video'));
+      syncPreviews();
+    });
     card.addEventListener('focus', syncPreviews);
     card.addEventListener('blur', () => queueMicrotask(syncPreviews));
     card.addEventListener('click', () => {
       const request = ++playRequest;
-      cards.forEach(item => item.querySelector('video').pause());
+      cards.forEach(item => resetPreview(item.querySelector('video')));
       status.textContent = '';
       document.querySelector('#practice-player-title').textContent = card.dataset.title;
       document.querySelector('#practice-player-index').textContent = `PRACTICE / ${String(index + 1).padStart(2, '0')}`;
